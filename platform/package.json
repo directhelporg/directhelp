@@ -6,7 +6,8 @@
   },
   "private": true,
   "scripts": {
-    "start": "meteor run --settings=settings.json --exclude-archs=web.browser.legacy,web.cordova --raw-logs"
+    "start": "meteor run --settings=settings.json --exclude-archs=web.browser.legacy,web.cordova --raw-logs",
+    "deploy": "meteor deploy direct-help.eu.meteorapp.com --settings=settings.json --free --mongo --debug"
   },
   "dependencies": {
     "@babel/runtime": "^7.23.2",
