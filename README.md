@@ -29,7 +29,7 @@ npm run dev
 ```
 
 ## Diagram
-![diagram](https://github.com/arjanjohan/aleo-football/blob/d02fd71a8c20f54cd3cde26cc232b5123f0bcdbe/public/flow.png)
+![diagram]()
 
 ## Links
 - [Demo video]()
