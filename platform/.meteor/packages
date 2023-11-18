@@ -32,6 +32,3 @@ ostrio:files
 ostrio:flow-router-extra
 space:template-controller
 fortawesome:fontawesome
-accounts-base
-accounts-password
-accounts-ui

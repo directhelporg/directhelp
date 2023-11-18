@@ -1,5 +1,5 @@
 <template name="Layout">
-  <header id="header" class="header fixed-top d-flex align-items-center">
+  <header id="header" class="header d-flex align-items-center">
     <div class="d-flex">
       <a href="{{pathFor "/"}}" class="logo d-flex align-items-center">
         <lead><i class="fa fa-handshake-o text-dark mr-2"></i></lead>
@@ -50,10 +50,8 @@
       {{/if}}
     </nav>
   </header>
-  <div style="margin-top: 60px"></div>
-  <div class="p-3">{{>loginButtons}}</div>
   <div class="position-relative" style="z-index: 1100;">{{>toastContainer}}</div>
-  <div class="container-fluid">
+  <div class="container-fluid pt-4">
     {{>Template.dynamic template=main}}
   </div>
 </template>

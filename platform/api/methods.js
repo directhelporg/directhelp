@@ -21,4 +21,12 @@ Meteor.methods({
       [agentAddress],
     );
   },
+  async 'challengeRequest'(assertionId) {
+    check(assertionId, String);
+    return callContractWriteFunction(
+      DirectHelp,
+      'challengeFundRequest',
+      [assertionId],
+    );
+  },
 });

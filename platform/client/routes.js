@@ -19,11 +19,6 @@ import './ui/pages/manager/dashboard';
 const manager = FlowRouter.group({
   name: 'manager',
   prefix: '/manager',
-  triggersEnter: [(context, redirect) => {
-    if (!Meteor.userId()) {
-      redirect('/');
-    }
-  }],
 });
 
 const agent = FlowRouter.group({

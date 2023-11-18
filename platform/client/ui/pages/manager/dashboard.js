@@ -66,6 +66,19 @@ TemplateController('ManagerDashboard', {
         await this.fetchAgents();
       }
     },
+    async 'click [data-action=challengeRequest]'(e) {
+      const { assertionId } = Blaze.getData(e.currentTarget);
+      this.state.requests = null;
+      try {
+        await this.callContractMethod('challengeRequest', assertionId);
+        showToast({
+          message: 'Funding request has been challenged',
+          brand: 'info',
+        });
+      } finally {
+        await this.fetchRequests();
+      }
+    },
   },
   private: {
     async fetchAgents() {
