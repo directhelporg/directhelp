@@ -6,11 +6,20 @@ import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {OptimisticOracleV3Interface} from "./interfaces/OptimisticOracleV3Interface.sol";
 import "hardhat/console.sol";
 
+// EAS
+import "./interfaces/EAS/ISchemaRegistry.sol";
+import "./interfaces/EAS/IEAS.sol";
+
 contract Help is Ownable {
     OptimisticOracleV3Interface private immutable _oov3;
     uint64 public defaultLiveness;
     IERC20 public defaultCurrency;
     bytes32 private constant _defaultIdentifier = "ASSERT_TRUTH";
+
+	IEAS public immutable EAS;
+	bytes32 public EAS_SCHEMA_UID = 0x4dcb06ee3e314aa247dcd32a1ffa1f0b357f6a659b922aac7482f079e88bb873;
+    
+    bytes32 public recentAttestationId;
 
     enum AgentStatus {
         Unapproved,
@@ -30,6 +39,7 @@ contract Help is Ownable {
         string name;
         string location;
         uint64 households;
+        uint64 householdBudget;
         AgentStatus status;
     }
 
@@ -43,8 +53,8 @@ contract Help is Ownable {
     // ========================================
 
     event AgentRegistered(address indexed agentAddress, string name, string location, uint64 households);
-    event AgentApproved(address indexed agentAddress);
-    event AgentSuspended(address indexed agentAddress);
+    event AgentApproved(address indexed agentAddress, uint64 householdBudget);
+    event AgentSuspended(address indexed agentAddress, uint64 householdBudget);
 
     event RequestInitiated(address indexed agentAddress, bytes32 indexed assertionId);
     event RequestApproved(address indexed agentAddress, bytes32 indexed assertionId);
@@ -63,8 +73,10 @@ contract Help is Ownable {
      * @param _liveness the liveness to use for assertions.
      * @param __oov3 the address of the OptimisticOracleV3 contract.
      */
-    constructor(IERC20 _currency, uint64 _liveness, address __oov3)
+    constructor(IERC20 _currency, uint64 _liveness, address __oov3, address _eas)
 		Ownable(msg.sender) {
+        EAS = IEAS(_eas);
+
         defaultCurrency = _currency;
         defaultLiveness = _liveness;
         _oov3 = OptimisticOracleV3Interface(__oov3);
@@ -74,18 +86,21 @@ contract Help is Ownable {
     //     AGENT FUNCTIONS
     // ========================================
 
-    function agentRegister(string memory _name, string memory _location, uint64 _households) public {
-        require(agents[msg.sender].agentAddress == address(0), "Agent already registered");
-        agents[msg.sender] = Agent(msg.sender, _name, _location, _households, AgentStatus.Unapproved);
-        emit AgentRegistered(msg.sender, _name, _location, _households);
+
+    function agentRegister(address _agentAddress, string memory _name, string memory _location, uint64 _households) public {
+        require(agents[_agentAddress].agentAddress == address(0), "Agent already registered");
+        agents[_agentAddress] = Agent(_agentAddress, _name, _location, _households, 0, AgentStatus.Unapproved);
+        emit AgentRegistered(_agentAddress, _name, _location, _households);
     }
 
-    function agentApprove(address _agentAddress) public
+    function agentApprove(address _agentAddress, uint64 householdBudget) public
     // onlyOwner
     {
         require(agents[_agentAddress].agentAddress != address(0), "Agent not registered");
+        _attestAgent(_agentAddress, agents[_agentAddress].households);
         agents[_agentAddress].status = AgentStatus.Approved;
-        emit AgentApproved(_agentAddress);
+        agents[_agentAddress].householdBudget = householdBudget;
+        emit AgentApproved(_agentAddress, householdBudget);
     }
 
     function agentSuspend(address _agentAddress) public
@@ -93,7 +108,8 @@ contract Help is Ownable {
     {
         require(agents[_agentAddress].agentAddress != address(0), "Agent not registered");
         agents[_agentAddress].status = AgentStatus.Suspended;
-        emit AgentSuspended(_agentAddress);
+        agents[_agentAddress].householdBudget = 0;
+        emit AgentSuspended(_agentAddress, agents[_agentAddress].householdBudget);
     }
 
     function getAgent(address _agentAddress) public view returns (Agent memory) {
@@ -168,6 +184,40 @@ contract Help is Ownable {
         return _oov3.getAssertion(_assertionId);
     }
     
+    // ========================================
+    //     EAS FUNCTIONS
+    // ========================================
+
+	function _attestAgent(
+		address _agentAddress,
+		uint256 _householdBudget
+	) internal returns (bytes32) {
+		bytes memory data = abi.encode(
+			_agentAddress,
+			// Name here
+            agents[_agentAddress].name,
+            agents[_agentAddress].location,
+			_householdBudget
+		);
+		
+		AttestationRequestData memory requestData = AttestationRequestData(
+			_agentAddress,
+			0,
+			false,
+			bytes32(0),
+			data,
+			0
+		);
+		
+		AttestationRequest memory request = AttestationRequest(
+			EAS_SCHEMA_UID,
+			requestData
+		);
+		
+		bytes32 attestationResult = EAS.attest(request);
+		return attestationResult;
+	}
+
     // ========================================
     //     HELPER FUNCTIONS
     // ========================================
