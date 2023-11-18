@@ -55,11 +55,12 @@
     </div>
 
     <div class='container'>
-      <div class="position-relative" style="z-index: 1100;">{{>toastContainer}}</div>
+      <div class="position-fixed" style="z-index: 1100; right: 3em; top: 1em; width: 400px">
+        {{>toastContainer}}
+      </div>
       <div class="container-fluid p-0">
 
         {{>Template.dynamic template=main}}
-
       </div>
     </div>
   </div>
