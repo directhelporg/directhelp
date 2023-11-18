@@ -202,7 +202,7 @@ contract Help is Ownable {
 	  /**
 	  * Dispute assertion manually
 	  */
-		function disputeAssertion(bytes32 _assertionId) public {
+		function challengeFundRequest(bytes32 _assertionId) public {
 			defaultCurrency.approve(address(_oov3), minimalBond);
 			_oov3.disputeAssertion(_assertionId, address(this));
 			
