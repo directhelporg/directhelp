@@ -88,11 +88,11 @@ const config: HardhatUserConfig = {
   etherscan: {
     apiKey: {
       sepolia: process.env.ETHERSCAN_API_KEY,
-      arbitrumGoerli: process.env.ETHERSCAN_API_KEY, // not working
+      arbitrumGoerli: process.env.ARBITRUM_API_KEY, // not working
       goerli: process.env.ETHERSCAN_API_KEY,
       baseGoerli: process.env.ETHERSCAN_API_KEY,
-      // goerli: process.env.ETHERSCAN_API_KEY,
-      // goerli: process.env.ETHERSCAN_API_KEY,
+      chiado: process.env.ETHERSCAN_API_KEY,
+      linea: process.env.ETHERSCAN_API_KEY,
       // goerli: process.env.ETHERSCAN_API_KEY,
       // chiado: process.env.ETHERSCAN_API_KEY,
       polygonMumbai: process.env.POLYGON_API_KEY,
@@ -129,6 +129,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://rpc.apothem.network/",
           browserURL: "https://explorer.apothem.network",
+        },
+      },
+      {
+        network: "linea",
+        chainId: 59140,
+        urls: {
+          apiURL: "https://rpc.goerli.linea.build/",
+          browserURL: "https://explorer.linea.build",
         },
       },
     ],
