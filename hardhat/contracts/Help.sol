@@ -34,6 +34,8 @@ contract Help is Ownable {
     }
 
     mapping(address => Agent) public agents;
+	
+	  bytes32 public recentAssertionId;
 
     
     // ========================================
@@ -132,8 +134,11 @@ contract Help is Ownable {
             _defaultIdentifier,
             bytes32(0) // domainId
         );
-        emit RequestInitiated(msg.sender, assertionId);
-        return assertionId;
+			
+			recentAssertionId = assertionId;
+			
+			emit RequestInitiated(msg.sender, assertionId);
+			return assertionId;
     }
 
     function serverSettleAssertion(bytes32 _assertionId) external returns (bool) {

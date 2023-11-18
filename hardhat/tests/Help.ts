@@ -26,15 +26,17 @@ describe("Help", function () {
 			);
 
 		// Add token balance for UMA
-		const USDC = await ethers.getContractFactory("ERC20Mock");
-		const usdc = USDC.attach(systemConfig.currency) as ERC20Mock;
-		await setUSDCBalance(usdc, await help.getAddress(), 100_000);
+		const CurrencyToken = await ethers.getContractFactory("ERC20Mock");
+		const currency = CurrencyToken.attach(systemConfig.currency) as ERC20Mock;
+		await setUSDCBalance(currency, await help.getAddress(), 100_000);
 
     return {
 			systemConfig,
 			help,
+			currency,
 			owner,
-			otherAccount };
+			otherAccount,
+		};
   }
 
   describe("Deployment", function () {
@@ -61,7 +63,7 @@ describe("Help", function () {
     });
 
 		it("Should pass agentApproval", async function () {
-      const { systemConfig, help, owner, otherAccount } = await loadFixture(deployContract);
+      const { help, owner, otherAccount } = await loadFixture(deployContract);
 
 			await help.connect(otherAccount).agentRegister("Name", "Location", 100_000);
 			await help.agentApprove(otherAccount.address);
@@ -79,30 +81,30 @@ describe("Help", function () {
     });
 
 		it("Should pass UMA", async function () {
-      const { systemConfig, help, owner, otherAccount } = await loadFixture(deployContract);
+      const { currency, help, owner, otherAccount } = await loadFixture(deployContract);
 
 			await help.connect(otherAccount).agentRegister("Name", "Location", 100_000);
 			await help.agentApprove(otherAccount.address);
+
+			const origBalance = await currency.balanceOf(await help.getAddress());
 
 			const trx = await help.agentInitateFundRequest(
 				"Some disaster",
 				"50000"
 			);
 
+			const recentAssertionId = await help.recentAssertionId();
+
 			expect(trx).to.emit(help, "RequestInitiated");
-/*
+
+			const newBalance = await currency.balanceOf(await help.getAddress());
+			//console.log(`New balance: ${newBalance}`);
+			expect(newBalance).to.be.lessThan(origBalance);
+
 			await time.increase(10);
 
-			await help.serverSettleAssertion();
-			const assertResult = await oov3.getAssertionResult();
-
-			expect(agentData).to.deep.equal([
-				otherAccount.address,
-				"Name",
-				"Location",
-				BigInt(100_000),
-				BigInt(1),
-			]);*/
+			await help.serverSettleAssertion(recentAssertionId);
+			expect(await help.getAssertionResult(recentAssertionId)).to.be.true;
     });
   });
 });
