@@ -87,14 +87,20 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
     apiKey: {
+      sepolia: process.env.ETHERSCAN_API_KEY,
+      arbitrumGoerli: process.env.ETHERSCAN_API_KEY, // not working
       goerli: process.env.ETHERSCAN_API_KEY,
-      chiado: process.env.ETHERSCAN_API_KEY,
+      baseGoerli: process.env.ETHERSCAN_API_KEY,
+      // goerli: process.env.ETHERSCAN_API_KEY,
+      // goerli: process.env.ETHERSCAN_API_KEY,
+      // goerli: process.env.ETHERSCAN_API_KEY,
+      // chiado: process.env.ETHERSCAN_API_KEY,
       polygonMumbai: process.env.POLYGON_API_KEY,
-      mantle: process.env.MANTLE_API_KEY,
+      mantleTestnet: process.env.MANTLE_API_KEY,
     },
     customChains: [
       {
-        network: 'mantle',
+        network: 'mantleTestnet',
         chainId: 5001,
         urls: {
           apiURL: 'https://explorer.testnet.mantle.xyz/api',
