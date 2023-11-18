@@ -41,7 +41,7 @@ npm run dev
 - [Arbitrum](https://goerli.arbiscan.io/address/0xE57bae05b7568E1b2b03104bD171ab94F54BcbFE#code)
 - [Base](https://goerli.basescan.org/address/0xE57bae05b7568E1b2b03104bD171ab94F54BcbFE#code)
 - [Gnosis UNVERIFIED](0x123a40a856d4a009Bb709c7828355C8Bc7309b57)
-- [Linea UNVERIFIED](0x123a40a856d4a009Bb709c7828355C8Bc7309b57)
+- [Linea UNVERIFIED](https://explorer.linea.build/address/0xE57bae05b7568E1b2b03104bD171ab94F54BcbFE)
 - [Scroll](https://sepolia-blockscout.scroll.io/address/0x82C993811B40609c5Dc3380E7Eb8c4BcAc42D46c#code)
 - [Mantle](https://explorer.testnet.mantle.xyz/address/0x990d9369C17Bb50083f6e615BB6773bfab637e48#code)
 - [CELO UNVERIFIED](0x509f25ab47607B5490561CC5053071a79E83D836)
@@ -56,6 +56,20 @@ We used OptimisticOracleV3
 
 #### Ethereum Attestation Service
 [todo]
+
+#### Gnosis - Innovate on Gnosis Chain 
+We deployed our smart contract on Gnosis testnet here: [TODO]().
+Here is the tweet about the project: [TODO]()
+
+#### Arbitrum 
+We deployed our smart contract on Arbitrum testnet: https://goerli.arbiscan.io/address/0xE57bae05b7568E1b2b03104bD171ab94F54BcbFE
+
+#### Metamask 
+[Deployed smart contract](https://explorer.linea.build/address/0xE57bae05b7568E1b2b03104bD171ab94F54BcbFE)
+
+#### Scroll
+[Deployed smart contract](https://sepolia-blockscout.scroll.io/address/0x82C993811B40609c5Dc3380E7Eb8c4BcAc42D46c)
+
 
 ## Team
 This project was build at EthGlobal Istanbul 2023 by:
