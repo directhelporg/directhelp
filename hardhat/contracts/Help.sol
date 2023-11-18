@@ -109,7 +109,9 @@ contract Help is Ownable {
     function agentInitateFundRequest(string memory _disasterDescription, string memory _householdsAffected) public
     returns (bytes32)
     {
-        // todo: check if agent (msg.sender) exists and is approved
+        // Comment out for testing purposes
+        // require(agents[msg.sender].agentAddress != address(0), "Agent not registered");
+        
         // todo: check is request is within budget
         // todo: check if another request is pending
 			
@@ -135,7 +137,6 @@ contract Help is Ownable {
     }
 
     function serverSettleAssertion(bytes32 _assertionId) external returns (bool) {
-        // todo: check if assertionId is not valid
         bool result = _oov3.settleAndGetAssertionResult(_assertionId);
         emit RequestSettled(msg.sender, _assertionId, result);
         return result;
