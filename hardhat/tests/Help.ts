@@ -6,6 +6,7 @@ import { anyValue } from "@nomicfoundation/hardhat-chai-matchers/withArgs";
 import { expect } from "chai";
 import { ethers } from "hardhat";
 import {getSystemConfig} from "../utils/systemConfig";
+import {ZeroAddress} from "ethers";
 
 describe("Lock", function () {
   // We define a fixture to reuse the same setup in every test.
@@ -30,6 +31,21 @@ describe("Lock", function () {
   describe("Deployment", function () {
     it("Should deploy", async function () {
       const { systemConfig, help } = await loadFixture(deployContract);
+
+      expect(await help.getAddress()).to.be.an("string");
+    });
+
+		it("Should add agent", async function () {
+      const { systemConfig, help } = await loadFixture(deployContract);
+
+			const agent = ethers.Wallet.createRandom();
+
+			help.connect(agent).agentRegister("Name", "Location");
+			const agentData = await help.agents(agent.address);
+			const agentData2 = await help.getAgent(agent.address);
+
+			console.log(agentData);
+			console.log(agentData2);
 
       expect(await help.getAddress()).to.be.an("string");
     });
