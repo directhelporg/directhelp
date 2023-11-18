@@ -1,5 +1,5 @@
-import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
+import { Meteor } from 'meteor/meteor';
 
 SimpleSchema.debug = Meteor.isDevelopment;
 SimpleSchema.extendOptions(['autoform']);
