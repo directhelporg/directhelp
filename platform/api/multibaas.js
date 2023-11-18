@@ -1,5 +1,6 @@
 import * as MultiBaas from '@curvegrid/multibaas-sdk';
 import { Meteor } from 'meteor/meteor';
+import { Signer } from './ethers';
 
 const { url: baseUrl, key: accessToken } = Meteor.settings.public.MultiBaas;
 
@@ -27,32 +28,49 @@ export async function getChainId() {
   return data.result.chainID;
 }
 
-export async function prepateAndSubmitContractWriteFunction(contract, name, args, signer) {
-  const { data: { result: { tx } } } = await Contracts.callContractFunction(
-    'ethereum',
-    contract.address,
-    contract.label,
-    'agentApprove',
-    {
-      from: signer.address,
-      args,
-    },
-  );
-  const signed = await signer.signTransaction({
-    from: signer.address,
-    chainId: await getChainId(),
-    to: tx.to,
-    data: tx.data,
-    value: tx.value,
-    nonce: tx.nonce,
-    gasLimit: tx.gas,
-    // maxFeePerGas: Number(tx.gasFeeCap),
-    // maxPriorityFeePerGas: Number(tx.gasTipCap),
-    type: tx.type,
-  });
+export async function callContractWriteFunction(contract, name, args, extra) {
   try {
-    const { data } = await Chains.submitSignedTransaction('ethereum', { signedTx: signed });
-    return data.result;
+    const { data: { result: { tx } } } = await Contracts.callContractFunction(
+      'ethereum',
+      contract.address,
+      contract.label,
+      name,
+      {
+        from: Signer.address,
+        args,
+        ...extra,
+      },
+    );
+    if (Meteor.isServer) {
+      const signed = await Signer.signTransaction({
+        from: Signer.address,
+        chainId: await getChainId(),
+        to: tx.to,
+        data: tx.data,
+        value: tx.value,
+        nonce: tx.nonce,
+        gasLimit: tx.gas,
+        // maxFeePerGas: Number(tx.gasFeeCap),
+        // maxPriorityFeePerGas: Number(tx.gasTipCap),
+        type: tx.type,
+      });
+      const { data } = await Chains.submitSignedTransaction('ethereum', { signedTx: signed });
+      return data.result;
+    } else {
+      const { hash } = await Signer.sendTransaction({
+        from: Signer.address,
+        chainId: await getChainId(),
+        to: tx.to,
+        data: tx.data,
+        value: tx.value,
+        nonce: tx.nonce,
+        gasLimit: tx.gas,
+        // maxFeePerGas: Number(tx.gasFeeCap),
+        // maxPriorityFeePerGas: Number(tx.gasTipCap),
+        type: tx.type,
+      });
+      return hash;
+    }
   } catch (err) {
     throw convertMultiBaasError(err);
   }

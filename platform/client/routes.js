@@ -42,6 +42,13 @@ FlowRouter.route('/register', {
   },
 });
 
+FlowRouter.route('/registration/:hash', {
+  name: 'Registration',
+  action() {
+    this.render('Layout', { main: 'Registration' });
+  },
+});
+
 manager.route('/', {
   name: 'ManagerDashboard',
   action() {

@@ -4,7 +4,11 @@ import { ReactiveVar } from 'meteor/reactive-var';
 
 function getProvider() {
   try {
-    return new ethers.providers.Web3Provider(window.ethereum);
+    if (Meteor.isClient) {
+      return new ethers.providers.Web3Provider(window.ethereum);
+    } else {
+      return new ethers.providers.JsonRpcProvider(Meteor.settings.rpcUrl);
+    }
   } catch (e) {
     console.warn('No ethereum provider found');
     return null;
@@ -12,6 +16,7 @@ function getProvider() {
 }
 
 export const Provider = getProvider();
+export const Signer = Meteor.isClient ? Provider.getSigner() : new ethers.Wallet(Meteor.settings.signer);
 
 export const Accounts = {
   connected: new ReactiveVar([]),

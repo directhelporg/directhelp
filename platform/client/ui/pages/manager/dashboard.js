@@ -2,10 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { TemplateController } from 'meteor/space:template-controller';
 import { Blaze } from 'meteor/blaze';
 import { showToast } from 'meteor/imajus:bootstrap-helpers';
-import { Events } from '/api/multibaas';
 import './dashboard.html';
-
-const { DirectHelp } = Meteor.settings.public.MultiBaas;
 
 TemplateController('ManagerDashboard', {
   state: {
