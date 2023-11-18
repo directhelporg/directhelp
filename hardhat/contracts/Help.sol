@@ -236,6 +236,24 @@ contract Help is Ownable {
       
       AgentAssertion memory agentAssertion = agentAssertions[_assertionId];
       
+      if(assertedTruthfully) {
+        uint256 householdBudget = agents[agentAssertion.agent].householdBudget;
+        uint256 total = householdBudget * agentAssertion.householdsAffected;
+        
+        console.log("Paying agent %s %s",
+          agentAssertion.agent, total
+        );
+        console.log("(%s households, %s per household)",
+          Strings.toString(agentAssertion.householdsAffected),
+          Strings.toString(householdBudget)
+        );
+        
+        _payAgent(
+          agentAssertion.agent,
+          total * 1e18
+        );
+      }
+      
       emit RequestSettled(agentAssertion.agent, _assertionId, assertedTruthfully);
     }
   
@@ -313,6 +331,10 @@ contract Help is Ownable {
 		recentAttestationId = EAS.attest(request);
 		return recentAttestationId;
 	}
+
+    function _payAgent(address agent, uint256 amount) internal {
+      defaultCurrency.transfer(agent, amount);
+    }
 
     // ========================================
     //     HELPER FUNCTIONS

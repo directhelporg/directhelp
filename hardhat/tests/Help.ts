@@ -121,22 +121,28 @@ describe("Help", function () {
 		it("Should pass UMA from server", async function() {
 			const {currency, help, owner, otherAccount} = await loadFixture(deployContract);
 
-			await help.connect(otherAccount).agentRegister("Name", "Location", 100_000);
-			await help.agentApprove(otherAccount.address, 100_000);
+			const HOUSEHOLDS_AFFECTED = 50;
+			const HOUSEHOLDS_BALANCE = 100;
 
-			const origBalance = await currency.balanceOf(await help.getAddress());
+			await help.connect(otherAccount).agentRegister("Name", "Location", HOUSEHOLDS_BALANCE);
+			await help.agentApprove(otherAccount.address, HOUSEHOLDS_BALANCE);
+
+			const origBalance = await currency.balanceOf(await help.getAddress()) /
+				BigInt("1000000000000000000");
+			console.log(`Original contract balance: ${origBalance}`);
 
 			const trx = await help.serverInitiateFundRequest(
 				otherAccount.address,
 				"Some disaster happened somewhere",
-				BigInt("50000"),
+				BigInt(HOUSEHOLDS_AFFECTED),
 			);
 
 			const recentAssertionId = await help.recentAssertionId();
 
 			expect(trx).to.emit(help, "RequestInitiated");
 
-			const newBalance = await currency.balanceOf(await help.getAddress());
+			const newBalance = await currency.balanceOf(await help.getAddress()) /
+				BigInt("1000000000000000000");
 			//console.log(`New balance: ${newBalance}`);
 			expect(newBalance).to.be.lessThan(origBalance);
 
@@ -151,10 +157,22 @@ describe("Help", function () {
 
 			expect(assertionData).to.deep.equal([
 				otherAccount.address,
-				BigInt("50000"),
+				BigInt(HOUSEHOLDS_AFFECTED),
 				true,
 				true
 			]);
+
+			const agentBalance = (await currency.balanceOf(otherAccount.address)) /
+				BigInt("1000000000000000000");
+			console.log(`Agent balance: ${agentBalance}`);
+
+			const contractBalance = (await currency.balanceOf(await help.getAddress())) /
+				BigInt("1000000000000000000");
+			console.log(`Contract balance: ${contractBalance}`);
+
+			expect(agentBalance).to.be.equal(
+				BigInt(HOUSEHOLDS_BALANCE * HOUSEHOLDS_AFFECTED));
+			expect(contractBalance).to.be.equal(origBalance - BigInt(HOUSEHOLDS_BALANCE * HOUSEHOLDS_AFFECTED));
 		});
 
 		it("Should allow to dispute UMA", async function() {
