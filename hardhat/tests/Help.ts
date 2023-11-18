@@ -23,6 +23,7 @@ describe("Help", function () {
 			systemConfig.currency,
 			3, // seconds?
 			systemConfig.oov3,
+			systemConfig.easRegistry
 		);
 
 		// Add token balance for UMA
@@ -59,6 +60,7 @@ describe("Help", function () {
 				"Location",
 				BigInt(100_000),
 				BigInt(0),
+				BigInt(0),
 			]);
 		});
 
@@ -66,7 +68,7 @@ describe("Help", function () {
 			const {help, owner, otherAccount} = await loadFixture(deployContract);
 
 			await help.connect(otherAccount).agentRegister("Name", "Location", 100_000);
-			await help.agentApprove(otherAccount.address);
+			await help.agentApprove(otherAccount.address, 100_000);
 
 			const agentData = await help.agents(otherAccount.address);
 			//console.log("Agent data:", agentData);
@@ -76,15 +78,18 @@ describe("Help", function () {
 				"Name",
 				"Location",
 				BigInt(100_000),
+				BigInt(100_000),
 				BigInt(1),
 			]);
 		});
+	});
 
+	describe("UMA", function() {
 		it("Should pass UMA", async function() {
 			const {currency, help, owner, otherAccount} = await loadFixture(deployContract);
 
 			await help.connect(otherAccount).agentRegister("Name", "Location", 100_000);
-			await help.agentApprove(otherAccount.address);
+			await help.agentApprove(otherAccount.address, 100_000);
 
 			const origBalance = await currency.balanceOf(await help.getAddress());
 
@@ -106,28 +111,28 @@ describe("Help", function () {
 			await help.serverSettleAssertion(recentAssertionId);
 			expect(await help.getAssertionResult(recentAssertionId)).to.be.true;
 		});
-	});
 
-	it("Should allow to dispute UMA", async function() {
-		const {currency, help, owner, otherAccount} = await loadFixture(deployContract);
+		it("Should allow to dispute UMA", async function() {
+			const {currency, help, owner, otherAccount} = await loadFixture(deployContract);
 
-		await help.connect(otherAccount).agentRegister("Name", "Location", 100_000);
-		await help.agentApprove(otherAccount.address);
+			await help.connect(otherAccount).agentRegister("Name", "Location", 100_000);
+			await help.agentApprove(otherAccount.address, 100_000);
 
-		await help.agentInitateFundRequest(
-			"Some disaster",
-			"50000"
-		);
-		const recentAssertionId = await help.recentAssertionId();
+			await help.agentInitateFundRequest(
+				"Some disaster",
+				"50000"
+			);
+			const recentAssertionId = await help.recentAssertionId();
 
-		await help.disputeAssertion(recentAssertionId);
+			await help.challengeFundRequest(recentAssertionId);
 
-		await time.increase(10_000);
-		await help.serverSettleAssertion(recentAssertionId);
-		//const assertionData = await help.getAssertionData(recentAssertionId);
-		//console.log(assertionData);
+			await time.increase(10_000);
+			await help.serverSettleAssertion(recentAssertionId);
+			//const assertionData = await help.getAssertionData(recentAssertionId);
+			//console.log(assertionData);
 
-		expect(await help.getAssertionResult(recentAssertionId)).to.be.false;
+			expect(await help.getAssertionResult(recentAssertionId)).to.be.false;
 
+		});
 	});
 });

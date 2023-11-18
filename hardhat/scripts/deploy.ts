@@ -6,6 +6,7 @@ import {SignerWithAddress} from "@nomicfoundation/hardhat-ethers/signers";
 import {HardhatRuntimeEnvironment} from "hardhat/types";
 import {DeployOptions, DeployResult} from "hardhat-multibaas-plugin-v6/lib/type-extensions";
 import {BaseContract} from "ethers";
+import {getSystemConfig} from "../utils/systemConfig";
 
 
 //// Deploy commands:
@@ -33,14 +34,22 @@ async function main() {
 	const currency = "0xEF8b46765ae805537053C59f826C3aD61924Db45"; // BASE Goerli WETH ERC20 
 	const eas_address = "0x4200000000000000000000000000000000000021"
 
-	const contractVersion = "1.2.12";
+	const contractVersion = "1.2.14";
 
 	let contract: BaseContract;
 
 	if(process.env.DEPLOY_MULTIBAAS) {
+		const systemConfig = await getSystemConfig();
+
 		contract = await deployWithMB(
 			"Help",
 			contractVersion,
+			[
+				systemConfig.currency,
+				0,
+				systemConfig.oov3,
+				systemConfig.easRegistry
+			],
 			[uma_address, dispute_time, currency, eas_address],
 			(await ethers.getSigners())[0]);
 	}

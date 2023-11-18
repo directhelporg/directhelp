@@ -39,8 +39,7 @@ const config: HardhatUserConfig = {
 
 				// Base Goerli
 				url: "https://goerli.base.org",
-				blockNumber: 12559944,
-
+				blockNumber: 12564022,
 			},
     },
 

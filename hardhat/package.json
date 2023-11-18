@@ -1,7 +1,11 @@
 {
   "name": "help-hardhat",
   "packageManager": "yarn@4.0.2",
-  "devDependencies": {
+	"scripts": {
+		"deploy": "hardhat run scripts/deploy.ts",
+		"deploy:goerli": "yarn deploy --network baseGoerli"
+	},
+	"devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",
     "@nomicfoundation/hardhat-ethers": "^3.0.0",
     "@nomicfoundation/hardhat-network-helpers": "^1.0.0",
