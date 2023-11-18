@@ -57,6 +57,9 @@ TODO - We used OptimisticOracleV3
 #### Ethereum Attestation Service
 TODO
 
+#### Curvegrid
+TODO
+
 #### Gnosis - Innovate on Gnosis Chain 
 - [Deployed smart contract](https://gnosisscan.io/address/0x04b3786899D4400bBEf2f000c07CBB916a9a8E24)
 - [Tweet about our project tagging @GnosisChain TODO]()
