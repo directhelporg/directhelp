@@ -37,7 +37,7 @@ TemplateController('ManagerDashboard', {
     }
   },
   helpers: {
-    capacity: () => '10000 USDC',
+    capacity: () => '10000',
   },
   events: {
     async 'click [data-action=approveAgent]'(e) {

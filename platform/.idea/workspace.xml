@@ -6,11 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="0fe5ad4c-7802-4d58-99be-03f1cd569e63" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/main.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/ui/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/layout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/pages/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/ui/stylesheets/theme-niceadmin.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/stylesheets/theme.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/pages/agent/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/agent/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/pages/agent/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/agent/register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/pages/manager/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/manager/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/pages/manager/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/pages/manager/dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/ui/stylesheets/theme.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/ui/stylesheets/theme.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
