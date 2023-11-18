@@ -3,7 +3,7 @@ import { ethers } from "hardhat";
 import * as dotenv from "dotenv";
 import {SignerWithAddress} from "@nomicfoundation/hardhat-ethers/signers";
 import {HardhatRuntimeEnvironment} from "hardhat/types";
-import {DeployResult} from "hardhat-multibaas-plugin/lib/type-extensions";
+import {DeployOptions, DeployResult} from "hardhat-multibaas-plugin-v6/lib/type-extensions";
 
 
 // to deploy use:
@@ -33,21 +33,17 @@ async function main() {
 		if(!process.env.DEPLOY_MULTIBAAS) {
 			contract = await ethers.deployContract("Help", args);
 		} else {
-			await deployWithMB(
+			contract = await deployWithMB(
 				"Help",
-				"1.2.4",
+				"1.2.9",
 				args,
 				(await ethers.getSigners())[0], hre);
 		}
 	}
   catch (error) {
-    // In case of error try with specific config for mantleTestnet
-    try {contract = await ethers.deployContract("Help", ["0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889", 200, "0xAfAE2dD69F115ec26DFbE2fa5a8642D94D7Cd37E"], { gasLimit: 10000000});}
-    catch (error) {
-      console.error('An error occurred during contract deployment:', error);
-      process.exit(1); // Exit with an error code
+		// Should not get into mantleTestnet"
+		throw new Error(`Deployment error: ${error.message}`);
   }
-}
 
   console.log("Contract address:", await contract?.getAddress());
 }
@@ -62,16 +58,35 @@ async function deployWithMB(
 ): Promise<DeployResult> {
 	await hre.mbDeployer.setup();
 
-	return hre.mbDeployer.deploy(
+	console.log("Deploying through MB");
+
+	let deployment: DeployResult;
+
+	try {
+		deployment = await hre.mbDeployer.deploy(
+			signer as SignerWithAddress,
+			contractName,
+			args,
+			{
+				addressLabel: "help_sc_address",
+				contractVersion,
+				contractLabel: contractName.toLowerCase(),
+			}
+		);
+	} catch(ex) {
+		console.error(`Error doing mbDeployment: ${ex.message}`);
+	}
+
+	// Temporary fix for link update
+	const linkResult = await hre.mbDeployer.link(
 		signer as SignerWithAddress,
 		contractName,
-		args,
-		{
-			addressLabel: "help_sc_address",
-			contractVersion,
-			contractLabel: contractName.toLowerCase(),
-		}
+		await deployment.contract.getAddress(),
 	);
+	console.log("Link result:");
+	console.log(linkResult);
+
+	return deployment;
 }
 
 main()
