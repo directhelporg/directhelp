@@ -1,8 +1,13 @@
 <template name="Request">
   <div class="row justify-content-center">
-    <div class="col-md-6 col-lg-4">
+    <div class="col-md-8 col-lg-6">
       {{>pageHeader heading='Funding request'}}
-      <p>Hash: {{assertionId}}</p>
+      <p>Hash: {{shortHash assertionId size=6}}</p>
+      {{#if state.loading}}
+        <div class="text-center">Loading {{>i fa="circle-o-notch" spin=true size="1x"}}</div>
+      {{else}}
+        <div class="text-success">Your funding request has been approved!</div>
+      {{/if}}
     </div>
   </div>
 </template>

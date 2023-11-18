@@ -10,7 +10,7 @@ Meteor.methods({
     return callContractWriteFunction(
       DirectHelp,
       'agentApprove',
-      [agentAddress],
+      [agentAddress, 100],
     );
   },
   async 'rejectAgent'(agentAddress) {
@@ -21,13 +21,22 @@ Meteor.methods({
       [agentAddress],
     );
   },
-  async 'submitRequest'(description, households) {
+  async 'submitRequest'(address, description, households) {
+    check(address, String);
     check(description, String);
     check(households, Match.Integer);
     return callContractWriteFunction(
       DirectHelp,
-      'agentInitateFundRequest',
-      [description, String(households)],
+      'serverInitiateFundRequest',
+      [address, description, households],
+    );
+  },
+  async 'settleRequest'(assertionId) {
+    check(assertionId, String);
+    return callContractWriteFunction(
+      DirectHelp,
+      'serverSettleAssertion',
+      [assertionId],
     );
   },
   async 'challengeRequest'(assertionId) {

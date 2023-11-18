@@ -65,8 +65,8 @@ export async function callContractWriteFunction(contract, name, args, extra) {
         value: tx.value,
         nonce: tx.nonce,
         gasLimit: tx.gas,
-        // maxFeePerGas: Number(tx.gasFeeCap),
-        // maxPriorityFeePerGas: Number(tx.gasTipCap),
+        maxFeePerGas: Number(tx.gasFeeCap),
+        maxPriorityFeePerGas: Number(tx.gasTipCap),
         type: tx.type,
       });
       const { data } = await Chains.submitSignedTransaction('ethereum', { signedTx: signed });
@@ -80,8 +80,8 @@ export async function callContractWriteFunction(contract, name, args, extra) {
         value: tx.value,
         nonce: tx.nonce,
         gasLimit: tx.gas,
-        // maxFeePerGas: Number(tx.gasFeeCap),
-        // maxPriorityFeePerGas: Number(tx.gasTipCap),
+        maxFeePerGas: Number(tx.gasFeeCap),
+        maxPriorityFeePerGas: Number(tx.gasTipCap),
         type: tx.type,
       });
       return hash;
