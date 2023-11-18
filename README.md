@@ -36,6 +36,15 @@ npm run dev
 - [Presentation slides]()
 - [Deployed contract]()
 
+## Deployed contracts
+- [Arbitrum]()
+- [Base]()
+- [Gnosis]()
+- [Linea]()
+- [Scroll]()
+- [Mantle]()
+- [CELO]()
+
 ## Hackathon bounties
 
 #### Unicef
