@@ -2,7 +2,7 @@
 
 
 <p align="center">
-<img src="https://github.com/directhelporg/directhelp/blob/8790b7a420f92313f59dcf6fc98d35d2745894a0/images/DirectHelp1.png" alt="logo" width="500"/>
+<img src="https://github.com/directhelporg/directhelp/blob/58f768d14db772739eafd183be8cd481f29b8054/images/logo.png" alt="logo"/>
 </p>
 <h4 align="center">
   <a href="https://docs.scaffoldeth.io">Deployed dApp</a> |
