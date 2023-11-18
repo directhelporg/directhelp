@@ -33,6 +33,21 @@ contract Help is Ownable {
 
     mapping(address => Agent) public agents;
 
+    
+    // ========================================
+    //     EVENTS
+    // ========================================
+
+    event AgentRegistered(address indexed agentAddress, string name, string location);
+    event AgentApproved(address indexed agentAddress);
+    event AgentSuspended(address indexed agentAddress);
+
+    event RequestInitiated(address indexed agentAddress, bytes32 indexed assertionId);
+    event RequestApproved(address indexed agentAddress, bytes32 indexed assertionId);
+    event RequestChallenged(address indexed agentAddress, bytes32 indexed assertionId);
+    event RequestRejected(address indexed agentAddress, bytes32 indexed assertionId);
+    event RequestSettled(address indexed agentAddress, bytes32 indexed assertionId, bool result);
+    event RequestResult(address indexed agentAddress, bytes32 indexed assertionId, bool result);
 
     // ========================================
     //     CONSTRUCTOR AND CORE FUNCTIONS
@@ -57,16 +72,19 @@ contract Help is Ownable {
     function agentRegister(string memory _name, string memory _location) public {
         require(agents[msg.sender].agentAddress == address(0), "Agent already registered");
         agents[msg.sender] = Agent(msg.sender, _name, _location, AgentStatus.Unapproved);
+        emit AgentRegistered(msg.sender, _name, _location);
     }
 
     function agentApprove(address _agentAddress) public onlyOwner {
         require(agents[_agentAddress].agentAddress != address(0), "Agent not registered");
         agents[_agentAddress].status = AgentStatus.Approved;
+        emit AgentApproved(_agentAddress);
     }
 
     function agentSuspend(address _agentAddress) public onlyOwner {
         require(agents[_agentAddress].agentAddress != address(0), "Agent not registered");
         agents[_agentAddress].status = AgentStatus.Suspended;
+        emit AgentSuspended(_agentAddress);
     }
 
     function getAgent(address _agentAddress) public view returns (Agent memory) {
@@ -97,12 +115,15 @@ contract Help is Ownable {
             _defaultIdentifier,
             bytes32(0) // domainId
         );
+        emit RequestInitiated(msg.sender, assertionId);
         return assertionId;
     }
 
     function serverSettleAssertion(bytes32 _assertionId) external returns (bool) {
         // todo: check if assertionId is not valid
-        return _oov3.settleAndGetAssertionResult(_assertionId);
+        bool result = _oov3.settleAndGetAssertionResult(_assertionId);
+        emit RequestSettled(msg.sender, _assertionId, result);
+        return result;
     }
 
     
