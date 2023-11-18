@@ -30,9 +30,6 @@ describe("Help", function () {
 		const usdc = USDC.attach(systemConfig.currency) as ERC20Mock;
 		await setUSDCBalance(usdc, await help.getAddress(), 100_000);
 
-		const balance = await usdc.balanceOf(await help.getAddress());
-		console.log(`Balance: ${balance}`);
-
     return {
 			systemConfig,
 			help,

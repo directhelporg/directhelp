@@ -114,7 +114,10 @@ contract Help is Ownable {
         // todo: check if another request is pending
 			
         bytes memory claim = createFinalClaimAssembly(bytes(_disasterDescription), bytes(_householdsAffected));
-        
+			
+			uint256 minimalBond = _oov3.getMinimumBond(address(defaultCurrency));
+			defaultCurrency.approve(address(_oov3), minimalBond);
+			
 			console.log("B4 assertTruth, currency: %s", address(defaultCurrency));
         bytes32 assertionId = _oov3.assertTruth(
             claim,
@@ -123,7 +126,7 @@ contract Help is Ownable {
             address(0), // escalationManager
             defaultLiveness,
             defaultCurrency,
-            _oov3.getMinimumBond(address(defaultCurrency)),
+					minimalBond,
             _defaultIdentifier,
             bytes32(0) // domainId
         );
