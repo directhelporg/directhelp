@@ -4,6 +4,7 @@ import { Accounts } from '/api/ethers';
 import './ui/layout';
 import './ui/pages/home';
 import './ui/pages/register';
+import './ui/pages/registration';
 import './ui/pages/manager/dashboard';
 
 // Preload already connected Web3 accounts
