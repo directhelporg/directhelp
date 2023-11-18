@@ -59,7 +59,8 @@ contract Help is Ownable {
      * @param _liveness the liveness to use for assertions.
      * @param __oov3 the address of the OptimisticOracleV3 contract.
      */
-    constructor(IERC20 _currency, uint64 _liveness, address __oov3) {
+    constructor(IERC20 _currency, uint64 _liveness, address __oov3)
+		Ownable(msg.sender) {
         defaultCurrency = _currency;
         defaultLiveness = _liveness;
         _oov3 = OptimisticOracleV3Interface(__oov3);
