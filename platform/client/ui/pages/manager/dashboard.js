@@ -2,7 +2,10 @@ import { Meteor } from 'meteor/meteor';
 import { TemplateController } from 'meteor/space:template-controller';
 import { Blaze } from 'meteor/blaze';
 import { showToast } from 'meteor/imajus:bootstrap-helpers';
+import { fetchEvents } from '/api/multibaas';
 import './dashboard.html';
+
+const { DirectHelp } = Meteor.settings.public.MultiBaas;
 
 TemplateController('ManagerDashboard', {
   state: {
@@ -66,56 +69,28 @@ TemplateController('ManagerDashboard', {
   },
   private: {
     async fetchAgents() {
-      this.state.agents = [
-        {
-          agentAddress: '0x490B7A3CE287dfE8E21eb9eA01a2C8B02D62EE8a',
-          name: 'Denis, the Baker',
-          location: 'Turkey, Istanbul',
-        },
-        {
-          agentAddress: '0xCa5a940E87cC4D4cC9F5F749c58a4DDcA79a3328',
-          name: 'Denis, the Driver',
-          location: 'Turkey, Bursa',
-        },
-      ];
-      // const { data } = await Events.listEvents(
-      //   undefined, //blockHash
-      //   undefined, //blockNumber
-      //   undefined, //txIndexInBlock
-      //   undefined, //eventIndexInLog
-      //   undefined, //txHash
-      //   undefined, //fromConstructor
-      //   'ethereum',
-      //   DirectHelp.address,
-      //   DirectHelp.label,
-      //   undefined, //'agentRegister(string,string)', //eventSignature
-      //   undefined, //limit
-      //   undefined, //offset
-      // );
-      // return data.result;
+      const all = await fetchEvents(DirectHelp, 'AgentRegistered(address,string,string,uint64)');
+      const approved = await fetchEvents(DirectHelp, 'AgentApproved(address)');
+      const rejected = await fetchEvents(DirectHelp, 'AgentSuspended(address)');
+      this.state.agents = all.map(({ event, triggeredAt }) => {
+        const address = event.inputs[0].value;
+        return {
+          agentAddress: address,
+          name: event.inputs[1].value,
+          location: event.inputs[2].value,
+          timestamp: new Date(triggeredAt),
+          approved: approved.some(({ event }) => event.inputs[0].value === address),
+          rejected: rejected.some(({ event }) => event.inputs[0].value === address),
+        };
+      });
     },
     async fetchRequests() {
-      this.state.requests = [
-        {
-          agentAddress: '0xCa5a940E87cC4D4cC9F5F749c58a4DDcA79a3328',
-          assertionId: 'xxxxxxxxxxxxxxxxxxxxxxxx',
-        },
-      ];
-      // const { data } = await Events.listEvents(
-      //   undefined, //blockHash
-      //   undefined, //blockNumber
-      //   undefined, //txIndexInBlock
-      //   undefined, //eventIndexInLog
-      //   undefined, //txHash
-      //   undefined, //fromConstructor
-      //   'ethereum',
-      //   DirectHelp.address,
-      //   DirectHelp.label,
-      //   '???', //eventSignature
-      //   undefined, //limit
-      //   undefined, //offset
-      // );
-      // return data.result;
+      const requests = await fetchEvents(DirectHelp, '???');
+      this.state.agents = requests.map(({ event, triggeredAt }) => ({
+        agentAddress: event.inputs[0].value,
+        assertionId: event.inputs[1].value,
+        timestamp: new Date(triggeredAt),
+      }));
     },
     async callContractMethod(name, ...args) {
       try {

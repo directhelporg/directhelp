@@ -76,8 +76,34 @@ export async function callContractWriteFunction(contract, name, args, extra) {
   }
 }
 
+export async function fetchEvents(contract, signature) {
+  try {
+    const { data } = await Events.listEvents(
+      undefined, //blockHash
+      undefined, //blockNumber
+      undefined, //txIndexInBlock
+      undefined, //eventIndexInLog
+      undefined, //txHash
+      undefined, //fromConstructor
+      'ethereum',
+      contract.address,
+      contract.label,
+      signature, //eventSignature
+      undefined, //limit
+      undefined, //offset
+    );
+    return data.result;
+  } catch (err) {
+    throw convertMultiBaasError(err);
+  }
+}
+
 Meteor.startup(async () => {
-  const { data } = await Chains.getChainStatus(chain);
-  const { chainID, blockNumber } = data.result;
-  console.log(`MultiBaas is connected to #${chainID}, the latest block is #${blockNumber}`);
+  try {
+    const { data } = await Chains.getChainStatus(chain);
+    const { chainID, blockNumber } = data.result;
+    console.log(`MultiBaas is connected to #${chainID}, the latest block is #${blockNumber}`);
+  } catch (err) {
+    throw convertMultiBaasError(err);
+  }
 });

@@ -34,7 +34,7 @@ TemplateController('Register', {
 AutoForm.addHooks('registerAgent', {
   async onSubmit({ wallet, name, location, households }) {
     this.event.preventDefault();
-    callContractWriteFunction(DirectHelp, 'agentRegister', [name, location/* , households */], {
+    callContractWriteFunction(DirectHelp, 'agentRegister', [name, location, households], {
       from: wallet,
     })
       .then(res => this.done(null, res))

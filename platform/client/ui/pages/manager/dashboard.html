@@ -7,22 +7,33 @@
           {{#each state.agents}}
             <li class="list-group-item">
               <div class="d-flex justify-content-between">
-                <div>{{name}}</div>
-                <div>{{location}}</div>
-                <div>{{shortHash agentAddress}}</div>
-                <div>
-                  <button
-                    class="btn btn-sm btn-success {{#if state.working}}disabled{{/if}}"
-                    data-action="approveAgent">
-                    {{>i fa='check'}}
-                    Approve
-                  </button>
-                  <button
-                    class="btn btn-sm btn-danger {{#if state.working}}disabled{{/if}}"
-                    data-action="rejectAgent">
-                    {{>i fa='times'}}
-                    Reject
-                  </button>
+                <div>{{name}} from {{location}}</div>
+                <div class="text-center">{{shortHash agentAddress}}</div>
+                <div class="text-right">
+                  {{#if approved}}
+                    <button class="btn btn-sm btn-success btn-outline disabled">
+                      {{>i fa='check'}}
+                      Approved
+                    </button>
+                  {{else if rejected}}
+                    <button class="btn btn-sm btn-danger btn-outline disabled">
+                      {{>i fa='times'}}
+                      Rejected
+                    </button>
+                  {{else}}
+                    <button
+                      class="btn btn-sm btn-success {{#if state.working}}disabled{{/if}}"
+                      data-action="approveAgent">
+                      {{>i fa='check'}}
+                      Approve
+                    </button>
+                    <button
+                      class="btn btn-sm btn-danger {{#if state.working}}disabled{{/if}}"
+                      data-action="rejectAgent">
+                      {{>i fa='times'}}
+                      Reject
+                    </button>
+                  {{/if}}
                 </div>
               </div>
             </li>
