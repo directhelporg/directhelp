@@ -54,9 +54,9 @@ describe("Lock", function () {
 			contractName,
 			args,
 			{
-				addressLabel: "greeter",
+				addressLabel: contractName.toLowerCase(),
 				contractVersion: "1.0",
-				contractLabel: "greeter",
+				contractLabel: contractName.toLowerCase(),
 			}
 		);
 	}
