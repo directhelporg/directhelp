@@ -37,18 +37,19 @@ describe("Lock", function () {
     });
 
 		it("Should add agent", async function () {
-      const { systemConfig, help } = await loadFixture(deployContract);
+      const { systemConfig, help, owner, otherAccount } = await loadFixture(deployContract);
 
-			const agent = ethers.Wallet.createRandom();
+			await help.connect(otherAccount).agentRegister("Name", "Location");
+			const agentData = await help.agents(otherAccount.address);
 
-			help.connect(agent).agentRegister("Name", "Location");
-			const agentData = await help.agents(agent.address);
-			const agentData2 = await help.getAgent(agent.address);
+			//console.log(agentData);
 
-			console.log(agentData);
-			console.log(agentData2);
-
-      expect(await help.getAddress()).to.be.an("string");
+      expect(agentData).to.deep.equal([
+				otherAccount.address,
+				"Name",
+				"Location",
+				BigInt(0)
+			]);
     });
   });
 });
