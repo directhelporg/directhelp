@@ -62,7 +62,8 @@ We used UMA's OptimisticOracleV3 to verify information about disasters. By using
 We use EAS to track reputation of agents that are connected to the charity (Unicef), to make sure the agents are trustworthy. By using EAS the reputation is available not only by Unicef, but also by other charities and institutions.
 
 #### Curvegrid
-TODO
+We are using MultiBaas by Curvegrid to interact with our smart contract in an easy way. We also use it to automatically deploy artifacts like interfaces. We had some issue with the plugin for hardhat, but we fixed it now. We made a PR for the fix, to make it available for others as well.
+- [GitHub PR for the plugin fix](https://github.com/curvegrid/hardhat-multibaas-plugin/pull/210)
 
 #### Gnosis - Innovate on Gnosis Chain 
 - [Deployed smart contract](https://gnosisscan.io/address/0x04b3786899D4400bBEf2f000c07CBB916a9a8E24)
