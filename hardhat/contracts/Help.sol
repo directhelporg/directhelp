@@ -78,7 +78,7 @@ contract Help is Ownable {
         emit AgentRegistered(msg.sender, _name, _location, _households);
     }
 
-    function agentApprove(address _agentAddress) public 
+    function agentApprove(address _agentAddress) public
     // onlyOwner
     {
         require(agents[_agentAddress].agentAddress != address(0), "Agent not registered");
@@ -86,7 +86,7 @@ contract Help is Ownable {
         emit AgentApproved(_agentAddress);
     }
 
-    function agentSuspend(address _agentAddress) public 
+    function agentSuspend(address _agentAddress) public
     // onlyOwner
     {
         require(agents[_agentAddress].agentAddress != address(0), "Agent not registered");
@@ -106,15 +106,19 @@ contract Help is Ownable {
     //     UMA FUNCTIONS
     // ========================================
 
-    function agentInitateFundRequest(string memory _disasterDescription, string memory _householdsAffected) public 
-    returns (bytes32) 
+    function agentInitateFundRequest(string memory _disasterDescription, string memory _householdsAffected) public
+    returns (bytes32)
     {
         // todo: check if agent (msg.sender) exists and is approved
         // todo: check is request is within budget
         // todo: check if another request is pending
-        
+			
         bytes memory claim = createFinalClaimAssembly(bytes(_disasterDescription), bytes(_householdsAffected));
-        
+			
+			uint256 minimalBond = _oov3.getMinimumBond(address(defaultCurrency));
+			defaultCurrency.approve(address(_oov3), minimalBond);
+			
+			console.log("B4 assertTruth, currency: %s", address(defaultCurrency));
         bytes32 assertionId = _oov3.assertTruth(
             claim,
             address(this), // asserter
@@ -122,7 +126,7 @@ contract Help is Ownable {
             address(0), // escalationManager
             defaultLiveness,
             defaultCurrency,
-            _oov3.getMinimumBond(address(defaultCurrency)),
+					minimalBond,
             _defaultIdentifier,
             bytes32(0) // domainId
         );

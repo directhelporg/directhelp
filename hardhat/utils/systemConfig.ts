@@ -28,6 +28,7 @@ export async function getSystemConfig(
 			// Mainnet
 			throw new Error(`Mainnet setup not implemented`);
 
+		/*
 		case -31337:
 			// Optimism
 			return {
@@ -36,14 +37,24 @@ export async function getSystemConfig(
 				oov3: "0x072819Bb43B50E7A251c64411e7aA362ce82803B",
 				currency: "0x7F5c764cBc14f9669B88837ca1490cCa17c31607", // USDC
 			};
+		 */
 
-		case 31337:
+		case -31337:
 			// Sepolia
 			return {
 				easRegistry: "0xC2679fBD37d54388Ce493F1DB75320D236e1815e",
 				easSchemaRegistry: "0x0a7E2Ff54e76B8E6659aedc9103FB21c038050D0",
-				oov3: "",
-				currency: "", // USDC
+				oov3: "0x072819Bb43B50E7A251c64411e7aA362ce82803B",
+				currency: "0x746d7b1dfcD1Cc2f4b7d09F3F1B9A21764FBeB33", // USDC
+			}
+
+		case 31337:
+			// BASE Goerli
+			return {
+				easRegistry: "0x4200000000000000000000000000000000000021",
+				easSchemaRegistry: "0x4200000000000000000000000000000000000020",
+				oov3: "0x1F4dC6D69E3b4dAC139E149E213a7e863a813466",
+				currency: "0xef8b46765ae805537053c59f826c3ad61924db45", // The only accepted
 			}
 
 		default:
