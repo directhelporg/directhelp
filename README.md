@@ -73,7 +73,7 @@ We are using MultiBaas by Curvegrid to interact with our smart contract in an ea
 - [Deployed smart contract](https://goerli.arbiscan.io/address/0xE57bae05b7568E1b2b03104bD171ab94F54BcbFE)
 
 #### Metamask 
-- [Deployed smart contract](https://explorer.linea.build/address/0xE57bae05b7568E1b2b03104bD171ab94F54BcbFE)
+- [Deployed smart contract](https://goerli.lineascan.build/address/address/0x04b3786899D4400bBEf2f000c07CBB916a9a8E24#code)
 
 #### Scroll
 - [Deployed smart contract](https://sepolia-blockscout.scroll.io/address/0x82C993811B40609c5Dc3380E7Eb8c4BcAc42D46c)
