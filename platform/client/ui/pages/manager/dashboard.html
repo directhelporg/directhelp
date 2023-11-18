@@ -38,6 +38,14 @@
             </tr>
             </thead>
             <tbody>
+              {{#if eq state.agents null}}
+                <tr>
+                  <td colspan="4" class="text-center">
+                    <i class="fa fa-spinner fa-spin"></i>
+                  </td>
+                </tr>
+              {{/if}}
+
               {{#each state.agents}}
                 <tr>
                   <td class="pd-l-20">
@@ -45,7 +53,7 @@
                   </td>
                   <td>
                     <a href="" class="tx-inverse tx-14 tx-medium d-block">{{name}}</a>
-                    <span class="tx-11 d-block">from {{location}}</span>
+                    <span class="tx-11 d-block">at <i>{{location}}</i></span>
                   </td>
                   <td class="tx-12">
                     <span class="square-8 bg-success mg-r-5 rounded-circle"></span>
@@ -107,6 +115,14 @@
             </thead>
             -->
             <tbody>
+            {{#if eq state.requests null}}
+              <tr>
+                <td colspan="4" class="text-center">
+                  <i class="fa fa-spinner fa-spin"></i>
+                </td>
+              </tr>
+            {{/if}}
+
             {{#each state.requests}}
               <tr>
                 <td class="pl-4">
