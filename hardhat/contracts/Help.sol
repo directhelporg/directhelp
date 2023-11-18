@@ -126,7 +126,6 @@ contract Help is Ownable {
         return result;
     }
 
-    
     /**
      * @notice Returns the result of the assertion.
      * @param _assertionId the assertionId of the claim.
@@ -138,18 +137,15 @@ contract Help is Ownable {
             _oov3.getAssertionResult(_assertionId);
     }
 
-
-    // /**
-    //  * @notice Returns the full assertion object contain all information associated with the assertion.
-    //  * @param _assertionId the assertionId of the claim.
-    //  * @dev This function can be called any time, it won't revert if assertion has not been settled.
-    //  * @return assertion the full assertion object.
-    //  */
-    // function getAssertionData(bytes calldata _assertionId) public view returns (OptimisticOracleV3Interface.Assertion memory) {
-    //     return _oov3.getAssertion(_assertionId);
-    // }
-
-
+    /**
+     * @notice Returns the full assertion object contain all information associated with the assertion.
+     * @param _assertionId the assertionId of the claim.
+     * @dev This function can be called any time, it won't revert if assertion has not been settled.
+     * @return assertion the full assertion object.
+     */
+    function getAssertionData(bytes32 _assertionId) public view returns (OptimisticOracleV3Interface.Assertion memory) {
+        return _oov3.getAssertion(_assertionId);
+    }
     
     // ========================================
     //     HELPER FUNCTIONS
