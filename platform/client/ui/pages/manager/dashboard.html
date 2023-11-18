@@ -1,4 +1,30 @@
 <template name="ManagerDashboard">
   {{>pageHeader heading="Fund manager"}}
-  //TODO
+  <div class="row">
+    <div class="col-md">
+      {{#card title="Agents registry"}}
+        <ul class="list-group list-group-flush">
+          {{#each agents}}
+            <li class="list-group-item">//TODO</li>
+          {{else}}
+            <li class="list-group-item text-center text-muted">No Agents found</li>
+          {{/each}}
+        </ul>
+      {{/card}}
+    </div>
+    <div class="col-md">
+      {{#card title="Fund capacity"}}
+        <div class="display-4">{{capacity}}</div>
+      {{/card}}
+      {{#card title="Funding requests"}}
+        <ul class="list-group list-group-flush">
+          {{#each agents}}
+            <li class="list-group-item">//TODO</li>
+          {{else}}
+            <li class="list-group-item text-center text-muted">No Funding requests found</li>
+          {{/each}}
+        </ul>
+      {{/card}}
+    </div>
+  </div>
 </template>

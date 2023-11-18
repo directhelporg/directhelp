@@ -2,5 +2,9 @@ import { TemplateController } from 'meteor/space:template-controller';
 import './dashboard.html';
 
 TemplateController('ManagerDashboard', {
-  //TODO
+  helpers: {
+    agents: () => [],
+    capacity: () => '10000 USDC',
+    requests: () => [],
+  },
 });
