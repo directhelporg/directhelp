@@ -12,6 +12,7 @@ TemplateController('Register', {
         allowedValues: () => Accounts.connected.get(),
         autoform: {
           type: 'select',
+          value: Accounts.current,
         },
       },
       name: String,
@@ -25,7 +26,7 @@ TemplateController('Register', {
   },
 });
 
-AutoForm.addHooks('registerAgent2', {
+AutoForm.addHooks('registerAgent', {
   onSubmit({ wallet, name, location, households }) {
     this.event.preventDefault();
     return false;
