@@ -1,12 +1,28 @@
 <template name="Layout">
   <header id="header" class="header fixed-top d-flex align-items-center">
-    <div class="d-flex align-items-center justify-content-between">
+    <div class="d-flex">
       <a href="{{pathFor "/"}}" class="logo d-flex align-items-center">
         <lead><i class="fa fa-handshake-o text-dark mr-2"></i></lead>
         <span class="d-none d-lg-block">DirectHelp</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div>
+    {{#if currentUser}}
+      <div class="d-flex">
+        <a href="{{pathFor "ManagerDashboard"}}" class="menu-item">
+          <span class="d-none d-lg-block">Dashboard</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+      </div>
+    {{/if}}
+    {{#if currentAccount}}
+      <div class="d-flex">
+        <a href="{{pathFor "AgentSubmit"}}" class="menu-item">
+          <span class="d-none d-lg-block">Submit request</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+      </div>
+    {{/if}}
     <nav class="header-nav ml-auto">
       {{#if isConnected}}
         <ul class="d-flex align-items-center">
