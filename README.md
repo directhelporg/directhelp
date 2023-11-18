@@ -40,7 +40,7 @@ npm run dev
 - [Sepolia](https://sepolia.etherscan.io/address/0x2d693964DAA7cFdD27F17501600Af950e0d852F6#code)
 - [Arbitrum](https://goerli.arbiscan.io/address/0xE57bae05b7568E1b2b03104bD171ab94F54BcbFE#code)
 - [Base](https://goerli.basescan.org/address/0xE57bae05b7568E1b2b03104bD171ab94F54BcbFE#code)
-- [Gnosis UNVERIFIED](0x123a40a856d4a009Bb709c7828355C8Bc7309b57)
+- [Gnosis UNVERIFIED](https://gnosisscan.io/address/0x04b3786899D4400bBEf2f000c07CBB916a9a8E24)
 - [Linea UNVERIFIED](https://explorer.linea.build/address/0xE57bae05b7568E1b2b03104bD171ab94F54BcbFE)
 - [Scroll](https://sepolia-blockscout.scroll.io/address/0x82C993811B40609c5Dc3380E7Eb8c4BcAc42D46c#code)
 - [Mantle](https://explorer.testnet.mantle.xyz/address/0x990d9369C17Bb50083f6e615BB6773bfab637e48#code)
@@ -49,20 +49,20 @@ npm run dev
 ## Hackathon bounties
 
 #### Unicef
-[todo]
+TODO
 
 #### ​UMA
-We used OptimisticOracleV3
+TODO - We used OptimisticOracleV3
 
 #### Ethereum Attestation Service
-[todo]
+TODO
 
 #### Gnosis - Innovate on Gnosis Chain 
-We deployed our smart contract on Gnosis testnet here: [TODO]().
-Here is the tweet about the project: [TODO]()
+[Deployed smart contract](https://gnosisscan.io/address/0x04b3786899D4400bBEf2f000c07CBB916a9a8E24)
+[Tweet about our project tagging @GnosisChain TODO]()
 
 #### Arbitrum 
-We deployed our smart contract on Arbitrum testnet: https://goerli.arbiscan.io/address/0xE57bae05b7568E1b2b03104bD171ab94F54BcbFE
+[Deployed smart contract](https://goerli.arbiscan.io/address/0xE57bae05b7568E1b2b03104bD171ab94F54BcbFE)
 
 #### Metamask 
 [Deployed smart contract](https://explorer.linea.build/address/0xE57bae05b7568E1b2b03104bD171ab94F54BcbFE)
@@ -70,10 +70,18 @@ We deployed our smart contract on Arbitrum testnet: https://goerli.arbiscan.io/a
 #### Scroll
 [Deployed smart contract](https://sepolia-blockscout.scroll.io/address/0x82C993811B40609c5Dc3380E7Eb8c4BcAc42D46c)
 
+#### Mantle - Best Ux
+[Deployed smart contract](https://explorer.testnet.mantle.xyz/address/0x990d9369C17Bb50083f6e615BB6773bfab637e48)
+
+#### CELO - Best dApps on Celo Blockchain 
+[Deployed smart contract](https://alfajores.celoscan.io/address/0x509f25ab47607B5490561CC5053071a79E83D836)
+
+#### Base  - Build a Consumer Product
+[Deployed smart contract](https://alfajores.celoscan.io/address/0x509f25ab47607B5490561CC5053071a79E83D836)
 
 ## Team
 This project was build at EthGlobal Istanbul 2023 by:
 
-- [Name](http://x.com/)
-- [Name](http://x.com/)
+- [Denis Perov](https://t.me/imajus)
+- [Oleg Borodkin](http://x.com/)
 - [arjanjohan](https://x.com/arjanjohan/)
