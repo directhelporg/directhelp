@@ -85,8 +85,8 @@ TemplateController('ManagerDashboard', {
       });
     },
     async fetchRequests() {
-      const requests = await fetchEvents(DirectHelp, '???');
-      this.state.agents = requests.map(({ event, triggeredAt }) => ({
+      const requests = await fetchEvents(DirectHelp, 'RequestInitiated(address,bytes32)');
+      this.state.requests = requests.map(({ event, triggeredAt }) => ({
         agentAddress: event.inputs[0].value,
         assertionId: event.inputs[1].value,
         timestamp: new Date(triggeredAt),
