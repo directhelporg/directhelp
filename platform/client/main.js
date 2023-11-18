@@ -12,6 +12,7 @@ import 'meteor/aldeed:autoform/static';
 import '/init';
 import './api';
 import './routes';
+import './ui/helpers';
 
 global.Popper = popper; // fixes some issues with Popper and Meteor
 
