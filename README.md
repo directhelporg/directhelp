@@ -1,5 +1,9 @@
 # 🏗 DirectHelp
 
+
+<p align="center">
+<img src="https://github.com/directhelporg/directhelp/blob/8790b7a420f92313f59dcf6fc98d35d2745894a0/images/DirectHelp1.png" alt="logo" width="500"/>
+</p>
 <h4 align="center">
   <a href="https://docs.scaffoldeth.io">Deployed dApp</a> |
   <a href="https://scaffoldeth.io">Demo video</a>
