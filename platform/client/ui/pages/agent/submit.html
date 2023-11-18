@@ -1,8 +1,13 @@
 <template name="AgentSubmit">
-  <div class="row justify-content-center">
-    <div class="col-md-6 col-lg-5">
-      {{>pageHeader heading="Submit a funding request"}}
-      {{>quickForm id="submitRequest" schema=schema type="normal"}}
+  {{>pageHeader2 heading="Submit a funding request" bc1="Funding request"}}
+
+  <div class="row">
+    <div class="col-6">
+      <div class="card shadow mb-4">
+        <div class='card-body'>
+          {{>quickForm id="submitRequest" schema=schema type="normal"}}
+        </div>
+      </div>
     </div>
   </div>
 </template>
