@@ -4,6 +4,7 @@ pragma solidity ^0.8.20;
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {OptimisticOracleV3Interface} from "./interfaces/OptimisticOracleV3Interface.sol";
+import "hardhat/console.sol";
 
 contract Help is Ownable {
     OptimisticOracleV3Interface private immutable _oov3;
