@@ -44,29 +44,29 @@ npm run dev
 - [Sepolia](https://sepolia.etherscan.io/address/0x2d693964DAA7cFdD27F17501600Af950e0d852F6#code)
 - [Arbitrum](https://goerli.arbiscan.io/address/0xE57bae05b7568E1b2b03104bD171ab94F54BcbFE#code)
 - [Base](https://goerli.basescan.org/address/0xE57bae05b7568E1b2b03104bD171ab94F54BcbFE#code)
-- [Gnosis UNVERIFIED](https://gnosisscan.io/address/0x04b3786899D4400bBEf2f000c07CBB916a9a8E24)
-- [Linea UNVERIFIED](https://explorer.linea.build/address/0xE57bae05b7568E1b2b03104bD171ab94F54BcbFE)
+- [Gnosis](https://gnosisscan.io/address/0x04b3786899D4400bBEf2f000c07CBB916a9a8E24)
+- [Linea](https://explorer.linea.build/address/0xE57bae05b7568E1b2b03104bD171ab94F54BcbFE)
 - [Scroll](https://sepolia-blockscout.scroll.io/address/0x82C993811B40609c5Dc3380E7Eb8c4BcAc42D46c#code)
 - [Mantle](https://explorer.testnet.mantle.xyz/address/0x990d9369C17Bb50083f6e615BB6773bfab637e48#code)
-- [CELO UNVERIFIED](0x509f25ab47607B5490561CC5053071a79E83D836)
+- [CELO](0x509f25ab47607B5490561CC5053071a79E83D836)
 
 ## Hackathon bounties
 
 #### Unicef
-TODO
+We are building a solution that will be of use for Unicef. By making onboarding of agents easier, and reducing the bureaucracy involved in the processes of disaster relief, Unicef will be able to provide more, better and faster help.
 
 #### ​UMA
-TODO - We used OptimisticOracleV3
+We used UMA's OptimisticOracleV3 to verify information about disasters. By using UMA we bypass a lot of the bureaucratic processes, making the release of funds easier, faster and more reliable.
 
 #### Ethereum Attestation Service
-TODO
+We use EAS to track reputation of agents that are connected to the charity (Unicef), to make sure the agents are trustworthy. By using EAS the reputation is available not only by Unicef, but also by other charities and institutions.
 
 #### Curvegrid
 TODO
 
 #### Gnosis - Innovate on Gnosis Chain 
 - [Deployed smart contract](https://gnosisscan.io/address/0x04b3786899D4400bBEf2f000c07CBB916a9a8E24)
-- [Tweet about our project tagging @GnosisChain TODO]()
+- [Tweet about our project tagging @GnosisChain](https://twitter.com/smartbots_sl/status/1725950705368813731)
 
 #### Arbitrum 
 - [Deployed smart contract](https://goerli.arbiscan.io/address/0xE57bae05b7568E1b2b03104bD171ab94F54BcbFE)
