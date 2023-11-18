@@ -12,6 +12,9 @@ const config = new MultiBaas.Configuration({
 const chain = 'ethereum';
 
 export const Chains = new MultiBaas.ChainsApi(config);
+export const Events = new MultiBaas.EventsApi(config);
+
+Events.listEvents();
 
 Meteor.startup(async () => {
   const { data } = await Chains.getChainStatus(chain);

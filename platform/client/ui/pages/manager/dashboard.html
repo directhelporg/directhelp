@@ -4,8 +4,24 @@
     <div class="col-md">
       {{#card title="Agents registry"}}
         <ul class="list-group list-group-flush">
-          {{#each agents}}
-            <li class="list-group-item">//TODO</li>
+          {{#each state.agents}}
+            <li class="list-group-item">
+              <div class="d-flex justify-content-between">
+                <div>{{name}}</div>
+                <div>{{location}}</div>
+                <div>{{shortHash agentAddress}}</div>
+                <div>
+                  <button class="btn btn-sm btn-success" data-action="approveAgent">
+                    {{>i fa='check'}}
+                    Approve
+                  </button>
+                  <button class="btn btn-sm btn-danger" data-action="rejectAgent">
+                    {{>i fa='times'}}
+                    Reject
+                  </button>
+                </div>
+              </div>
+            </li>
           {{else}}
             <li class="list-group-item text-center text-muted">No Agents found</li>
           {{/each}}
@@ -18,8 +34,19 @@
       {{/card}}
       {{#card title="Funding requests"}}
         <ul class="list-group list-group-flush">
-          {{#each agents}}
-            <li class="list-group-item">//TODO</li>
+          {{#each state.agents}}
+            <li class="list-group-item">
+              <div class="d-flex justify-content-between">
+                <div>{{shortHash agentAddress}}</div>
+                <div>{{assertionId}}</div>
+                <div>
+                  <a href="#" class="btn btn-sm btn-warning">
+                    {{>i fa='ban'}}
+                    Challenge
+                  </a>
+                </div>
+              </div>
+            </li>
           {{else}}
             <li class="list-group-item text-center text-muted">No Funding requests found</li>
           {{/each}}
