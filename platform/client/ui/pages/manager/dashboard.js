@@ -40,7 +40,9 @@ TemplateController('ManagerDashboard', {
   },
   helpers: {
     balance() {
-      const { balance } = this.state;
+      let { balance } = this.state;
+      // Add commas
+      balance = balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
       return balance;
     },
     balanceSymbol() {
