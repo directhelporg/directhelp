@@ -1,81 +1,79 @@
 //This script deploys the ERC20Votes contract to the Goerli testnet
 import { ethers } from "hardhat";
 import * as dotenv from "dotenv";
+import hre from 'hardhat';
 import {SignerWithAddress} from "@nomicfoundation/hardhat-ethers/signers";
 import {HardhatRuntimeEnvironment} from "hardhat/types";
 import {DeployOptions, DeployResult} from "hardhat-multibaas-plugin-v6/lib/type-extensions";
+import {BaseContract} from "ethers";
 
 
-// to deploy use:
-// npx hardhat run scripts/deploy.ts --network goerli
-// npx hardhat run scripts/deploy.ts --network alfajores
-// npx hardhat run scripts/deploy.ts --network linea
-// npx hardhat run scripts/deploy.ts --network chiado
-// npx hardhat run scripts/deploy.ts --network baseGoerli
+//// Deploy commands:
+// npx hardhat run scripts/deploy.ts --network sepolia
 // npx hardhat run scripts/deploy.ts --network arbitrumGoerli
-// npx hardhat run scripts/deploy.ts --network mantleTestnet
-
-// no funds:
+// npx hardhat run scripts/deploy.ts --network baseGoerli
+// npx hardhat run scripts/deploy.ts --network chiado
+// npx hardhat run scripts/deploy.ts --network linea
 // npx hardhat run scripts/deploy.ts --network scrollSepolia
+// npx hardhat run scripts/deploy.ts --network mantleTestnet
+// npx hardhat run scripts/deploy.ts --network alfajores
 
 
-// npx hardhat verify --network scroll 0x04b3786899D4400bBEf2f000c07CBB916a9a8E24 0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889 200 0xAfAE2dD69F115ec26DFbE2fa5a8642D94D7Cd37E
-// npx hardhat verify --network mantleTestnet 0x88403E5719295B76a1A456b9B2665aCDA9AD4943 0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889 200 0xAfAE2dD69F115ec26DFbE2fa5a8642D94D7Cd37E
+// npx hardhat verify --network arbitrumGoerli 0xE57bae05b7568E1b2b03104bD171ab94F54BcbFE 0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889 200 0xAfAE2dD69F115ec26DFbE2fa5a8642D94D7Cd37E
+// npx hardhat verify --network chiado 0x123a40a856d4a009Bb709c7828355C8Bc7309b57 0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889 200 0xAfAE2dD69F115ec26DFbE2fa5a8642D94D7Cd37E
+// npx hardhat verify --network linea 0x82C993811B40609c5Dc3380E7Eb8c4BcAc42D46c 0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889 200 0xAfAE2dD69F115ec26DFbE2fa5a8642D94D7Cd37E
+
+
 dotenv.config();
 
-declare const hre: HardhatRuntimeEnvironment;
-
 async function main() {
-  let contract;
-  try {
-		const args = ["0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889", 200, "0xAfAE2dD69F115ec26DFbE2fa5a8642D94D7Cd37E"];
+	const arg1 = "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889";
+	const arg2 = 200;
+	const arg3 = "0xAfAE2dD69F115ec26DFbE2fa5a8642D94D7Cd37E";
 
-		if(!process.env.DEPLOY_MULTIBAAS) {
-			contract = await ethers.deployContract("Help", args);
-		} else {
-			contract = await deployWithMB(
-				"Help",
-				"1.2.9",
-				args,
-				(await ethers.getSigners())[0], hre);
-		}
+	const contractVersion = "1.2.10";
+
+	let contract: BaseContract;
+
+	if(process.env.DEPLOY_MULTIBAAS) {
+		contract = await deployWithMB(
+			"Help",
+			contractVersion,
+			[arg1, arg2, arg3],
+			(await ethers.getSigners())[0]);
 	}
-  catch (error) {
-		// Should not get into mantleTestnet"
-		throw new Error(`Deployment error: ${error.message}`);
-  }
+	if(hre.network.name != "mantleTestnet") {
+		contract = await ethers.deployContract("Help", [arg1, arg2, arg3]);
+	} else {
+		contract = await ethers.deployContract("Help", [arg1, arg2, arg3], {gasLimit: 10000000});
+	}
 
-  console.log("Contract address:", await contract?.getAddress());
+	const deployContractAddress = await contract.getAddress();
+	console.log("Contract address:", deployContractAddress);
+	console.log("To verify execute the command below:");
+	console.log("npx hardhat verify --network " + hre.network.name + " " + deployContractAddress + " " + arg1 + " " + arg2 + " " + arg3);
 }
-
 
 async function deployWithMB(
 	contractName: string,
 	contractVersion: string,
 	args: any[],
 	signer: SignerWithAddress,
-	hre: HardhatRuntimeEnvironment
-): Promise<DeployResult> {
+): Promise<BaseContract> {
 	await hre.mbDeployer.setup();
 
 	console.log("Deploying through MB");
 
-	let deployment: DeployResult;
-
-	try {
-		deployment = await hre.mbDeployer.deploy(
-			signer as SignerWithAddress,
-			contractName,
-			args,
-			{
-				addressLabel: "help_sc_address",
-				contractVersion,
-				contractLabel: contractName.toLowerCase(),
-			}
-		);
-	} catch(ex) {
-		console.error(`Error doing mbDeployment: ${ex.message}`);
-	}
+	let deployment = await hre.mbDeployer.deploy(
+		signer as SignerWithAddress,
+		contractName,
+		args,
+		{
+			addressLabel: "help_sc_address",
+			contractVersion,
+			contractLabel: contractName.toLowerCase(),
+		}
+	);
 
 	// Temporary fix for link update
 	const linkResult = await hre.mbDeployer.link(
@@ -86,7 +84,7 @@ async function deployWithMB(
 	console.log("Link result:");
 	console.log(linkResult);
 
-	return deployment;
+	return deployment.contract;
 }
 
 main()
@@ -95,6 +93,3 @@ main()
     console.error(error);
     process.exit(1);
   });
-
-
-  // 0x388615CDF39FE5934Ac05AcFf2bbB86DB933CcB7

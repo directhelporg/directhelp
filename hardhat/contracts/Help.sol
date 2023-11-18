@@ -76,13 +76,17 @@ contract Help is Ownable {
         emit AgentRegistered(msg.sender, _name, _location);
     }
 
-    function agentApprove(address _agentAddress) public onlyOwner {
+    function agentApprove(address _agentAddress) public 
+    // onlyOwner
+    {
         require(agents[_agentAddress].agentAddress != address(0), "Agent not registered");
         agents[_agentAddress].status = AgentStatus.Approved;
         emit AgentApproved(_agentAddress);
     }
 
-    function agentSuspend(address _agentAddress) public onlyOwner {
+    function agentSuspend(address _agentAddress) public 
+    // onlyOwner
+    {
         require(agents[_agentAddress].agentAddress != address(0), "Agent not registered");
         agents[_agentAddress].status = AgentStatus.Suspended;
         emit AgentSuspended(_agentAddress);
@@ -100,13 +104,13 @@ contract Help is Ownable {
     //     UMA FUNCTIONS
     // ========================================
 
-    function agentInitateFundRequest(bytes memory _disasterDescription, bytes memory _householdsAffected) public returns (bytes32) {
+    function agentInitateFundRequest(string memory _disasterDescription, string memory _householdsAffected) public returns (bytes32) {
         // todo: check if agent (msg.sender) exists and is approved
         // todo: check is request is within budget
         // todo: check if another request is pending
         
         bytes32 assertionId = _oov3.assertTruth(
-            createFinalClaimAssembly(_disasterDescription, _householdsAffected),
+            createFinalClaimAssembly(bytes(_disasterDescription), bytes(_householdsAffected)),
             address(this), // asserter
             address(0), // callbackRecipient
             address(0), // escalationManager
@@ -127,7 +131,6 @@ contract Help is Ownable {
         return result;
     }
 
-    
     /**
      * @notice Returns the result of the assertion.
      * @param _assertionId the assertionId of the claim.
@@ -139,44 +142,41 @@ contract Help is Ownable {
             _oov3.getAssertionResult(_assertionId);
     }
 
-
-    // /**
-    //  * @notice Returns the full assertion object contain all information associated with the assertion.
-    //  * @param _assertionId the assertionId of the claim.
-    //  * @dev This function can be called any time, it won't revert if assertion has not been settled.
-    //  * @return assertion the full assertion object.
-    //  */
-    // function getAssertionData(bytes calldata _assertionId) public view returns (OptimisticOracleV3Interface.Assertion memory) {
-    //     return _oov3.getAssertion(_assertionId);
-    // }
-
-
+    /**
+     * @notice Returns the full assertion object contain all information associated with the assertion.
+     * @param _assertionId the assertionId of the claim.
+     * @dev This function can be called any time, it won't revert if assertion has not been settled.
+     * @return assertion the full assertion object.
+     */
+    function getAssertionData(bytes32 _assertionId) public view returns (OptimisticOracleV3Interface.Assertion memory) {
+        return _oov3.getAssertion(_assertionId);
+    }
     
     // ========================================
     //     HELPER FUNCTIONS
     // ========================================
 
     function createFinalClaimAssembly(
-        bytes memory claim,
-        bytes memory lensPostId
+        bytes memory _disasterDescription,
+        bytes memory _householdsAffected
     ) private pure returns (bytes memory) {
-        bytes memory mergedBytes = new bytes(claim.length + lensPostId.length);
+        bytes memory mergedBytes = new bytes(_disasterDescription.length + _householdsAffected.length);
 
         assembly {
-            let length1 := mload(claim)
-            let length2 := mload(lensPostId)
+            let length1 := mload(_disasterDescription)
+            let length2 := mload(_householdsAffected)
             let dest := add(mergedBytes, 32) // Skip over the length field of the dynamic array
 
-            // Copy claim to mergedBytes
+            // Copy _disasterDescription to mergedBytes
             for {
                 let i := 0
             } lt(i, length1) {
                 i := add(i, 32)
             } {
-                mstore(add(dest, i), mload(add(claim, add(32, i))))
+                mstore(add(dest, i), mload(add(_disasterDescription, add(32, i))))
             }
 
-            // Copy lensPostId to mergedBytes
+            // Copy _householdsAffected to mergedBytes
             for {
                 let i := 0
             } lt(i, length2) {
@@ -184,7 +184,7 @@ contract Help is Ownable {
             } {
                 mstore(
                     add(dest, add(length1, i)),
-                    mload(add(lensPostId, add(32, i)))
+                    mload(add(_householdsAffected, add(32, i)))
                 )
             }
 
