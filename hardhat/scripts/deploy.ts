@@ -34,7 +34,7 @@ async function main() {
 	const currency = "0xEF8b46765ae805537053C59f826C3aD61924Db45"; // BASE Goerli WETH ERC20
 	const eas_address = "0x4200000000000000000000000000000000000021"
 
-	const contractVersion = "1.3";
+	const contractVersion = "1.3.4";
 
 	let contract: BaseContract;
 

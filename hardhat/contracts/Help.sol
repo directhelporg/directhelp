@@ -49,7 +49,7 @@ contract Help is Ownable {
     mapping(bytes32 => address) public disputedAssertions;
 	
 	  bytes32 public recentAssertionId;
-		uint256 minimalBond;
+		uint256 public minimalBond;
 
     
     // ========================================
@@ -60,6 +60,7 @@ contract Help is Ownable {
     event AgentApproved(address indexed agentAddress, uint64 householdBudget);
     event AgentSuspended(address indexed agentAddress, uint64 householdBudget);
 
+    event RequestInitiateBegin(address indexed agentAddress, bytes32 indexed assertionId);
     event RequestInitiated(address indexed agentAddress, bytes32 indexed assertionId);
     event RequestApproved(address indexed agentAddress, bytes32 indexed assertionId);
     event RequestChallenged(address indexed agentAddress, bytes32 indexed assertionId);
@@ -137,28 +138,65 @@ contract Help is Ownable {
         // todo: check is request is within budget
         // todo: check if another request is pending
 			
-        bytes memory claim = createFinalClaimAssembly(bytes(_disasterDescription), bytes(_householdsAffected));
+      bytes memory claim = createFinalClaimAssembly(
+        bytes(_disasterDescription),
+        bytes(_householdsAffected)
+      );
 			
 			minimalBond = _oov3.getMinimumBond(address(defaultCurrency));
 			defaultCurrency.approve(address(_oov3), minimalBond);
 			
-			console.log("B4 assertTruth, currency: %s", address(defaultCurrency));
-        bytes32 assertionId = _oov3.assertTruth(
-            claim,
-            address(this), // asserter
-            address(0), // callbackRecipient
-            address(0), // escalationManager
-            defaultLiveness,
-            defaultCurrency,
+			//console.log("B4 assertTruth, currency: %s", address(defaultCurrency));
+      recentAssertionId = _oov3.assertTruth(
+          claim,
+          address(this), // asserter
+          address(0), // callbackRecipient
+          address(0), // escalationManager
+          defaultLiveness,
+          defaultCurrency,
 					minimalBond,
-            _defaultIdentifier,
-            bytes32(0) // domainId
-        );
+          _defaultIdentifier,
+          bytes32(0) // domainId
+      );
 			
-			recentAssertionId = assertionId;
+			emit RequestInitiated(msg.sender, recentAssertionId);
+			return recentAssertionId;
+    }
+  
+  
+    function serverInitiateFundRequest(address _agent, string memory _disasterDescription, string memory _householdsAffected) public
+    returns (bytes32)
+    {
+      require(agents[_agent].agentAddress != address(0), "Agent not registered");
+        
+        // todo: check is request is within budget
+        // todo: check if another request is pending
+      
+      emit RequestInitiateBegin(_agent, recentAssertionId);
+      
+      bytes memory claim = createFinalClaimAssembly(
+        bytes(_disasterDescription),
+        bytes(_householdsAffected)
+      );
 			
-			emit RequestInitiated(msg.sender, assertionId);
-			return assertionId;
+			minimalBond = _oov3.getMinimumBond(address(defaultCurrency));
+			defaultCurrency.approve(address(_oov3), minimalBond);
+			
+			//console.log("B4 assertTruth, currency: %s", address(defaultCurrency));
+      recentAssertionId = _oov3.assertTruth(
+          claim,
+          address(this), // asserter
+          address(0), // callbackRecipient
+          address(0), // escalationManager
+          defaultLiveness,
+          defaultCurrency,
+					minimalBond,
+          _defaultIdentifier,
+          bytes32(0) // domainId
+      );
+			
+			emit RequestInitiated(_agent, recentAssertionId);
+			return recentAssertionId;
     }
 
     function serverSettleAssertion(bytes32 _assertionId) external returns (bool) {
@@ -209,6 +247,11 @@ contract Help is Ownable {
 			// Simulate disputed assertion
 			disputedAssertions[_assertionId] = address(this);
 		}
+  
+  // "USCD" payments and balance retrieval
+  function getCurrencyBalance() public view returns (uint256) {
+    return defaultCurrency.balanceOf(address(this));
+  }
     
     // ========================================
     //     EAS FUNCTIONS
@@ -240,8 +283,8 @@ contract Help is Ownable {
 			requestData
 		);
 		
-		bytes32 attestationResult = EAS.attest(request);
-		return attestationResult;
+		recentAttestationId = EAS.attest(request);
+		return recentAttestationId;
 	}
 
     // ========================================

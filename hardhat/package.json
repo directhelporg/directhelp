@@ -3,7 +3,8 @@
   "packageManager": "yarn@4.0.2",
 	"scripts": {
 		"deploy": "hardhat run scripts/deploy.ts",
-		"deploy:base": "yarn deploy --network baseGoerli"
+		"deploy:base": "yarn deploy --network baseGoerli",
+		"test": "hardhat test tests/Help.ts"
 	},
 	"devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",

@@ -47,6 +47,14 @@ describe("Help", function () {
 			expect(await help.getAddress()).to.be.an("string");
 		});
 
+		it("Should have a balance", async function() {
+			const {help} = await loadFixture(deployContract);
+
+			const balance = await help.getCurrencyBalance();
+
+			expect(balance).to.be.equal(BigInt("100000000000000000000000"));
+		});
+
 		it("Should add agent", async function() {
 			const {systemConfig, help, owner, otherAccount} = await loadFixture(deployContract);
 
@@ -93,6 +101,34 @@ describe("Help", function () {
 
 			const trx = await help.agentInitateFundRequest(
 				"Some disaster",
+				"50000"
+			);
+
+			const recentAssertionId = await help.recentAssertionId();
+
+			expect(trx).to.emit(help, "RequestInitiated");
+
+			const newBalance = await currency.balanceOf(await help.getAddress());
+			//console.log(`New balance: ${newBalance}`);
+			expect(newBalance).to.be.lessThan(origBalance);
+
+			await time.increase(10);
+
+			await help.serverSettleAssertion(recentAssertionId);
+			expect(await help.getAssertionResult(recentAssertionId)).to.be.true;
+		});
+
+		it("Should pass UMA from server", async function() {
+			const {currency, help, owner, otherAccount} = await loadFixture(deployContract);
+
+			await help.connect(otherAccount).agentRegister("Name", "Location", 100_000);
+			await help.agentApprove(otherAccount.address, 100_000);
+
+			const origBalance = await currency.balanceOf(await help.getAddress());
+
+			const trx = await help.serverInitiateFundRequest(
+				otherAccount.address,
+				"Some disaster happened somewhere",
 				"50000"
 			);
 
