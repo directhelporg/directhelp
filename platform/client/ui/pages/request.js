@@ -4,6 +4,6 @@ import './request.html';
 
 TemplateController('Request', {
   helpers: {
-    hash: () => FlowRouter.getParam('hash'),
+    assertionId: () => FlowRouter.getParam('assertionId'),
   },
 });

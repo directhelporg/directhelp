@@ -1,6 +1,17 @@
 <template name="ManagerDashboard">
   {{>pageHeader heading="Fund manager"}}
   <div class="row">
+    <div class="col-12">
+      {{#card title="Fund capacity"}}
+        <div class="display-4">
+          {{#unless eq state.balance null}}
+            {{balance}}
+          {{else}}
+            ...
+          {{/unless}}
+        </div>
+      {{/card}}
+    </div>
     <div class="col-md">
       {{#card title="Agents registry" loading=(eq state.agents null)}}
         <ul class="list-group list-group-flush">
@@ -8,8 +19,8 @@
             <li class="list-group-item">
               <div class="d-flex justify-content-between">
                 <div>{{name}} from {{location}}</div>
-                <div class="text-center">{{shortHash agentAddress}}</div>
-                <div class="text-right">
+                <div class="text-break text-center">{{shortHash agentAddress}}</div>
+                <div class="text-break text-right">
                   {{#if approved}}
                     <button class="btn btn-sm btn-outline-success disabled">
                       {{>i fa='check'}}
@@ -44,16 +55,13 @@
       {{/card}}
     </div>
     <div class="col-md">
-      {{#card title="Fund capacity"}}
-        <div class="display-4">{{capacity}}</div>
-      {{/card}}
       {{#card title="Funding requests" loading=(eq state.requests null)}}
         <ul class="list-group list-group-flush">
           {{#each state.requests}}
             <li class="list-group-item">
               <div class="d-flex justify-content-between">
-                <div>{{shortHash agentAddress}}</div>
-                <div>{{assertionId}}</div>
+                <div class="text-break">{{shortHash agentAddress}}</div>
+                <div class="text-break">{{shortHash assertionId}}</div>
                 <div>
                   <a href="#" class="btn btn-sm btn-warning">
                     {{>i fa='ban'}}

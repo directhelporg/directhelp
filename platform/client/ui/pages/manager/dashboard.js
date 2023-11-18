@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { TemplateController } from 'meteor/space:template-controller';
 import { Blaze } from 'meteor/blaze';
 import { showToast } from 'meteor/imajus:bootstrap-helpers';
-import { fetchEvents } from '/api/multibaas';
+import { callContractReadFunction, fetchEvents } from '/api/multibaas';
 import './dashboard.html';
 
 const { DirectHelp } = Meteor.settings.public.MultiBaas;
@@ -11,12 +11,14 @@ TemplateController('ManagerDashboard', {
   state: {
     agents: null,
     requests: null,
+    balance: null,
     working: false,
   },
   async onRendered() {
     try {
       await this.fetchAgents();
       await this.fetchRequests();
+      await this.fetchBalance();
     } catch (err) {
       if (err.response?.data) {
         const { status, message } = err.response.data;
@@ -37,7 +39,10 @@ TemplateController('ManagerDashboard', {
     }
   },
   helpers: {
-    capacity: () => '10000 USDC',
+    balance() {
+      const { balance } = this.state;
+      return `${balance} ${DirectHelp.symbol}`;
+    },
   },
   events: {
     async 'click [data-action=approveAgent]'(e) {
@@ -104,6 +109,10 @@ TemplateController('ManagerDashboard', {
         assertionId: event.inputs[1].value,
         timestamp: new Date(triggeredAt),
       }));
+    },
+    async fetchBalance() {
+      const balance = await callContractReadFunction(DirectHelp, 'getCurrencyBalance');
+      this.state.balance = balance / 1e18;
     },
     async callContractMethod(name, ...args) {
       try {

@@ -45,7 +45,7 @@ FlowRouter.route('/registration/:hash', {
   },
 });
 
-FlowRouter.route('/request/:hash', {
+FlowRouter.route('/request/:assertionId', {
   name: 'Request',
   action() {
     this.render('Layout', { main: 'Request' });
