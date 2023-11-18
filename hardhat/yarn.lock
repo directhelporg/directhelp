@@ -3605,9 +3605,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hardhat-multibaas-plugin@file:/Users/oleg/Documents/crypto/hardhat-multibaas-plugin::locator=hardhat%40workspace%3A.":
+"hardhat-multibaas-plugin@https://github.com/directhelporg/hardhat-multibaas-plugin.git":
   version: 0.1.5
-  resolution: "hardhat-multibaas-plugin@file:/Users/oleg/Documents/crypto/hardhat-multibaas-plugin#/Users/oleg/Documents/crypto/hardhat-multibaas-plugin::hash=994301&locator=hardhat%40workspace%3A."
+  resolution: "hardhat-multibaas-plugin@https://github.com/directhelporg/hardhat-multibaas-plugin.git#commit=f7d2c4cacaf06448ab4e93a2949c63293e091761"
   dependencies:
     "@nomicfoundation/hardhat-ethers": "npm:^3.0.0"
     "@openzeppelin/hardhat-upgrades": "npm:^2.4.1"
@@ -3615,7 +3615,7 @@ __metadata:
     ethers: "npm:^6.4.0"
     hardhat: "npm:^2.14.0"
     validator: "npm:^13.7.0"
-  checksum: 04e55ad0316b06ebb14a1889c2703d01830a6e2b37d45b37638715eb91c286c18ade8d61ef6938aa59c8064029977b737e6242be376fd27b156a959e3dbbd48e
+  checksum: 7a1ece2730e3f6dbc082d282bfd6084778c83394779bcc168058b1eccd80573c932fdcb0df4e690581cdf04e7763340a064d9402c2658f9c9ed32623b2e9f78d
   languageName: node
   linkType: hard
 
@@ -3706,7 +3706,7 @@ __metadata:
     ethers: "npm:^6.4.0"
     hardhat: "npm:^2.14.0"
     hardhat-gas-reporter: "npm:^1.0.8"
-    hardhat-multibaas-plugin: /Users/oleg/Documents/crypto/hardhat-multibaas-plugin
+    hardhat-multibaas-plugin: "https://github.com/directhelporg/hardhat-multibaas-plugin.git"
     solidity-coverage: "npm:^0.8.0"
     ts-node: "npm:>=8.0.0"
     typechain: "npm:^8.3.0"
