@@ -105,7 +105,7 @@ const config: HardhatUserConfig = {
       goerli: process.env.ETHERSCAN_API_KEY,
       baseGoerli: process.env.ETHERSCAN_API_KEY,
       chiado: process.env.GNOSISSCAN_API_KEY,
-      linea: process.env.ETHERSCAN_API_KEY,
+      linea: process.env.LINEASCAN_API_KEY,
       scrollSepolia: process.env.ETHERSCAN_API_KEY,
       polygonMumbai: process.env.POLYGON_API_KEY,
       mantleTestnet: process.env.MANTLE_API_KEY,
@@ -124,7 +124,7 @@ const config: HardhatUserConfig = {
         network: "chiado",
         chainId: 10200,
         urls: {
-          apiURL: "https://blockscout.com/gnosis/chiado/api",
+          apiURL: "	https://gnosis-chiado.blockscout.com/api",
           browserURL: "https://blockscout.com/gnosis/chiado",
         },
       },
@@ -140,8 +140,8 @@ const config: HardhatUserConfig = {
         network: "linea",
         chainId: 59140,
         urls: {
-          apiURL: "	https://explorer.linea.build/api",
-          browserURL: "	https://explorer.linea.build/",
+          apiURL: "https://api-testnet.lineascan.build/api",
+          browserURL: "	https://goerli.lineascan.build/address",
         },
       },
       {
