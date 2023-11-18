@@ -88,7 +88,7 @@ TemplateController('ManagerDashboard', {
   private: {
     async fetchAgents() {
       const all = await fetchEvents(DirectHelp, 'AgentRegistered(address,string,string,uint64)');
-      const approved = await fetchEvents(DirectHelp, 'AgentApproved(address)');
+      const approved = await fetchEvents(DirectHelp, 'AgentApproved(address,uint64)');
       const rejected = await fetchEvents(DirectHelp, 'AgentSuspended(address)');
       this.state.agents = all.map(({ event, triggeredAt }) => {
         const address = event.inputs[0].value;

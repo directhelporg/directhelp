@@ -35,9 +35,13 @@ AutoForm.addHooks('submitRequest', {
         });
         Meteor.setTimeout(async () => {
           // Fetch UMA assertion ID
-          const assertionId = await callContractReadFunction(DirectHelp, 'recentAssertionId');
-          this.done(null, assertionId);
-        }, 5000);
+          try {
+            const assertionId = await callContractReadFunction(DirectHelp, 'recentAssertionId');
+            this.done(null, assertionId);
+          } catch (err) {
+            this.done(err);
+          }
+        }, 3000);
       } catch (err) {
         this.done(err);
       }

@@ -21,7 +21,7 @@ TemplateController('Request', {
       } finally {
         this.state.loading = false;
       }
-    }, 5000);
+    }, 3000);
   },
   helpers: {
     assertionId: () => FlowRouter.getParam('assertionId'),
