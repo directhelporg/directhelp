@@ -2,10 +2,30 @@
   {{>pageHeader heading="Fund manager"}}
   <div class="row">
     <div class="col-md">
-      {{#card title="Agents registry"}}
+      {{#card title="Agents registry" loading=(eq state.agents null)}}
         <ul class="list-group list-group-flush">
-          {{#each agents}}
-            <li class="list-group-item">//TODO</li>
+          {{#each state.agents}}
+            <li class="list-group-item">
+              <div class="d-flex justify-content-between">
+                <div>{{name}}</div>
+                <div>{{location}}</div>
+                <div>{{shortHash agentAddress}}</div>
+                <div>
+                  <button
+                    class="btn btn-sm btn-success {{#if state.working}}disabled{{/if}}"
+                    data-action="approveAgent">
+                    {{>i fa='check'}}
+                    Approve
+                  </button>
+                  <button
+                    class="btn btn-sm btn-danger {{#if state.working}}disabled{{/if}}"
+                    data-action="rejectAgent">
+                    {{>i fa='times'}}
+                    Reject
+                  </button>
+                </div>
+              </div>
+            </li>
           {{else}}
             <li class="list-group-item text-center text-muted">No Agents found</li>
           {{/each}}
@@ -16,10 +36,21 @@
       {{#card title="Fund capacity"}}
         <div class="display-4">{{capacity}}</div>
       {{/card}}
-      {{#card title="Funding requests"}}
+      {{#card title="Funding requests" loading=(eq state.requests null)}}
         <ul class="list-group list-group-flush">
-          {{#each agents}}
-            <li class="list-group-item">//TODO</li>
+          {{#each state.requests}}
+            <li class="list-group-item">
+              <div class="d-flex justify-content-between">
+                <div>{{shortHash agentAddress}}</div>
+                <div>{{assertionId}}</div>
+                <div>
+                  <a href="#" class="btn btn-sm btn-warning">
+                    {{>i fa='ban'}}
+                    Challenge
+                  </a>
+                </div>
+              </div>
+            </li>
           {{else}}
             <li class="list-group-item text-center text-muted">No Funding requests found</li>
           {{/each}}
