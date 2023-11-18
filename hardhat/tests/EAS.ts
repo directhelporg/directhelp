@@ -17,13 +17,16 @@ describe("EAS", function () {
 
 		const systemConfig = await getSystemConfig();
 
-		console.log(`Deployng with EAS Register: ${systemConfig.easSchemaRegistry}`);
+		// console.log(`Deploying with EAS Register: ${systemConfig.easSchemaRegistry}`);
 
+
+		console.log(systemConfig);
     const EASRegisterer = await ethers.getContractFactory("EASRegisterer");
     const easRegisterer = await EASRegisterer.deploy(
 			systemConfig.easRegistry,
 			systemConfig.easSchemaRegistry
 		);
+		console.log(2);
 
     return { systemConfig, easRegisterer, owner, otherAccount };
   }
