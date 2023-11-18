@@ -21,24 +21,18 @@
 ## Contents
 - [Contents](#contents)
 - [Diagram](#diagram)
-- [Run and test](#run-and-test)
 - [Links](#links)
+- [Deployed contracts](#deployed-contracts)
 - [Hackathon bounties](#hackathon-bounties)
 - [Team](#team)
 
-## Run and test
-The frontend dapp can be deployed by running 
-```
-npm run dev
-```
-
 ## Diagram
-![diagram]()
+![diagram](https://github.com/directhelporg/directhelp/blob/cc9d937a737873fafbdc378d4954061eaa488258/images/draw_small.png)
 
 ## Links
+- [Deployed dApp]()
 - [Demo video]()
-- [Presentation slides]()
-- [Deployed contract]()
+- [Presentation slides](https://docs.google.com/presentation/d/1vG90dBGTiEyBmAL9vfIE4XoaHOR_6UKL-cnz1pXhVoU/edit?usp=sharing)
 
 ## Deployed contracts
 - [Sepolia](https://sepolia.etherscan.io/address/0x2d693964DAA7cFdD27F17501600Af950e0d852F6#code)
