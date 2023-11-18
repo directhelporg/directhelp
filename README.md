@@ -21,24 +21,18 @@
 ## Contents
 - [Contents](#contents)
 - [Diagram](#diagram)
-- [Run and test](#run-and-test)
 - [Links](#links)
+- [Deployed contracts](#deployed-contracts)
 - [Hackathon bounties](#hackathon-bounties)
 - [Team](#team)
 
-## Run and test
-The frontend dapp can be deployed by running 
-```
-npm run dev
-```
-
 ## Diagram
-![diagram]()
+![diagram](https://github.com/directhelporg/directhelp/blob/bb5e7bd244df801e3c2d7598a752d0d52e8dd522/images/draw_final.png)
 
 ## Links
+- [Deployed dApp]()
 - [Demo video]()
-- [Presentation slides]()
-- [Deployed contract]()
+- [Presentation slides](https://docs.google.com/presentation/d/1vG90dBGTiEyBmAL9vfIE4XoaHOR_6UKL-cnz1pXhVoU/edit?usp=sharing)
 
 ## Deployed contracts
 - [Sepolia](https://sepolia.etherscan.io/address/0x2d693964DAA7cFdD27F17501600Af950e0d852F6#code)
@@ -52,7 +46,7 @@ npm run dev
 
 ## Hackathon bounties
 
-#### Unicef
+#### UNICEF Innovation
 We are building a solution that will be of use for Unicef. By making onboarding of agents easier, and reducing the bureaucracy involved in the processes of disaster relief, Unicef will be able to provide more, better and faster help.
 
 #### ​UMA

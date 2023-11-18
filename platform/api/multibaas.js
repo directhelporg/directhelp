@@ -28,6 +28,21 @@ export async function getChainId() {
   return data.result.chainID;
 }
 
+export async function callContractReadFunction(contract, name, args, extra) {
+  const { data } = await Contracts.callContractFunction(
+    'ethereum',
+    contract.address,
+    contract.label,
+    name,
+    {
+      from: Signer.address,
+      args,
+      ...extra,
+    },
+  );
+  return data.result.output;
+}
+
 export async function callContractWriteFunction(contract, name, args, extra) {
   try {
     const { data: { result: { tx } } } = await Contracts.callContractFunction(
@@ -50,8 +65,8 @@ export async function callContractWriteFunction(contract, name, args, extra) {
         value: tx.value,
         nonce: tx.nonce,
         gasLimit: tx.gas,
-        // maxFeePerGas: Number(tx.gasFeeCap),
-        // maxPriorityFeePerGas: Number(tx.gasTipCap),
+        maxFeePerGas: Number(tx.gasFeeCap),
+        maxPriorityFeePerGas: Number(tx.gasTipCap),
         type: tx.type,
       });
       const { data } = await Chains.submitSignedTransaction('ethereum', { signedTx: signed });
@@ -65,8 +80,8 @@ export async function callContractWriteFunction(contract, name, args, extra) {
         value: tx.value,
         nonce: tx.nonce,
         gasLimit: tx.gas,
-        // maxFeePerGas: Number(tx.gasFeeCap),
-        // maxPriorityFeePerGas: Number(tx.gasTipCap),
+        maxFeePerGas: Number(tx.gasFeeCap),
+        maxPriorityFeePerGas: Number(tx.gasTipCap),
         type: tx.type,
       });
       return hash;

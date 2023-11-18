@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { check } from 'meteor/check';
+import { check, Match } from 'meteor/check';
 import { callContractWriteFunction } from '/api/multibaas';
 
 const { DirectHelp } = Meteor.settings.public.MultiBaas;
@@ -10,7 +10,7 @@ Meteor.methods({
     return callContractWriteFunction(
       DirectHelp,
       'agentApprove',
-      [agentAddress],
+      [agentAddress, 100],
     );
   },
   async 'rejectAgent'(agentAddress) {
@@ -19,6 +19,24 @@ Meteor.methods({
       DirectHelp,
       'agentReject',
       [agentAddress],
+    );
+  },
+  async 'submitRequest'(address, description, households) {
+    check(address, String);
+    check(description, String);
+    check(households, Match.Integer);
+    return callContractWriteFunction(
+      DirectHelp,
+      'serverInitiateFundRequest',
+      [address, description, households],
+    );
+  },
+  async 'settleRequest'(assertionId) {
+    check(assertionId, String);
+    return callContractWriteFunction(
+      DirectHelp,
+      'serverSettleAssertion',
+      [assertionId],
     );
   },
   async 'challengeRequest'(assertionId) {
