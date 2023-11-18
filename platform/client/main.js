@@ -5,7 +5,7 @@ import popper from 'popper.js';
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { AutoForm } from 'meteor/aldeed:autoform';
-import { BootstrapHelpers } from 'meteor/imajus:bootstrap-helpers';
+import { BootstrapHelpers, showToast } from 'meteor/imajus:bootstrap-helpers';
 import { AutoFormThemeBootstrap4 } from 'meteor/communitypackages:autoform-bootstrap4/static';
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 import 'meteor/aldeed:autoform/static';
@@ -19,6 +19,16 @@ BootstrapHelpers.forBootstrap4 = true;
 
 AutoFormThemeBootstrap4.load();
 AutoForm.setDefaultTemplate('bootstrap4');
+AutoForm.addHooks(null, {
+  onError(formType, err) {
+    this.event.preventDefault();
+    showToast({
+      heading: 'Submission error',
+      message: err.message,
+      brand: 'danger',
+    });
+  },
+});
 
 if (Meteor.isDevelopment) {
   AutoForm.debug();
