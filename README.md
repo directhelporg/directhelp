@@ -46,7 +46,7 @@
 
 ## Hackathon bounties
 
-#### Unicef
+#### UNICEF Innovation
 We are building a solution that will be of use for Unicef. By making onboarding of agents easier, and reducing the bureaucracy involved in the processes of disaster relief, Unicef will be able to provide more, better and faster help.
 
 #### ​UMA
