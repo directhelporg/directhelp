@@ -129,7 +129,7 @@ describe("Help", function () {
 			const trx = await help.serverInitiateFundRequest(
 				otherAccount.address,
 				"Some disaster happened somewhere",
-				"50000"
+				BigInt("50000"),
 			);
 
 			const recentAssertionId = await help.recentAssertionId();
@@ -144,6 +144,17 @@ describe("Help", function () {
 
 			await help.serverSettleAssertion(recentAssertionId);
 			expect(await help.getAssertionResult(recentAssertionId)).to.be.true;
+
+			// Check records
+			const assertionData = await help.agentAssertions(recentAssertionId);
+			//console.log(assertionData);
+
+			expect(assertionData).to.deep.equal([
+				otherAccount.address,
+				BigInt("50000"),
+				true,
+				true
+			]);
 		});
 
 		it("Should allow to dispute UMA", async function() {

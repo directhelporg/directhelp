@@ -3,6 +3,7 @@ pragma solidity ^0.8.20;
 
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 import {OptimisticOracleV3Interface} from "./interfaces/OptimisticOracleV3Interface.sol";
 import "hardhat/console.sol";
 
@@ -42,8 +43,16 @@ contract Help is Ownable {
         uint64 householdBudget;
         AgentStatus status;
     }
+  
+    struct AgentAssertion {
+      address agent;
+      uint256 householdsAffected;
+      bool resolved;
+      bool assertedTruthfully;
+    }
 
     mapping(address => Agent) public agents;
+    mapping(bytes32 => AgentAssertion) public agentAssertions;
 	
 		// All disputed assertions (simulation for the test network)
     mapping(bytes32 => address) public disputedAssertions;
@@ -164,7 +173,7 @@ contract Help is Ownable {
     }
   
   
-    function serverInitiateFundRequest(address _agent, string memory _disasterDescription, string memory _householdsAffected) public
+    function serverInitiateFundRequest(address _agent, string memory _disasterDescription, uint256 _householdsAffected) public
     returns (bytes32)
     {
       require(agents[_agent].agentAddress != address(0), "Agent not registered");
@@ -176,23 +185,30 @@ contract Help is Ownable {
       
       bytes memory claim = createFinalClaimAssembly(
         bytes(_disasterDescription),
-        bytes(_householdsAffected)
+        bytes(Strings.toString(_householdsAffected))
       );
 			
 			minimalBond = _oov3.getMinimumBond(address(defaultCurrency));
-			defaultCurrency.approve(address(_oov3), minimalBond);
+			defaultCurrency.approve(address(_oov3), minimalBond * 5);
 			
 			//console.log("B4 assertTruth, currency: %s", address(defaultCurrency));
       recentAssertionId = _oov3.assertTruth(
           claim,
           address(this), // asserter
-          address(0), // callbackRecipient
+          address(this), // callbackRecipient
           address(0), // escalationManager
           defaultLiveness,
           defaultCurrency,
 					minimalBond,
           _defaultIdentifier,
           bytes32(0) // domainId
+      );
+      
+      agentAssertions[recentAssertionId] = AgentAssertion(
+        _agent,
+        _householdsAffected,
+        false,
+        false
       );
 			
 			emit RequestInitiated(_agent, recentAssertionId);
@@ -208,12 +224,23 @@ contract Help is Ownable {
 				}
 		
 				bool result = _oov3.settleAndGetAssertionResult(_assertionId);
-        emit RequestSettled(msg.sender, _assertionId, result);
         return result;
     }
-
-    /**
-     * @notice Returns the result of the assertion.
+    
+    /** A callback from UMA when assertion is resolved */
+    function assertionResolvedCallback(bytes32 _assertionId, bool assertedTruthfully) public {
+      console.log("Assertion has arrived:", assertedTruthfully);
+      
+      agentAssertions[_assertionId].resolved = true;
+      agentAssertions[_assertionId].assertedTruthfully = assertedTruthfully;
+      
+      AgentAssertion memory agentAssertion = agentAssertions[_assertionId];
+      
+      emit RequestSettled(agentAssertion.agent, _assertionId, assertedTruthfully);
+    }
+  
+  /**
+   * @notice Returns the result of the assertion.
      * @param _assertionId the assertionId of the claim.
      * @dev This function can only be called once the assertion has been settled, otherwise it reverts.
      * @return result the result of the assertion (true/false).
