@@ -41,7 +41,10 @@ TemplateController('ManagerDashboard', {
   helpers: {
     balance() {
       const { balance } = this.state;
-      return `${balance} ${DirectHelp.symbol}`;
+      return balance;
+    },
+    balanceSymbol() {
+      return DirectHelp.symbol;
     },
   },
   events: {
