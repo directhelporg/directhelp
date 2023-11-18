@@ -30,7 +30,7 @@ dotenv.config();
 async function main() {
 	const arg1 = "0x1F4dC6D69E3b4dAC139E149E213a7e863a813466"; // BASE Goerli UMA contract
 	const arg2 = 200;
-	const arg3 = "0x2e668Bb88287675e34c8dF82686dfd0b7F0c0383"; // BASE Goerli USDC ERC20 
+	const arg3 = "0xEF8b46765ae805537053C59f826C3aD61924Db45"; // BASE Goerli WETH ERC20 
 
 	const contractVersion = "1.2.12";
 
