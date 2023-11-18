@@ -87,10 +87,10 @@ contract Help is Ownable {
     // ========================================
 
 
-    function agentRegister(address _agentAddress, string memory _name, string memory _location, uint64 _households) public {
-        require(agents[_agentAddress].agentAddress == address(0), "Agent already registered");
-        agents[_agentAddress] = Agent(_agentAddress, _name, _location, _households, 0, AgentStatus.Unapproved);
-        emit AgentRegistered(_agentAddress, _name, _location, _households);
+    function agentRegister(string memory _name, string memory _location, uint64 _households) public {
+        require(agents[msg.sender].agentAddress == msg.sender, "Agent already registered");
+        agents[msg.sender] = Agent(msg.sender, _name, _location, _households, 0, AgentStatus.Unapproved);
+        emit AgentRegistered(msg.sender, _name, _location, _households);
     }
 
     function agentApprove(address _agentAddress, uint64 householdBudget) public
