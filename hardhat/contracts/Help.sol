@@ -17,6 +17,13 @@ contract Help is Ownable {
         Suspended
     }
 
+    enum RequestStatus {
+        Pending,
+        Approved,
+        Challenged,
+        Rejected
+    }
+
     struct Agent {
         address agentAddress;
         string name;
@@ -52,6 +59,23 @@ contract Help is Ownable {
         agents[msg.sender] = Agent(msg.sender, _name, _location, AgentStatus.Unapproved);
     }
 
+    function agentApprove(address _agentAddress) public onlyOwner {
+        require(agents[_agentAddress].agentAddress != address(0), "Agent not registered");
+        agents[_agentAddress].status = AgentStatus.Approved;
+    }
+
+    function agentSuspend(address _agentAddress) public onlyOwner {
+        require(agents[_agentAddress].agentAddress != address(0), "Agent not registered");
+        agents[_agentAddress].status = AgentStatus.Suspended;
+    }
+
+    function getAgent(address _agentAddress) public view returns (Agent memory) {
+        return agents[_agentAddress];
+    }
+
+    function getAgentStatus(address _agentAddress) public view returns (AgentStatus) {
+        return agents[_agentAddress].status;
+    }
 
     // ========================================
     //     UMA FUNCTIONS
