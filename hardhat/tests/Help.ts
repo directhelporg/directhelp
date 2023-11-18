@@ -5,6 +5,8 @@ import {
 import { ethers } from "hardhat";
 import {getSystemConfig} from "../utils/systemConfig";
 import {expect} from "chai";
+import {setUSDCBalance} from "../utils/mintUSDC";
+import {ERC20Mock} from "../typechain-types";
 
 describe("Help", function () {
   // We define a fixture to reuse the same setup in every test.
@@ -22,6 +24,14 @@ describe("Help", function () {
 				0,
 				systemConfig.oov3,
 			);
+
+		// Add token balance for UMA
+		const USDC = await ethers.getContractFactory("ERC20Mock");
+		const usdc = USDC.attach(systemConfig.currency) as ERC20Mock;
+		await setUSDCBalance(usdc, await help.getAddress(), 100_000);
+
+		const balance = await usdc.balanceOf(await help.getAddress());
+		console.log(`Balance: ${balance}`);
 
     return {
 			systemConfig,
