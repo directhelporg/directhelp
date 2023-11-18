@@ -1,13 +1,19 @@
 <template name="Request">
-  {{log assertionId}}
-  <div class="row justify-content-center">
-    <div class="col-md-8 col-lg-6">
-      {{>pageHeader heading='Funding request'}}
-      {{#if state.loading}}
-        <div>Loading {{>i fa="circle-o-notch" spin=true size="1x"}}</div>
-      {{else}}
-        <h2 class="text-success">Your funding request has been approved!</h2>
-      {{/if}}
+  {{>pageHeader2 heading="Funding request" bc1="Request"}}
+
+  <div class="row">
+    <div class="col-6">
+      <div class="card shadow mb-4" style='height: 400px'>
+        <div class='card-body'>
+          {{#if state.loading}}
+            <div>Loading {{>i fa="circle-o-notch" spin=true size="1x"}}</div>
+          {{else}}
+            <h2 class="text-success">Your funding request has been approved!</h2>
+          {{/if}}
+
+          <p class='my-3'>{{log assertionId}}</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
