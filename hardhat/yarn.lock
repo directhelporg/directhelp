@@ -575,6 +575,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@juanelas/base64@npm:^1.1.2":
+  version: 1.1.5
+  resolution: "@juanelas/base64@npm:1.1.5"
+  checksum: b8675cc3ec7d68fbcdd19489735f52cdc875bd336bc222fd1632021eb12e0a1e846aebb8261e4f8393214ec5d62cd9e5b8b703c80e5126c5b3390b2a26d99fb2
+  languageName: node
+  linkType: hard
+
 "@metamask/eth-sig-util@npm:^4.0.0":
   version: 4.0.1
   resolution: "@metamask/eth-sig-util@npm:4.0.1"
@@ -1934,6 +1941,15 @@ __metadata:
   version: 1.1.4
   resolution: "bech32@npm:1.1.4"
   checksum: 5f62ca47b8df99ace9c0e0d8deb36a919d91bf40066700aaa9920a45f86bb10eb56d537d559416fd8703aa0fb60dddb642e58f049701e7291df678b2033e5ee5
+  languageName: node
+  linkType: hard
+
+"bigint-conversion@npm:^2.4.3":
+  version: 2.4.3
+  resolution: "bigint-conversion@npm:2.4.3"
+  dependencies:
+    "@juanelas/base64": "npm:^1.1.2"
+  checksum: 04c7cbc2c89197d6ab3b5272d8e6d6fdacc5fa313780752f465c7a4dbc1fdebb1879154c9dbc173d747070d3445ae19e83a89b78e660f7acef074855e3ee701d
   languageName: node
   linkType: hard
 
@@ -3807,6 +3823,7 @@ __metadata:
     "@types/chai": "npm:^4.2.0"
     "@types/mocha": "npm:>=9.1.0"
     "@types/node": "npm:>=16.0.0"
+    bigint-conversion: "npm:^2.4.3"
     chai: "npm:^4.2.0"
     dotenv: "npm:^16.3.1"
     ethers: "npm:^6.4.0"

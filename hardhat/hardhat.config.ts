@@ -32,8 +32,15 @@ const config: HardhatUserConfig = {
 
 				//url: `https://optimism.llamarpc.com`,
 				//blockNumber: 111883000,
-				url: "https://sepolia.infura.io/v3/ee642ee8e91d452a9c2dd229ed4f7a33",
-				blockNumber: 4718211,
+
+				// Sepolia
+				//url: "https://sepolia.infura.io/v3/ee642ee8e91d452a9c2dd229ed4f7a33",
+				//blockNumber: 4718211,
+
+				// Base Goerli
+				url: "https://goerli.base.org",
+				blockNumber: 12559944,
+
 			},
     },
 
