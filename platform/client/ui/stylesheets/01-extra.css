@@ -13,3 +13,8 @@
 .opacity-60-hover:hover {
     opacity: 1;
 }
+
+.chart-bg {
+    background: url(/images/chart-bg.png) no-repeat center bottom;
+    background-size: contain;
+}
