@@ -47,7 +47,7 @@ interface OptimisticOracleV3Interface {
 	/**
 	 * @notice Fetches information about a specific assertion and returns it.
      * @param assertionId unique identifier for the assertion to fetch information for.
-     * @return assertion information about the assertion.
+     * @return assertion information about the assertion.0x4dcb06ee3e314aa247dcd32a1ffa1f0b357f6a659b922aac7482f079e88bb873
      */
 	function getAssertion(bytes32 assertionId) external view returns (Assertion memory);
 
@@ -140,7 +140,9 @@ interface OptimisticOracleV3Interface {
      * @return minimum bond amount.
      */
 	function getMinimumBond(address currency) external view returns (uint256);
-
+	
+	function disputeAssertion(bytes32 assertionId, address disputer) external;
+	
 	event AssertionMade(
 		bytes32 indexed assertionId,
 		bytes32 domainId,

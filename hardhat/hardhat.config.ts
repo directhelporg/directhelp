@@ -2,6 +2,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
+import "hardhat-multibaas-plugin-v6";
 
 
 
@@ -20,16 +21,28 @@ const config: HardhatUserConfig = {
   solidity: "0.8.20",
   paths: { tests: "tests" },
 
-  
+
   networks: {
     // View the networks that are pre-configured.
     // If the network you are looking for is not here you can add new network settings
     hardhat: {
       forking: {
-        url: `https://eth-mainnet.alchemyapi.io/v2/${alchemyApiKey}`,
-        enabled: process.env.MAINNET_FORKING_ENABLED === "true",
-      },
+        //url: `https://eth-mainnet.alchemyapi.io/v2/${alchemyApiKey}`,
+				// enabled: process.env.MAINNET_FORKING_ENABLED === "true",
+
+				//url: `https://optimism.llamarpc.com`,
+				//blockNumber: 111883000,
+
+				// Sepolia
+				//url: "https://sepolia.infura.io/v3/ee642ee8e91d452a9c2dd229ed4f7a33",
+				//blockNumber: 4718211,
+
+				// Base Goerli
+				url: "https://goerli.base.org",
+				blockNumber: 12564022,
+			},
     },
+
     sepolia: {
       url: `https://eth-sepolia.g.alchemy.com/v2/${alchemyApiKey}`,
       accounts: [deployerPrivateKey],
@@ -87,14 +100,20 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
     apiKey: {
+      sepolia: process.env.ETHERSCAN_API_KEY,
+      arbitrumGoerli: process.env.ARBITRUM_API_KEY,
       goerli: process.env.ETHERSCAN_API_KEY,
-      chiado: process.env.ETHERSCAN_API_KEY,
+      baseGoerli: process.env.ETHERSCAN_API_KEY,
+      chiado: process.env.GNOSISSCAN_API_KEY,
+      linea: process.env.LINEASCAN_API_KEY,
+      scrollSepolia: process.env.ETHERSCAN_API_KEY,
       polygonMumbai: process.env.POLYGON_API_KEY,
-      mantle: process.env.MANTLE_API_KEY,
+      mantleTestnet: process.env.MANTLE_API_KEY,
+      alfajores: process.env.MANTLE_API_KEY,
     },
     customChains: [
       {
-        network: 'mantle',
+        network: 'mantleTestnet',
         chainId: 5001,
         urls: {
           apiURL: 'https://explorer.testnet.mantle.xyz/api',
@@ -105,16 +124,8 @@ const config: HardhatUserConfig = {
         network: "chiado",
         chainId: 10200,
         urls: {
-          apiURL: "https://blockscout.com/gnosis/chiado/api",
+          apiURL: "	https://gnosis-chiado.blockscout.com/api",
           browserURL: "https://blockscout.com/gnosis/chiado",
-        },
-      },
-      {
-        network: "zkEVMtestnet",
-        chainId: 1442,
-        urls: {
-          apiURL: "https://rpc.public.zkevm-test.net",
-          browserURL: "https://alfajores.celoscan.io",
         },
       },
       {
@@ -125,8 +136,40 @@ const config: HardhatUserConfig = {
           browserURL: "https://explorer.apothem.network",
         },
       },
+      {
+        network: "linea",
+        chainId: 59140,
+        urls: {
+          apiURL: "https://api-testnet.lineascan.build/api",
+          browserURL: "	https://goerli.lineascan.build/address",
+        },
+      },
+      {
+        network: "scrollSepolia",
+        chainId: 534351,
+        urls: {
+          apiURL: "https://sepolia-blockscout.scroll.io/api",
+          browserURL: "https://sepolia-blockscout.scroll.io/",
+        },
+      },
+      {
+        network: "alfajores",
+        chainId: 44787,
+        urls: {
+          apiURL: "https://alfajores-forno.celo-testnet.org/api",
+          browserURL: "https://alfajores.celoscan.io",
+        },
+      },
     ],
   },
+
+	// MultiBaas config
+	mbConfig: {
+		apiKey: process.env.MULTIBAAS_ACCESS_KEY as string,
+		host: new URL(process.env.MULTIBAAS_URL as string),
+		allowUpdateAddress: ["development", "sepolia", "baseGoerli"],
+		allowUpdateContract: ["development"],
+	},
 };
 
 export default config;
