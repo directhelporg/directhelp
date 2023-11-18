@@ -29,6 +29,7 @@ contract Help is Ownable {
         address agentAddress;
         string name;
         string location;
+        uint64 households;
         AgentStatus status;
     }
 
@@ -39,7 +40,7 @@ contract Help is Ownable {
     //     EVENTS
     // ========================================
 
-    event AgentRegistered(address indexed agentAddress, string name, string location);
+    event AgentRegistered(address indexed agentAddress, string name, string location, uint64 households);
     event AgentApproved(address indexed agentAddress);
     event AgentSuspended(address indexed agentAddress);
 
@@ -71,10 +72,10 @@ contract Help is Ownable {
     //     AGENT FUNCTIONS
     // ========================================
 
-    function agentRegister(string memory _name, string memory _location) public {
+    function agentRegister(string memory _name, string memory _location, uint64 _households) public {
         require(agents[msg.sender].agentAddress == address(0), "Agent already registered");
-        agents[msg.sender] = Agent(msg.sender, _name, _location, AgentStatus.Unapproved);
-        emit AgentRegistered(msg.sender, _name, _location);
+        agents[msg.sender] = Agent(msg.sender, _name, _location, _households, AgentStatus.Unapproved);
+        emit AgentRegistered(msg.sender, _name, _location, _households);
     }
 
     function agentApprove(address _agentAddress) public 
