@@ -10,7 +10,7 @@
       "name": "Debug: Node",
       "runtimeExecutable": "meteor",
       "runtimeArgs": [
-        "--settings=settings.json",
+        "--settings=.env/settings.json",
         "--exclude-archs=web.browser.legacy,web.cordova",
         "--raw-logs"
       ],
