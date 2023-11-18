@@ -29,37 +29,8 @@ describe("Lock", function () {
 			systemConfig.currency,
 		);
 
-		await deployWithMB(
-			"Help",
-			[
-				systemConfig.currency,
-				0,
-				systemConfig.currency,
-			],
-			owner, hre);
-
     return { systemConfig, help, owner, otherAccount };
   }
-
-	async function deployWithMB(
-		contractName: string,
-		args: any[],
-		signer: SignerWithAddress,
-		hre: HardhatRuntimeEnvironment
-	): Promise<DeployResult> {
-		await hre.mbDeployer.setup();
-
-		return hre.mbDeployer.deploy(
-			signer as SignerWithAddress,
-			contractName,
-			args,
-			{
-				addressLabel: contractName.toLowerCase(),
-				contractVersion: "1.0",
-				contractLabel: contractName.toLowerCase(),
-			}
-		);
-	}
 
   describe("Deployment", function () {
     it("Should deploy", async function () {

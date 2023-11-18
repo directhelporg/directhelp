@@ -69,15 +69,6 @@ const config: HardhatUserConfig = {
       accounts: [deployerPrivateKey],
       chainId: 44787,
     },
-  },
-
-	// MultiBaas config
-	mbConfig: {
-		apiKey: process.env.MULTIBAAS_ACCESS_KEY as string,
-		host: new URL(process.env.MULTIBAAS_URL as string),
-		allowUpdateAddress: ["development"],
-		allowUpdateContract: ["development"],
-	},
     scrollSepolia: {
       url: "https://sepolia-rpc.scroll.io",
       accounts: [deployerPrivateKey],
@@ -137,6 +128,14 @@ const config: HardhatUserConfig = {
       },
     ],
   },
+
+	// MultiBaas config
+	mbConfig: {
+		apiKey: process.env.MULTIBAAS_ACCESS_KEY as string,
+		host: new URL(process.env.MULTIBAAS_URL as string),
+		allowUpdateAddress: ["development"],
+		allowUpdateContract: ["development"],
+	},
 };
 
 export default config;

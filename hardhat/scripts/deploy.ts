@@ -1,10 +1,13 @@
 //This script deploys the ERC20Votes contract to the Goerli testnet
 import { ethers } from "hardhat";
 import * as dotenv from "dotenv";
+import {SignerWithAddress} from "@nomicfoundation/hardhat-ethers/signers";
+import {HardhatRuntimeEnvironment} from "hardhat/types";
+import {DeployResult} from "hardhat-multibaas-plugin/lib/type-extensions";
 
 
 // to deploy use:
-// npx hardhat run scripts/deploy.ts --network goerli 
+// npx hardhat run scripts/deploy.ts --network goerli
 // npx hardhat run scripts/deploy.ts --network alfajores
 // npx hardhat run scripts/deploy.ts --network linea
 // npx hardhat run scripts/deploy.ts --network chiado
@@ -20,11 +23,23 @@ import * as dotenv from "dotenv";
 // npx hardhat verify --network mantleTestnet 0x88403E5719295B76a1A456b9B2665aCDA9AD4943 0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889 200 0xAfAE2dD69F115ec26DFbE2fa5a8642D94D7Cd37E
 dotenv.config();
 
+declare const hre: HardhatRuntimeEnvironment;
+
 async function main() {
   let contract;
   try {
-    contract = await ethers.deployContract("Help", ["0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889", 200, "0xAfAE2dD69F115ec26DFbE2fa5a8642D94D7Cd37E"]);
-  }
+		const args = ["0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889", 200, "0xAfAE2dD69F115ec26DFbE2fa5a8642D94D7Cd37E"];
+
+		if(!process.env.DEPLOY_MULTIBAAS) {
+			contract = await ethers.deployContract("Help", args);
+		} else {
+			await deployWithMB(
+				"Help",
+				"1.2.4",
+				args,
+				(await ethers.getSigners())[0], hre);
+		}
+	}
   catch (error) {
     // In case of error try with specific config for mantleTestnet
     try {contract = await ethers.deployContract("Help", ["0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889", 200, "0xAfAE2dD69F115ec26DFbE2fa5a8642D94D7Cd37E"], { gasLimit: 10000000});}
@@ -34,8 +49,29 @@ async function main() {
   }
 }
 
+  console.log("Contract address:", await contract?.getAddress());
+}
 
-  console.log("Contract address:", await contract.getAddress());
+
+async function deployWithMB(
+	contractName: string,
+	contractVersion: string,
+	args: any[],
+	signer: SignerWithAddress,
+	hre: HardhatRuntimeEnvironment
+): Promise<DeployResult> {
+	await hre.mbDeployer.setup();
+
+	return hre.mbDeployer.deploy(
+		signer as SignerWithAddress,
+		contractName,
+		args,
+		{
+			addressLabel: "help_sc_address",
+			contractVersion,
+			contractLabel: contractName.toLowerCase(),
+		}
+	);
 }
 
 main()
