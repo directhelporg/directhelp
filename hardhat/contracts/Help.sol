@@ -45,7 +45,11 @@ contract Help is Ownable {
 
     mapping(address => Agent) public agents;
 	
+		// All disputed assertions (simulation for the test network)
+    mapping(bytes32 => address) public disputedAssertions;
+	
 	  bytes32 public recentAssertionId;
+		uint256 minimalBond;
 
     
     // ========================================
@@ -135,7 +139,7 @@ contract Help is Ownable {
 			
         bytes memory claim = createFinalClaimAssembly(bytes(_disasterDescription), bytes(_householdsAffected));
 			
-			uint256 minimalBond = _oov3.getMinimumBond(address(defaultCurrency));
+			minimalBond = _oov3.getMinimumBond(address(defaultCurrency));
 			defaultCurrency.approve(address(_oov3), minimalBond);
 			
 			console.log("B4 assertTruth, currency: %s", address(defaultCurrency));
@@ -158,7 +162,14 @@ contract Help is Ownable {
     }
 
     function serverSettleAssertion(bytes32 _assertionId) external returns (bool) {
-        bool result = _oov3.settleAndGetAssertionResult(_assertionId);
+        // todo: check if assertionId is not valid
+			
+				// Simulate disputed assertion
+				if(disputedAssertions[_assertionId] != address(0)) {
+					return false;
+				}
+		
+				bool result = _oov3.settleAndGetAssertionResult(_assertionId);
         emit RequestSettled(msg.sender, _assertionId, result);
         return result;
     }
@@ -170,8 +181,12 @@ contract Help is Ownable {
      * @return result the result of the assertion (true/false).
      */
     function getAssertionResult(bytes32 _assertionId) public view returns (bool) {
-        return
-            _oov3.getAssertionResult(_assertionId);
+			// Simulate disputed assertion
+			if(disputedAssertions[_assertionId] != address(0)) {
+				return false;
+			}
+			
+			return _oov3.getAssertionResult(_assertionId);
     }
 
     /**
@@ -183,6 +198,17 @@ contract Help is Ownable {
     function getAssertionData(bytes32 _assertionId) public view returns (OptimisticOracleV3Interface.Assertion memory) {
         return _oov3.getAssertion(_assertionId);
     }
+	
+	  /**
+	  * Dispute assertion manually
+	  */
+		function challengeFundRequest(bytes32 _assertionId) public {
+			defaultCurrency.approve(address(_oov3), minimalBond);
+			_oov3.disputeAssertion(_assertionId, address(this));
+			
+			// Simulate disputed assertion
+			disputedAssertions[_assertionId] = address(this);
+		}
     
     // ========================================
     //     EAS FUNCTIONS

@@ -21,6 +21,8 @@ contract EASRegisterer is AccessControl {
 	) {
 		//owner = msg.sender;
 		
+		console.log("EASRegisterer constructor");
+		
 		EAS = IEAS(_eas);
 		EAS_SCHEMA_REGISTRY = ISchemaRegistry(_easSchemaRegistry);
 		

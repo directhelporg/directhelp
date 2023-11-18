@@ -140,7 +140,9 @@ interface OptimisticOracleV3Interface {
      * @return minimum bond amount.
      */
 	function getMinimumBond(address currency) external view returns (uint256);
-
+	
+	function disputeAssertion(bytes32 assertionId, address disputer) external;
+	
 	event AssertionMade(
 		bytes32 indexed assertionId,
 		bytes32 domainId,

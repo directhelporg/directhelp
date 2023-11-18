@@ -49,6 +49,15 @@ export async function getSystemConfig(
 			}
 
 		case 31337:
+			// BASE Goerli within HardHat fork
+			return {
+				easRegistry: "0x4200000000000000000000000000000000000021",
+				easSchemaRegistry: "0x4200000000000000000000000000000000000020",
+				oov3: "0x1F4dC6D69E3b4dAC139E149E213a7e863a813466",
+				currency: "0xef8b46765ae805537053c59f826c3ad61924db45", // The only accepted
+			}
+
+		case 84531:
 			// BASE Goerli
 			return {
 				easRegistry: "0x4200000000000000000000000000000000000021",
