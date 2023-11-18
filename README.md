@@ -27,7 +27,7 @@
 - [Team](#team)
 
 ## Diagram
-![diagram](https://github.com/directhelporg/directhelp/blob/cc9d937a737873fafbdc378d4954061eaa488258/images/draw_small.png)
+![diagram](https://github.com/directhelporg/directhelp/blob/bb5e7bd244df801e3c2d7598a752d0d52e8dd522/images/draw_final.png)
 
 ## Links
 - [Deployed dApp]()
