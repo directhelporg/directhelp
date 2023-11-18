@@ -1,8 +1,17 @@
 import { Meteor } from 'meteor/meteor';
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
+import { Accounts } from '/api/ethers';
 import './ui/layout';
 import './ui/pages/home';
+import './ui/pages/register';
 import './ui/pages/manager/dashboard';
+
+// Preload already connected Web3 accounts
+(async () => {
+  FlowRouter.wait();
+  await Accounts.init();
+  FlowRouter.initialize();
+})();
 
 const manager = FlowRouter.group({
   name: 'manager',
@@ -15,8 +24,21 @@ const manager = FlowRouter.group({
 });
 
 FlowRouter.route('/', {
+  name: 'Home',
   action() {
     this.render('Layout', { main: 'Home' });
+  },
+});
+
+FlowRouter.route('/register', {
+  name: 'Register',
+  triggersEnter: [(context, redirect) => {
+    if (!Accounts.isConnected()) {
+      redirect('/');
+    }
+  }],
+  action() {
+    this.render('Layout', { main: 'Register' });
   },
 });
 
