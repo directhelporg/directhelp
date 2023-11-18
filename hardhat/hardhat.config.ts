@@ -88,15 +88,15 @@ const config: HardhatUserConfig = {
   etherscan: {
     apiKey: {
       sepolia: process.env.ETHERSCAN_API_KEY,
-      arbitrumGoerli: process.env.ARBITRUM_API_KEY, // not working
+      arbitrumGoerli: process.env.ARBITRUM_API_KEY,
       goerli: process.env.ETHERSCAN_API_KEY,
       baseGoerli: process.env.ETHERSCAN_API_KEY,
-      chiado: process.env.ETHERSCAN_API_KEY,
+      chiado: process.env.GNOSISSCAN_API_KEY,
       linea: process.env.ETHERSCAN_API_KEY,
-      // goerli: process.env.ETHERSCAN_API_KEY,
-      // chiado: process.env.ETHERSCAN_API_KEY,
+      scrollSepolia: process.env.ETHERSCAN_API_KEY,
       polygonMumbai: process.env.POLYGON_API_KEY,
       mantleTestnet: process.env.MANTLE_API_KEY,
+      alfajores: process.env.MANTLE_API_KEY,
     },
     customChains: [
       {
@@ -116,14 +116,6 @@ const config: HardhatUserConfig = {
         },
       },
       {
-        network: "zkEVMtestnet",
-        chainId: 1442,
-        urls: {
-          apiURL: "https://rpc.public.zkevm-test.net",
-          browserURL: "https://alfajores.celoscan.io",
-        },
-      },
-      {
         network: "xdc",
         chainId: 51,
         urls: {
@@ -135,8 +127,24 @@ const config: HardhatUserConfig = {
         network: "linea",
         chainId: 59140,
         urls: {
-          apiURL: "https://rpc.goerli.linea.build/",
-          browserURL: "https://explorer.linea.build",
+          apiURL: "	https://explorer.linea.build/api",
+          browserURL: "	https://explorer.linea.build/",
+        },
+      },
+      {
+        network: "scrollSepolia",
+        chainId: 534351,
+        urls: {
+          apiURL: "https://sepolia-blockscout.scroll.io/api",
+          browserURL: "https://sepolia-blockscout.scroll.io/",
+        },
+      },
+      {
+        network: "alfajores",
+        chainId: 44787,
+        urls: {
+          apiURL: "https://alfajores-forno.celo-testnet.org/api",
+          browserURL: "https://alfajores.celoscan.io",
         },
       },
     ],
