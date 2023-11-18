@@ -31,7 +31,7 @@ async function main() {
 	const arg2 = 200;
 	const arg3 = "0xAfAE2dD69F115ec26DFbE2fa5a8642D94D7Cd37E";
 
-	const contractVersion = "1.2.11";
+	const contractVersion = "1.2.12";
 
 	let contract: BaseContract;
 
