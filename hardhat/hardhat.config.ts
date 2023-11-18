@@ -80,6 +80,10 @@ const config: HardhatUserConfig = {
       url: `https://linea-goerli.infura.io/v3/${process.env.INFURA_API_KEY}`,
       accounts: [deployerPrivateKey],
     },
+    xdc: {
+      url: `https://rpc.apothem.network/`,
+      accounts: [deployerPrivateKey],
+    },
   },
   etherscan: {
     apiKey: {
@@ -111,6 +115,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://rpc.public.zkevm-test.net",
           browserURL: "https://alfajores.celoscan.io",
+        },
+      },
+      {
+        network: "xdc",
+        chainId: 51,
+        urls: {
+          apiURL: "https://rpc.apothem.network/",
+          browserURL: "https://explorer.apothem.network",
         },
       },
     ],
