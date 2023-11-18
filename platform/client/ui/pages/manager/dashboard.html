@@ -1,80 +1,132 @@
 <template name="ManagerDashboard">
-  {{>pageHeader heading="Fund manager"}}
+  {{>pageHeader2 heading="Fund manager" bc1="Management"}}
+
   <div class="row">
-    <div class="col-12">
-      {{#card title="Fund capacity"}}
-        <div class="display-4">
-          {{#unless eq state.balance null}}
-            {{balance}}
-          {{else}}
-            ...
-          {{/unless}}
+    <div class="col-6">
+      <div class="dash-headline-item-one" style='height: 400px'>
+        <div id="chartArea1" class="dash-chartist" style="position: relative;"><div class="resize-sensor" style="position: absolute; inset: 0px; overflow: hidden; z-index: -1; visibility: hidden;"><div class="resize-sensor-expand" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;"><div style="position: absolute; left: 0px; top: 0px; transition: all 0s ease 0s; width: 100000px; height: 100000px;"></div></div><div class="resize-sensor-shrink" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;"><div style="position: absolute; left: 0; top: 0; transition: 0s; width: 200%; height: 200%"></div></div></div><svg xmlns:ct="http://gionkunz.github.com/chartist-js/ct" width="100%" height="100%" class="ct-chart-line" style="width: 100%; height: 100%;"><g class="ct-grids"><line x1="0" x2="0" y1="0" y2="498" class="ct-grid ct-horizontal"></line><line x1="77.57142857142857" x2="77.57142857142857" y1="0" y2="498" class="ct-grid ct-horizontal"></line><line x1="155.14285714285714" x2="155.14285714285714" y1="0" y2="498" class="ct-grid ct-horizontal"></line><line x1="232.71428571428572" x2="232.71428571428572" y1="0" y2="498" class="ct-grid ct-horizontal"></line><line x1="310.2857142857143" x2="310.2857142857143" y1="0" y2="498" class="ct-grid ct-horizontal"></line><line x1="387.85714285714283" x2="387.85714285714283" y1="0" y2="498" class="ct-grid ct-horizontal"></line><line x1="465.42857142857144" x2="465.42857142857144" y1="0" y2="498" class="ct-grid ct-horizontal"></line><line x1="543" x2="543" y1="0" y2="498" class="ct-grid ct-horizontal"></line><line y1="498" y2="498" x1="0" x2="543" class="ct-grid ct-vertical"></line><line y1="464.8" y2="464.8" x1="0" x2="543" class="ct-grid ct-vertical"></line><line y1="431.6" y2="431.6" x1="0" x2="543" class="ct-grid ct-vertical"></line><line y1="398.4" y2="398.4" x1="0" x2="543" class="ct-grid ct-vertical"></line><line y1="365.2" y2="365.2" x1="0" x2="543" class="ct-grid ct-vertical"></line><line y1="332" y2="332" x1="0" x2="543" class="ct-grid ct-vertical"></line><line y1="298.8" y2="298.8" x1="0" x2="543" class="ct-grid ct-vertical"></line><line y1="265.6" y2="265.6" x1="0" x2="543" class="ct-grid ct-vertical"></line><line y1="232.39999999999998" y2="232.39999999999998" x1="0" x2="543" class="ct-grid ct-vertical"></line><line y1="199.2" y2="199.2" x1="0" x2="543" class="ct-grid ct-vertical"></line><line y1="166" y2="166" x1="0" x2="543" class="ct-grid ct-vertical"></line><line y1="132.8" y2="132.8" x1="0" x2="543" class="ct-grid ct-vertical"></line><line y1="99.60000000000002" y2="99.60000000000002" x1="0" x2="543" class="ct-grid ct-vertical"></line><line y1="66.39999999999998" y2="66.39999999999998" x1="0" x2="543" class="ct-grid ct-vertical"></line><line y1="33.19999999999999" y2="33.19999999999999" x1="0" x2="543" class="ct-grid ct-vertical"></line><line y1="0" y2="0" x1="0" x2="543" class="ct-grid ct-vertical"></line></g><g><g class="ct-series ct-series-a"><path d="M0,498L0,398.4C25.857,387.333,51.714,365.2,77.571,365.2C103.429,365.2,129.286,381.8,155.143,381.8C181,381.8,206.857,350.971,232.714,332C258.571,313.029,284.429,265.6,310.286,265.6C336.143,265.6,362,315.4,387.857,315.4C413.714,315.4,439.571,248.21,465.429,232.4C491.286,216.59,517.143,210.267,543,199.2L543,498Z" class="ct-area"></path><path d="M0,398.4C25.857,387.333,51.714,365.2,77.571,365.2C103.429,365.2,129.286,381.8,155.143,381.8C181,381.8,206.857,350.971,232.714,332C258.571,313.029,284.429,265.6,310.286,265.6C336.143,265.6,362,315.4,387.857,315.4C413.714,315.4,439.571,248.21,465.429,232.4C491.286,216.59,517.143,210.267,543,199.2" class="ct-line"></path><line x1="0" y1="398.4" x2="0.01" y2="398.4" class="ct-point" ct:value="6"></line><line x1="77.57142857142857" y1="365.2" x2="77.58142857142857" y2="365.2" class="ct-point" ct:value="8"></line><line x1="155.14285714285714" y1="381.8" x2="155.15285714285713" y2="381.8" class="ct-point" ct:value="7"></line><line x1="232.71428571428572" y1="332" x2="232.7242857142857" y2="332" class="ct-point" ct:value="10"></line><line x1="310.2857142857143" y1="265.6" x2="310.29571428571427" y2="265.6" class="ct-point" ct:value="14"></line><line x1="387.85714285714283" y1="315.4" x2="387.8671428571428" y2="315.4" class="ct-point" ct:value="11"></line><line x1="465.42857142857144" y1="232.39999999999998" x2="465.43857142857144" y2="232.39999999999998" class="ct-point" ct:value="16"></line><line x1="543" y1="199.2" x2="543.01" y2="199.2" class="ct-point" ct:value="18"></line></g><g class="ct-series ct-series-b"><path d="M0,498L0,464.8C25.857,453.733,51.714,431.6,77.571,431.6C103.429,431.6,129.286,448.2,155.143,448.2C181,448.2,206.857,437.133,232.714,431.6C258.571,426.067,284.429,415,310.286,415C336.143,415,362,448.2,387.857,448.2C413.714,448.2,439.571,415,465.429,415C491.286,415,517.143,426.067,543,431.6L543,498Z" class="ct-area"></path><path d="M0,464.8C25.857,453.733,51.714,431.6,77.571,431.6C103.429,431.6,129.286,448.2,155.143,448.2C181,448.2,206.857,437.133,232.714,431.6C258.571,426.067,284.429,415,310.286,415C336.143,415,362,448.2,387.857,448.2C413.714,448.2,439.571,415,465.429,415C491.286,415,517.143,426.067,543,431.6" class="ct-line"></path><line x1="0" y1="464.8" x2="0.01" y2="464.8" class="ct-point" ct:value="2"></line><line x1="77.57142857142857" y1="431.6" x2="77.58142857142857" y2="431.6" class="ct-point" ct:value="4"></line><line x1="155.14285714285714" y1="448.2" x2="155.15285714285713" y2="448.2" class="ct-point" ct:value="3"></line><line x1="232.71428571428572" y1="431.6" x2="232.7242857142857" y2="431.6" class="ct-point" ct:value="4"></line><line x1="310.2857142857143" y1="415" x2="310.29571428571427" y2="415" class="ct-point" ct:value="5"></line><line x1="387.85714285714283" y1="448.2" x2="387.8671428571428" y2="448.2" class="ct-point" ct:value="3"></line><line x1="465.42857142857144" y1="415" x2="465.43857142857144" y2="415" class="ct-point" ct:value="5"></line><line x1="543" y1="431.6" x2="543.01" y2="431.6" class="ct-point" ct:value="4"></line></g></g><g class="ct-labels"><foreignObject style="overflow: visible;" x="0" y="503" width="77.57142857142857" height="0"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 78px; height: 0px;">1</span></foreignObject><foreignObject style="overflow: visible;" x="77.57142857142857" y="503" width="77.57142857142857" height="0"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 78px; height: 0px;">2</span></foreignObject><foreignObject style="overflow: visible;" x="155.14285714285714" y="503" width="77.57142857142858" height="0"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 78px; height: 0px;">3</span></foreignObject><foreignObject style="overflow: visible;" x="232.71428571428572" y="503" width="77.57142857142856" height="0"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 78px; height: 0px;">4</span></foreignObject><foreignObject style="overflow: visible;" x="310.2857142857143" y="503" width="77.57142857142856" height="0"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 78px; height: 0px;">5</span></foreignObject><foreignObject style="overflow: visible;" x="387.85714285714283" y="503" width="77.57142857142861" height="0"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 78px; height: 0px;">6</span></foreignObject><foreignObject style="overflow: visible;" x="465.42857142857144" y="503" width="77.57142857142856" height="0"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 78px; height: 0px;">7</span></foreignObject><foreignObject style="overflow: visible;" x="543" y="503" width="30" height="0"><span class="ct-label ct-horizontal ct-end" xmlns="http://www.w3.org/2000/xmlns/" style="width: 30px; height: 0px;">8</span></foreignObject><foreignObject style="overflow: visible;" y="464.8" x="0" height="33.2" width="0"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 33px; width: 0px;">0</span></foreignObject><foreignObject style="overflow: visible;" y="431.6" x="0" height="33.2" width="0"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 33px; width: 0px;">2</span></foreignObject><foreignObject style="overflow: visible;" y="398.40000000000003" x="0" height="33.19999999999999" width="0"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 33px; width: 0px;">4</span></foreignObject><foreignObject style="overflow: visible;" y="365.19999999999993" x="0" height="33.20000000000002" width="0"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 33px; width: 0px;">6</span></foreignObject><foreignObject style="overflow: visible;" y="332" x="0" height="33.19999999999999" width="0"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 33px; width: 0px;">8</span></foreignObject><foreignObject style="overflow: visible;" y="298.8" x="0" height="33.19999999999999" width="0"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 33px; width: 0px;">10</span></foreignObject><foreignObject style="overflow: visible;" y="265.6" x="0" height="33.20000000000002" width="0"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 33px; width: 0px;">12</span></foreignObject><foreignObject style="overflow: visible;" y="232.4" x="0" height="33.20000000000002" width="0"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 33px; width: 0px;">14</span></foreignObject><foreignObject style="overflow: visible;" y="199.2" x="0" height="33.19999999999999" width="0"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 33px; width: 0px;">16</span></foreignObject><foreignObject style="overflow: visible;" y="166" x="0" height="33.19999999999999" width="0"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 33px; width: 0px;">18</span></foreignObject><foreignObject style="overflow: visible;" y="132.8" x="0" height="33.19999999999999" width="0"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 33px; width: 0px;">20</span></foreignObject><foreignObject style="overflow: visible;" y="99.60000000000002" x="0" height="33.19999999999999" width="0"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 33px; width: 0px;">22</span></foreignObject><foreignObject style="overflow: visible;" y="66.39999999999998" x="0" height="33.200000000000045" width="0"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 33px; width: 0px;">24</span></foreignObject><foreignObject style="overflow: visible;" y="33.19999999999999" x="0" height="33.19999999999999" width="0"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 33px; width: 0px;">26</span></foreignObject><foreignObject style="overflow: visible;" y="0" x="0" height="33.19999999999999" width="0"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 33px; width: 0px;">28</span></foreignObject><foreignObject style="overflow: visible;" y="-30" x="0" height="30" width="0"><span class="ct-label ct-vertical ct-start" xmlns="http://www.w3.org/2000/xmlns/" style="height: 30px; width: 0px;">30</span></foreignObject></g></svg></div>
+        <div class="dash-item-overlay">
+          <h1>
+            {{#unless eq state.balance null}}
+              {{balance}}
+            {{else}}
+              ...
+            {{/unless}}
+            <span class="tx-24">{{balanceSymbol}}</span>
+          </h1>
+          <p class="earning-label">Fund capacity</p>
+          <p class="earning-desc">Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus...</p>
+          <a href="#" class="statement-link">View Statements <i class="fa fa-angle-right mg-l-5"></i></a>
         </div>
-      {{/card}}
+      </div>
     </div>
-    <div class="col-md">
-      {{#card title="Agents registry" loading=(eq state.agents null)}}
-        <ul class="list-group list-group-flush">
-          {{#each state.agents}}
-            <li class="list-group-item">
-              <div class="d-flex justify-content-between">
-                <div>{{name}} from {{location}}</div>
-                <div class="text-break text-center">{{shortHash agentAddress}}</div>
-                <div class="text-break text-right">
-                  {{#if approved}}
-                    <button class="btn btn-sm btn-outline-success disabled">
-                      {{>i fa='check'}}
-                      Approved
-                    </button>
-                  {{else if rejected}}
-                    <button class="btn btn-sm btn-outline-danger disabled">
-                      {{>i fa='times'}}
-                      Rejected
-                    </button>
-                  {{else}}
-                    <button
-                      class="btn btn-sm btn-success {{#if state.working}}disabled{{/if}}"
-                      data-action="approveAgent">
-                      {{>i fa='check'}}
-                      Approve
-                    </button>
-                    <button
-                      class="btn btn-sm btn-danger {{#if state.working}}disabled{{/if}}"
-                      data-action="rejectAgent">
-                      {{>i fa='times'}}
-                      Reject
-                    </button>
-                  {{/if}}
-                </div>
-              </div>
-            </li>
-          {{else}}
-            <li class="list-group-item text-center text-muted">No Agents found</li>
-          {{/each}}
-        </ul>
-      {{/card}}
+
+    <div class="col-md h-100 d-flex flex-column" style='min-height: 400px'>
+      <div class="card card-table flex-grow-1">
+        <div class="card-header">
+          <h6 class="slim-card-title">Agents registry</h6>
+        </div><!-- card-header -->
+        <div class="table-responsive">
+          <table class="table mg-b-0 tx-13">
+            <thead>
+            <tr class="tx-10">
+              <th class="wd-10p pd-y-5">&nbsp;</th>
+              <th class="pd-y-5">Name / Location</th>
+              <th class="pd-y-5">Wallet</th>
+              <th class="pd-y-5">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+              {{#each state.agents}}
+                <tr>
+                  <td class="pd-l-20">
+                    <img src="https://robohash.org/{{agentAddress}}?bgset=bg1" class="wd-36 rounded-circle" alt="Image">
+                  </td>
+                  <td>
+                    <a href="" class="tx-inverse tx-14 tx-medium d-block">{{name}}</a>
+                    <span class="tx-11 d-block">from {{location}}</span>
+                  </td>
+                  <td class="tx-12">
+                    <span class="square-8 bg-success mg-r-5 rounded-circle"></span>
+                    {{shortHash agentAddress}}
+                  </td>
+                  <td>
+                    {{#if approved}}
+                      <button class="btn btn-sm btn-outline-success disabled">
+                        {{>i fa='check'}}
+                        Approved
+                      </button>
+                    {{else if rejected}}
+                      <button class="btn btn-sm btn-outline-danger disabled">
+                        {{>i fa='times'}}
+                        Rejected
+                      </button>
+                    {{else}}
+                      <button
+                        class="btn btn-sm btn-success {{#if state.working}}disabled{{/if}}"
+                        data-action="approveAgent">
+                        {{>i fa='check'}}
+                        Approve
+                      </button>
+                      <button
+                        class="btn btn-sm btn-danger {{#if state.working}}disabled{{/if}}"
+                        data-action="rejectAgent">
+                        {{>i fa='times'}}
+                        Reject
+                      </button>
+                    {{/if}}
+                  </td>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div><!-- table-responsive -->
+
+        <div class="card-footer tx-12 pd-y-15 bg-transparent">
+          <a href=""><i class="fa fa-angle-down mg-r-5"></i>Browse all Agents</a>
+        </div><!-- card-footer -->
+      </div>
     </div>
-    <div class="col-md">
-      {{#card title="Funding requests" loading=(eq state.requests null)}}
-        <ul class="list-group list-group-flush">
-          {{#each state.requests}}
-            <li class="list-group-item">
-              <div class="d-flex justify-content-between">
-                <div class="text-break">{{shortHash agentAddress}}</div>
-                <div class="text-break">{{shortHash assertionId}}</div>
-                <div>
+
+    <div class="col-md my-3">
+      <div class="card card-table">
+        <div class="card-header">
+          <h6 class="slim-card-title">Funding requests</h6>
+        </div><!-- card-header -->
+        <div class="table-responsive">
+          <table class="table mg-b-0">
+            <!--
+            <thead>
+            <tr class="tx-10">
+              <th class="wd-10p pd-y-5">&nbsp;</th>
+              <th class="pd-y-5">Name / Location</th>
+              <th class="pd-y-5">Wallet</th>
+              <th class="pd-y-5">Actions</th>
+            </tr>
+            </thead>
+            -->
+            <tbody>
+            {{#each state.requests}}
+              <tr>
+                <td class="pl-4">
+                  {{shortHash agentAddress}}
+                </td>
+                <td class='text-center'>
+                  {{shortHash assertionId}}
+                </td>
+                <td class='text-right pr-5'>
                   <a href="#" class="btn btn-sm btn-warning">
                     {{>i fa='ban'}}
                     Challenge
                   </a>
-                </div>
-              </div>
-            </li>
-          {{else}}
-            <li class="list-group-item text-center text-muted">No Funding requests found</li>
-          {{/each}}
-        </ul>
-      {{/card}}
+                </td>
+              </tr>
+            {{/each}}
+            </tbody>
+          </table>
+        </div><!-- table-responsive -->
+      </div>
+
     </div>
   </div>
 </template>

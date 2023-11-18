@@ -1,9 +1,19 @@
 <template name="Registration">
-  {{log hash}}
+  {{>pageHeader2 heading="Agent registration" bc1="Register"}}
+
   <div class="row justify-content-center">
-    <div class="col-md-6 col-lg-4">
-      {{>pageHeader heading='Agent registration'}}
-      <h2>Thanks for registering!</h2>
+    <div class='col-lg-8'>
+      <div class="card shadow mb-4" style='height: 400px'>
+        <div class='card-body text-center'>
+          <h3 class='mt-4'>Thanks for applying for</h3>
+          <h2>DirectHelp!</h2>
+
+          <p class='my-4'>
+          {{log hash}}
+          </p>
+
+        </div>
+      </div>
     </div>
   </div>
 </template>

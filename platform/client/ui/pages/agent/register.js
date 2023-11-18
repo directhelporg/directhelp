@@ -5,6 +5,9 @@ import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 import { AutoForm } from 'meteor/aldeed:autoform';
 import { Accounts } from '/api/ethers';
 import { callContractWriteFunction } from '/api/multibaas';
+
+import '/client/ui/components/pageHeader';
+
 import './register.html';
 
 const { DirectHelp } = Meteor.settings.public.MultiBaas;

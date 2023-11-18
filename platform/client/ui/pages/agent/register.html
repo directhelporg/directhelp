@@ -1,8 +1,30 @@
 <template name="AgentRegister">
-  <div class="row justify-content-center">
-    <div class="col-md-6 col-lg-4">
-      {{>pageHeader heading="Register as an Agent"}}
-      {{>quickForm id="registerAgent" schema=schema type="normal"}}
+  {{>pageHeader2 heading="Register as an Agent" bc1="Register"}}
+
+  <div class='row'>
+    <div class='col-lg-8'>
+      <div class="card shadow mb-4">
+        <div class='card-body'>
+          {{>quickForm id="registerAgent" schema=schema type="normal"}}
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4 mg-t-20 mg-lg-t-0">
+      <div class="card card-connection">
+        <div class="row row-xs">
+          <div class="col-12 text-left tx-primary lead">1,029</div>
+          <div class="col-12 text-left">agents already registered</div>
+        </div><!-- row -->
+        <hr>
+        <div class="row row-xs">
+          <div class="col-12 text-left tx-purple lead">289,102</div>
+          <div class="col-12 text-left">
+            households connected <br>
+          </div>
+        </div><!-- row -->
+      </div><!-- card -->
+
     </div>
   </div>
 </template>

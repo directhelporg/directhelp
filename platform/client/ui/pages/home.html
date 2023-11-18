@@ -1,13 +1,58 @@
 <template name="Home">
-  <div class="jumbotron">
-    <h1 class="display-4">Meet DirectHelp</h1>
-    <p class="lead">A charity funds distribution platform aimed to reduce the time for delivering aid in emergency situations.</p>
-    <hr class="my-4">
-    <p>Are you a local business who is capable to provide some goods or services?</p>
-    {{#if currentAccount}}
-      <a href="{{pathFor "Register"}}" class="btn btn-primary btn-lg">Sign up as Agent</a>
-    {{else}}
-      <button class="btn btn-primary btn-lg" data-action="connectWallet">Connect Wallet</button>
-    {{/if}}
+  <div class='dash-headline mt-5'>
+    <div class='dash-headline-left d-flex flex-column'>
+      <div class="card card-info flex-grow-1">
+        <div class="card-body pd-40">
+          <div class="d-flex justify-content-center mg-b-30">
+            <img src="../img/icon2.svg" class="wd-100" alt="">
+          </div>
+          <h5 class="tx-inverse mg-b-20">Meet DirectHelp!</h5>
+          <p class='lead'>A charity funds distribution platform aimed to reduce the time for delivering aid in emergency situations.</p>
+          <p>Are you a local business who is capable to provide some goods or services?</p>
+
+          {{#if currentAccount}}
+            <a href="{{pathFor "Register"}}" class="btn btn-primary btn-lg">Sign up as Agent</a>
+          {{else}}
+            <button class="btn btn-primary btn-lg" data-action="connectWallet">Connect Wallet</button>
+          {{/if}}
+
+        </div><!-- card-body -->
+      </div>
+    </div>
+
+    <div class="dash-headline-right">
+      <div class="dash-headline-right-top">
+        <div class="dash-headline-item-two">
+          <div id="chartMultiBar1" class="chart-rickshaw rickshaw_graph"><svg width="543" height="238"><rect x="0" y="158.66666666666669" width="16.1203125" height="79.33333333333333" transform="matrix(1,0,0,1,0,0)" fill="#8AC6E8"></rect><rect x="33.9375" y="138.83333333333331" width="16.1203125" height="99.16666666666667" transform="matrix(1,0,0,1,0,0)" fill="#8AC6E8"></rect><rect x="67.875" y="198.33333333333334" width="16.1203125" height="39.666666666666664" transform="matrix(1,0,0,1,0,0)" fill="#8AC6E8"></rect><rect x="101.8125" y="158.66666666666669" width="16.1203125" height="79.33333333333333" transform="matrix(1,0,0,1,0,0)" fill="#8AC6E8"></rect><rect x="135.75" y="178.5" width="16.1203125" height="59.5" transform="matrix(1,0,0,1,0,0)" fill="#8AC6E8"></rect><rect x="169.6875" y="166.6" width="16.1203125" height="71.39999999999999" transform="matrix(1,0,0,1,0,0)" fill="#8AC6E8"></rect><rect x="203.625" y="178.5" width="16.1203125" height="59.5" transform="matrix(1,0,0,1,0,0)" fill="#8AC6E8"></rect><rect x="237.5625" y="226.1" width="16.1203125" height="11.9" transform="matrix(1,0,0,1,0,0)" fill="#8AC6E8"></rect><rect x="271.5" y="230.06666666666666" width="16.1203125" height="7.933333333333334" transform="matrix(1,0,0,1,0,0)" fill="#8AC6E8"></rect><rect x="305.4375" y="218.16666666666666" width="16.1203125" height="19.833333333333332" transform="matrix(1,0,0,1,0,0)" fill="#8AC6E8"></rect><rect x="339.375" y="226.1" width="16.1203125" height="11.9" transform="matrix(1,0,0,1,0,0)" fill="#8AC6E8"></rect><rect x="373.3125" y="230.06666666666666" width="16.1203125" height="7.933333333333334" transform="matrix(1,0,0,1,0,0)" fill="#8AC6E8"></rect><rect x="407.25" y="222.13333333333333" width="16.1203125" height="15.866666666666667" transform="matrix(1,0,0,1,0,0)" fill="#8AC6E8"></rect><rect x="441.1875" y="218.16666666666666" width="16.1203125" height="19.833333333333332" transform="matrix(1,0,0,1,0,0)" fill="#8AC6E8"></rect><rect x="475.125" y="234.03333333333333" width="16.1203125" height="3.966666666666667" transform="matrix(1,0,0,1,0,0)" fill="#8AC6E8"></rect><rect x="509.0625" y="230.06666666666666" width="16.1203125" height="7.933333333333334" transform="matrix(1,0,0,1,0,0)" fill="#8AC6E8"></rect><rect x="16.1203125" y="198.33333333333334" width="16.1203125" height="39.666666666666664" transform="matrix(1,0,0,1,0,0)" fill="#1B84E7"></rect><rect x="50.0578125" y="119" width="16.1203125" height="119" transform="matrix(1,0,0,1,0,0)" fill="#1B84E7"></rect><rect x="83.9953125" y="59.5" width="16.1203125" height="178.5" transform="matrix(1,0,0,1,0,0)" fill="#1B84E7"></rect><rect x="117.9328125" y="119" width="16.1203125" height="119" transform="matrix(1,0,0,1,0,0)" fill="#1B84E7"></rect><rect x="151.8703125" y="138.83333333333331" width="16.1203125" height="99.16666666666667" transform="matrix(1,0,0,1,0,0)" fill="#1B84E7"></rect><rect x="185.8078125" y="178.5" width="16.1203125" height="59.5" transform="matrix(1,0,0,1,0,0)" fill="#1B84E7"></rect><rect x="219.7453125" y="198.33333333333334" width="16.1203125" height="39.666666666666664" transform="matrix(1,0,0,1,0,0)" fill="#1B84E7"></rect><rect x="253.6828125" y="222.13333333333333" width="16.1203125" height="15.866666666666667" transform="matrix(1,0,0,1,0,0)" fill="#1B84E7"></rect><rect x="287.6203125" y="226.1" width="16.1203125" height="11.9" transform="matrix(1,0,0,1,0,0)" fill="#1B84E7"></rect><rect x="321.5578125" y="230.06666666666666" width="16.1203125" height="7.933333333333334" transform="matrix(1,0,0,1,0,0)" fill="#1B84E7"></rect><rect x="355.4953125" y="218.16666666666666" width="16.1203125" height="19.833333333333332" transform="matrix(1,0,0,1,0,0)" fill="#1B84E7"></rect><rect x="389.4328125" y="230.06666666666666" width="16.1203125" height="7.933333333333334" transform="matrix(1,0,0,1,0,0)" fill="#1B84E7"></rect><rect x="423.3703125" y="226.1" width="16.1203125" height="11.9" transform="matrix(1,0,0,1,0,0)" fill="#1B84E7"></rect><rect x="457.3078125" y="230.06666666666666" width="16.1203125" height="7.933333333333334" transform="matrix(1,0,0,1,0,0)" fill="#1B84E7"></rect><rect x="491.2453125" y="222.13333333333333" width="16.1203125" height="15.866666666666667" transform="matrix(1,0,0,1,0,0)" fill="#1B84E7"></rect><rect x="525.1828125" y="218.16666666666666" width="16.1203125" height="19.833333333333332" transform="matrix(1,0,0,1,0,0)" fill="#1B84E7"></rect></svg></div>
+          <div class="dash-item-overlay">
+            <h4>80 <span class="tx-20">%</span></h4>
+            <p class="item-label">Response Time Reduction</p>
+            <p class="item-desc">Since launching the platform</p>
+          </div>
+        </div><!-- dash-headline-item-two -->
+      </div><!-- dash-headline-right-top -->
+      <div class="dash-headline-right-bottom">
+        <div class="dash-headline-right-bottom-left">
+          <div class="dash-headline-item-three">
+            <span id="sparkline3" class="sparkline wd-100p"><canvas width="261" height="45" style="display: inline-block; width: 261px; height: 45px; vertical-align: top;"></canvas></span>
+            <div>
+              <h1>1,029</h1>
+              <p class="item-label">Charity agents</p>
+              <p class="item-desc">Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus...</p>
+            </div>
+          </div><!-- dash-headline-item-three -->
+        </div><!-- dash-headline-right-bottom-left -->
+        <div class="dash-headline-right-bottom-right">
+          <div class="dash-headline-item-three">
+            <span id="sparkline4" class="sparkline wd-100p"><canvas width="261" height="45" style="display: inline-block; width: 261px; height: 45px; vertical-align: top;"></canvas></span>
+            <div>
+              <h1>289,102</h1>
+              <p class="item-label">households connected</p>
+              <p class="item-desc">Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus...</p>
+            </div>
+          </div><!-- dash-headline-item-three -->
+        </div><!-- dash-headline-right-bottom-right -->
+      </div><!-- dash-headline-right-bottom -->
+    </div>
   </div>
 </template>
