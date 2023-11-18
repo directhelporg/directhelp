@@ -16,33 +16,36 @@ function getProvider() {
 }
 
 export const Provider = getProvider();
-export const Signer = Meteor.isClient ? Provider.getSigner() : new ethers.Wallet(Meteor.settings.signer);
+export const Signer = Meteor.isClient ? Provider?.getSigner() : new ethers.Wallet(Meteor.settings.signer);
 
 export const Accounts = {
   connected: new ReactiveVar([]),
-  get current() {
-    const [account] = this.connected.get() ?? [];
-    return account;
-  },
+  current: new ReactiveVar(),
   isConnected() {
     return Boolean(this.connected.get()?.length > 0);
   },
   async init() {
     const accounts = await Provider?.listAccounts();
     this.connected.set(accounts);
+    if (accounts?.length > 0) {
+      this.current.set(accounts[0]);
+    }
   },
   async connect() {
     const accounts = await Provider?.send('eth_requestAccounts', []);
     this.connected.set(accounts);
+    if (accounts?.length > 0) {
+      this.current.set(accounts[0]);
+    }
   },
 };
 
 Meteor.startup(async () => {
-  if(Provider) {
+  if (Provider) {
     const { chainId } = await Provider.getNetwork();
     const blockNumber = await Provider.getBlockNumber();
     console.log(`Ethers is connected to #${chainId}, the latest block is #${blockNumber}`);
   } else {
-    console.warn(`Ethers is not detected`);
+    console.warn('Ethers is not detected');
   }
 });

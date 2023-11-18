@@ -29,7 +29,7 @@ AutoForm.addHooks('challengeRequest', {
     this.event.preventDefault();
     const hash = FlowRouter.getParam('hash');
     callContractWriteFunction(DirectHelp, 'challengeFundRequest', [hash, description], {
-      from: Accounts.current,
+      from: Accounts.current.get(),
     })
       .then(res => this.done(null, res))
       .catch(this.done);

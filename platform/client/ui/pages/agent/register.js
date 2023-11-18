@@ -12,14 +12,14 @@ const { DirectHelp } = Meteor.settings.public.MultiBaas;
 TemplateController('AgentRegister', {
   helpers: {
     schema: () => new SimpleSchema({
-      wallet: {
-        type: String,
-        allowedValues: () => Accounts.connected.get(),
-        autoform: {
-          type: 'select',
-          value: Accounts.current,
-        },
-      },
+      // wallet: {
+      //   type: String,
+      //   allowedValues: () => Accounts.connected.get(),
+      //   autoform: {
+      //     type: 'select',
+      //     value: Accounts.current.get(),
+      //   },
+      // },
       name: String,
       location: String,
       households: {
@@ -32,10 +32,10 @@ TemplateController('AgentRegister', {
 });
 
 AutoForm.addHooks('registerAgent', {
-  async onSubmit({ wallet, name, location, households }) {
+  async onSubmit({ /* wallet, */ name, location, households }) {
     this.event.preventDefault();
     callContractWriteFunction(DirectHelp, 'agentRegister', [name, location, households], {
-      from: wallet,
+      from: Accounts.current.get(), //wallet,
     })
       .then(res => this.done(null, res))
       .catch(this.done);

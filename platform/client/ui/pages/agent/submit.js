@@ -21,7 +21,7 @@ AutoForm.addHooks('submitRequest', {
   async onSubmit({ description }) {
     this.event.preventDefault();
     callContractWriteFunction(DirectHelp, 'agentInitateFundRequest', [description, '99'], {
-      from: Accounts.current,
+      from: Accounts.current.get(),
     })
       .then(res => this.done(null, res))
       .catch(this.done);

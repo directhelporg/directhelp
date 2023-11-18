@@ -1,55 +1,34 @@
 <template name="Layout">
-  <header id="header" class="header d-flex align-items-center">
-    <div class="d-flex">
-      <a href="{{pathFor "/"}}" class="logo d-flex align-items-center">
-        <lead><i class="fa fa-handshake-o text-dark mr-2"></i></lead>
-        <span class="d-none d-lg-block">DirectHelp</span>
-      </a>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
-    </div>
-    {{#if currentUser}}
-      <div class="d-flex">
-        <a href="{{pathFor "ManagerDashboard"}}" class="menu-item">
-          <span class="d-none d-lg-block">Dashboard</span>
-        </a>
-        <i class="bi bi-list toggle-sidebar-btn"></i>
-      </div>
-    {{/if}}
-    {{#if currentAccount}}
-      <div class="d-flex">
-        <a href="{{pathFor "AgentSubmit"}}" class="menu-item">
-          <span class="d-none d-lg-block">Submit request</span>
-        </a>
-        <i class="bi bi-list toggle-sidebar-btn"></i>
-      </div>
-    {{/if}}
-    <nav class="header-nav ml-auto">
-      {{#if isConnected}}
-        <ul class="d-flex align-items-center">
-          <li class="nav-item dropdown pe-3">
-            <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-              <img src="https://robohash.org/0x9F329d6bad710155bc1fA84bdFB0d629Cf4f7FBc?bgset=bg1" class="rounded-circle">
-              <span class="d-none d-md-block dropdown-toggle pl-2">{{shortHash currentAccount}}</span>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-              <li class="dropdown-header">
-                <h6>{{shortHash currentAccount}}</h6>
-              </li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li>
-                <a class="dropdown-item d-flex align-items-center" href="#">
-                  <i class="bi bi-box-arrow-right"></i>
-                  <span>Sign Out</span>
-                </a>
-              </li>
-            </ul>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">{{>i fa="handshake-o"}} DirectHelp</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{{pathFor "/"}}">{{>i fa="home"}} Home</a>
+        </li>
+        {{#if currentAccount}}
+          <li class="nav-item">
+            <a class="nav-link" href="{{pathFor "Register"}}">{{>i fa="exclamation-triangle"}} Submit request</a>
           </li>
-        </ul>
-      {{/if}}
-    </nav>
-  </header>
+        {{/if}}
+      </ul>
+      <ul class="ml-auto navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+            {{shortHash currentAccount}}
+          </a>
+          <div class="dropdown-menu dropdown-menu-right">
+            {{#each connectedAccounts}}
+              <a class="dropdown-item" href="#" data-action="selectAccount">{{shortHash this size=4}}</a>
+            {{/each}}
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
   <div class="position-relative" style="z-index: 1100;">{{>toastContainer}}</div>
   <div class="container-fluid pt-4">
     {{>Template.dynamic template=main}}
