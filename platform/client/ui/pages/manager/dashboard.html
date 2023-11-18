@@ -1,6 +1,5 @@
 <template name="ManagerDashboard">
   {{>pageHeader2 heading="Fund manager" bc1="Management"}}
-
   <div class="row">
     <div class="col-6">
       <div class="chart-bg dash-headline-item-one" style='height: 400px;'>
@@ -14,14 +13,9 @@
             <span class="tx-24">{{balanceSymbol}}</span>
           </h1>
           <p class="earning-label">Fund capacity</p>
-          <!--
-          <p class="earning-desc">Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus...</p>
-          <a href="#" class="statement-link">View Statements <i class="fa fa-angle-right mg-l-5"></i></a>
-          -->
         </div>
       </div>
     </div>
-
     <div class="col-md h-100 d-flex flex-column" style='min-height: 400px'>
       <div class="card card-table flex-grow-1">
         <div class="card-header">
@@ -45,14 +39,13 @@
                   </td>
                 </tr>
               {{/if}}
-
               {{#each state.agents}}
                 <tr>
                   <td class="pd-l-20">
                     <img src="https://robohash.org/{{agentAddress}}?bgset=bg1" class="wd-36 rounded-circle" alt="Image">
                   </td>
                   <td>
-                    <a href="" class="tx-inverse tx-14 tx-medium d-block">{{name}}</a>
+                    <a href="#" class="tx-inverse tx-14 tx-medium d-block">{{name}}</a>
                     <span class="tx-11 d-block">at <i>{{location}}</i></span>
                   </td>
                   <td class="tx-12">
@@ -61,15 +54,19 @@
                   </td>
                   <td>
                     {{#if approved}}
-                      <button class="btn btn-sm btn-outline-success disabled">
-                        {{>i fa='check'}}
-                        Approved
-                      </button>
+                      {{#if and (eq @index 0) state.attestationId}}
+                        <a href="https://base-goerli-predeploy.easscan.org/attestation/view/{{state.attestationId}}" target="_blank">EAS {{>i fa="external-link"}}</a>
+                      {{else}}
+                        <span class="text-success">
+                          {{>i fa='check'}}
+                          Approved
+                        </span>
+                      {{/if}} 
                     {{else if rejected}}
-                      <button class="btn btn-sm btn-outline-danger disabled">
+                      <span class="text-success">
                         {{>i fa='times'}}
                         Rejected
-                      </button>
+                      </span>
                     {{else}}
                       <button
                         class="btn btn-sm btn-success {{#if state.working}}disabled{{/if}}"
@@ -90,13 +87,11 @@
             </tbody>
           </table>
         </div><!-- table-responsive -->
-
         <div class="card-footer tx-12 pd-y-15 bg-transparent">
           <a href=""><i class="fa fa-angle-down mg-r-5"></i>Browse all Agents</a>
         </div><!-- card-footer -->
       </div>
     </div>
-
     <div class="col-md my-3">
       <div class="card card-table">
         <div class="card-header">
@@ -104,16 +99,6 @@
         </div><!-- card-header -->
         <div class="table-responsive">
           <table class="table mg-b-0">
-            <!--
-            <thead>
-            <tr class="tx-10">
-              <th class="wd-10p pd-y-5">&nbsp;</th>
-              <th class="pd-y-5">Name / Location</th>
-              <th class="pd-y-5">Wallet</th>
-              <th class="pd-y-5">Actions</th>
-            </tr>
-            </thead>
-            -->
             <tbody>
             {{#if eq state.requests null}}
               <tr>
@@ -122,20 +107,23 @@
                 </td>
               </tr>
             {{/if}}
-
             {{#each state.requests}}
               <tr>
                 <td class="pl-4">
-                  {{shortHash agentAddress}}
+                  From: {{shortHash agentAddress}}
                 </td>
                 <td class='text-center'>
-                  {{shortHash assertionId}}
+                  UMA: <a href="#">{{>i fa="external-link"}} {{shortHash assertionId}}</a>
                 </td>
                 <td class='text-right pr-5'>
-                  <a href="#" class="btn btn-sm btn-warning">
-                    {{>i fa='ban'}}
-                    Challenge
-                  </a>
+                  {{#if eq @index 0}}
+                    <a href="#" class="btn btn-sm btn-outline-warning">
+                      {{>i fa='ban'}}
+                      Challenge
+                    </a>
+                  {{else}}
+                    <span class="text-info">{{>i fa="check"}} Settled</span>
+                  {{/if}}
                 </td>
               </tr>
             {{/each}}
@@ -143,7 +131,6 @@
           </table>
         </div><!-- table-responsive -->
       </div>
-
     </div>
   </div>
 </template>

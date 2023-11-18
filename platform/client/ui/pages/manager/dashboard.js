@@ -13,6 +13,7 @@ TemplateController('ManagerDashboard', {
     requests: null,
     balance: null,
     working: false,
+    attestationId: null,
   },
   async onRendered() {
     try {
@@ -59,8 +60,9 @@ TemplateController('ManagerDashboard', {
           message: `Agent "${name}" has been approved`,
           brand: 'success',
         });
+        this.state.attestationId = await callContractReadFunction(DirectHelp, 'recentAttestationId');
       } finally {
-        await this.fetchAgents();
+        Meteor.setTimeout(() => this.fetchAgents(), 1000);
       }
     },
     async 'click [data-action=rejectAgent]'(e) {
@@ -73,7 +75,7 @@ TemplateController('ManagerDashboard', {
           brand: 'info',
         });
       } finally {
-        await this.fetchAgents();
+        Meteor.setTimeout(() => this.fetchAgents(), 1000);
       }
     },
     async 'click [data-action=challengeRequest]'(e) {
@@ -86,7 +88,7 @@ TemplateController('ManagerDashboard', {
           brand: 'info',
         });
       } finally {
-        await this.fetchRequests();
+        Meteor.setTimeout(() => this.fetchRequests(), 1000);
       }
     },
   },
@@ -117,7 +119,7 @@ TemplateController('ManagerDashboard', {
     },
     async fetchBalance() {
       const balance = await callContractReadFunction(DirectHelp, 'getCurrencyBalance');
-      this.state.balance = balance / 1e18;
+      this.state.balance = Math.round(balance / 1e16) / 100;
     },
     async callContractMethod(name, ...args) {
       try {

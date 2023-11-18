@@ -4,11 +4,10 @@
       <div class="container">
         <div class="slim-header-left">
           <h2 class="slim-logo">
-            <a href="/">
+            <a href="{{pathFor "/"}}">
               <img src='/images/logo.png' alt='DirectHelp' height='50' width='auto'
               class='mr-1'>
               DirectHelp<span>.</span></a></h2>
-
         </div><!-- slim-header-left -->
         <div class="slim-header-right">
           <div class="dropdown dropdown-c">
@@ -28,38 +27,27 @@
         </div><!-- header-right -->
       </div><!-- container -->
     </div>
-
-    <div class="slim-navbar">
-      <div class="container">
-        <ul class="nav">
-          {{#if currentUser}}
-            <li class="nav-item active">
-              <a href="{{pathFor "ManagerDashboard"}}" class="nav-link">
-                <i class="fa fa-dashboard mr-2"></i>
-                <span>Dashboard</span>
-              </a>
-            </li>
-          {{/if}}
-
-          {{#if true}}
-            <div class="nav-item">
-              <a href="{{pathFor "AgentSubmit"}}" class="nav-link">
-                <i class="fa fa-exclamation-triangle mr-2"></i>
-                <span>Submit request</span>
-              </a>
-            </div>
-          {{/if}}
-
-        </ul>
-      </div><!-- container -->
-    </div>
-
+    {{#if currentAccount}}
+      {{#unless isActiveRoute 'ManagerDashboard'}}
+        <div class="slim-navbar">
+          <div class="container">
+            <ul class="nav">
+              <div class="nav-item">
+                <a href="{{pathFor "AgentSubmit"}}" class="nav-link">
+                  <i class="fa fa-exclamation-triangle mr-2"></i>
+                  <span>Submit request</span>
+                </a>
+              </div>
+            </ul>
+          </div><!-- container -->
+        </div>
+      {{/unless}}
+    {{/if}}
     <div class='container'>
       <div class="position-fixed" style="z-index: 1100; right: 3em; top: 1em; width: 400px">
         {{>toastContainer}}
       </div>
       <div class="container-fluid p-0">
-
         {{>Template.dynamic template=main}}
       </div>
     </div>
