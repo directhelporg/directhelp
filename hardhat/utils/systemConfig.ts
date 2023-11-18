@@ -23,8 +23,6 @@ export async function getSystemConfig(
 		currency: ZeroAddress,
 	};
 
-	console.log(`Using ChainId ${chainId}`);
-
 	switch(chainId) {
 		case 1:
 			// Mainnet

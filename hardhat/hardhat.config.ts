@@ -2,6 +2,7 @@ import * as dotenv from "dotenv";
 dotenv.config();
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
+import "hardhat-multibaas-plugin";
 
 
 
@@ -19,7 +20,7 @@ const config: HardhatUserConfig = {
   solidity: "0.8.20",
   paths: { tests: "tests" },
 
-  
+
   networks: {
     // View the networks that are pre-configured.
     // If the network you are looking for is not here you can add new network settings
@@ -70,7 +71,15 @@ const config: HardhatUserConfig = {
       accounts: [deployerPrivateKey],
       chainId: 44787,
     },
-  }
+  },
+
+	// MultiBaas config
+	mbConfig: {
+		apiKey: process.env.MULTIBAAS_ACCESS_KEY as string,
+		host: new URL(process.env.MULTIBAAS_URL as string),
+		allowUpdateAddress: ["development"],
+		allowUpdateContract: ["development"],
+	},
 };
 
 export default config;
