@@ -68,6 +68,7 @@ contract Help is Ownable {
     event AgentRegistered(address indexed agentAddress, string name, string location, uint64 households);
     event AgentApproved(address indexed agentAddress, uint64 householdBudget);
     event AgentSuspended(address indexed agentAddress, uint64 householdBudget);
+    event AgentPaid(address agent, uint256 householdsAffected, uint256 householdBudget, uint256 total);
 
     event RequestInitiateBegin(address indexed agentAddress, bytes32 indexed assertionId);
     event RequestInitiated(address indexed agentAddress, bytes32 indexed assertionId);
@@ -251,6 +252,12 @@ contract Help is Ownable {
         _payAgent(
           agentAssertion.agent,
           total * 1e18
+        );
+        emit AgentPaid(
+          agentAssertion.agent,
+          agentAssertion.householdsAffected,
+          householdBudget,
+          total
         );
       }
       
