@@ -106,13 +106,17 @@ contract Help is Ownable {
     //     UMA FUNCTIONS
     // ========================================
 
-    function agentInitateFundRequest(string memory _disasterDescription, string memory _householdsAffected) public returns (bytes32) {
+    function agentInitateFundRequest(string memory _disasterDescription, string memory _householdsAffected) public 
+    returns (bytes32) 
+    {
         // todo: check if agent (msg.sender) exists and is approved
         // todo: check is request is within budget
         // todo: check if another request is pending
         
+        bytes memory claim = createFinalClaimAssembly(bytes(_disasterDescription), bytes(_householdsAffected));
+        
         bytes32 assertionId = _oov3.assertTruth(
-            createFinalClaimAssembly(bytes(_disasterDescription), bytes(_householdsAffected)),
+            claim,
             address(this), // asserter
             address(0), // callbackRecipient
             address(0), // escalationManager

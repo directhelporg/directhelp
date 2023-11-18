@@ -3685,35 +3685,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"hardhat@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "hardhat@workspace:."
-  dependencies:
-    "@nomicfoundation/hardhat-chai-matchers": "npm:^2.0.0"
-    "@nomicfoundation/hardhat-ethers": "npm:^3.0.0"
-    "@nomicfoundation/hardhat-network-helpers": "npm:^1.0.0"
-    "@nomicfoundation/hardhat-toolbox": "npm:^4.0.0"
-    "@nomicfoundation/hardhat-verify": "npm:^2.0.0"
-    "@openzeppelin/contracts": "npm:^5.0.0"
-    "@openzeppelin/hardhat-upgrades": "npm:^2.4.1"
-    "@typechain/ethers-v6": "npm:^0.5.0"
-    "@typechain/hardhat": "npm:^9.0.0"
-    "@types/chai": "npm:^4.2.0"
-    "@types/mocha": "npm:>=9.1.0"
-    "@types/node": "npm:>=16.0.0"
-    chai: "npm:^4.2.0"
-    dotenv: "npm:^16.3.1"
-    ethers: "npm:^6.4.0"
-    hardhat: "npm:^2.14.0"
-    hardhat-gas-reporter: "npm:^1.0.8"
-    hardhat-multibaas-plugin-v6: "npm:^0.2.3"
-    solidity-coverage: "npm:^0.8.0"
-    ts-node: "npm:>=8.0.0"
-    typechain: "npm:^8.3.0"
-    typescript: "npm:>=4.5.0"
-  languageName: unknown
-  linkType: soft
-
 "has-bigints@npm:^1.0.1, has-bigints@npm:^1.0.2":
   version: 1.0.2
   resolution: "has-bigints@npm:1.0.2"
@@ -3819,6 +3790,35 @@ __metadata:
   checksum: 341c5d51ae13dc8346c371a8a69c57c972fcb9a3233090d3dd5ba29d483d6b5b4e75492443cbfeacd46608bb30e6680f646ffb7a6205900221735587d07a79b6
   languageName: node
   linkType: hard
+
+"help-hardhat@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "help-hardhat@workspace:."
+  dependencies:
+    "@nomicfoundation/hardhat-chai-matchers": "npm:^2.0.0"
+    "@nomicfoundation/hardhat-ethers": "npm:^3.0.0"
+    "@nomicfoundation/hardhat-network-helpers": "npm:^1.0.0"
+    "@nomicfoundation/hardhat-toolbox": "npm:^4.0.0"
+    "@nomicfoundation/hardhat-verify": "npm:^2.0.0"
+    "@openzeppelin/contracts": "npm:^5.0.0"
+    "@openzeppelin/hardhat-upgrades": "npm:^2.4.1"
+    "@typechain/ethers-v6": "npm:^0.5.0"
+    "@typechain/hardhat": "npm:^9.0.0"
+    "@types/chai": "npm:^4.2.0"
+    "@types/mocha": "npm:>=9.1.0"
+    "@types/node": "npm:>=16.0.0"
+    chai: "npm:^4.2.0"
+    dotenv: "npm:^16.3.1"
+    ethers: "npm:^6.4.0"
+    hardhat: "npm:^2.14.0"
+    hardhat-gas-reporter: "npm:^1.0.8"
+    hardhat-multibaas-plugin-v6: "npm:^0.2.3"
+    solidity-coverage: "npm:^0.8.0"
+    ts-node: "npm:>=8.0.0"
+    typechain: "npm:^8.3.0"
+    typescript: "npm:>=4.5.0"
+  languageName: unknown
+  linkType: soft
 
 "hmac-drbg@npm:^1.0.1":
   version: 1.0.1
