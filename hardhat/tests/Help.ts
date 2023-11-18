@@ -82,9 +82,7 @@ describe("Help", function () {
 				BigInt(1),
 			]);
 		});
-	});
 
-	describe("UMA", function() {
 		it("Should pass UMA", async function() {
 			const {currency, help, owner, otherAccount} = await loadFixture(deployContract);
 

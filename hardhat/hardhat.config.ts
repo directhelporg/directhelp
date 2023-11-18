@@ -167,7 +167,7 @@ const config: HardhatUserConfig = {
 	mbConfig: {
 		apiKey: process.env.MULTIBAAS_ACCESS_KEY as string,
 		host: new URL(process.env.MULTIBAAS_URL as string),
-		allowUpdateAddress: ["development", "sepolia"],
+		allowUpdateAddress: ["development", "sepolia", "baseGoerli"],
 		allowUpdateContract: ["development"],
 	},
 };
