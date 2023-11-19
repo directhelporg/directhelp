@@ -42,7 +42,7 @@
 - [Linea](https://explorer.linea.build/address/0xE57bae05b7568E1b2b03104bD171ab94F54BcbFE)
 - [Scroll](https://sepolia-blockscout.scroll.io/address/0x82C993811B40609c5Dc3380E7Eb8c4BcAc42D46c#code)
 - [Mantle](https://explorer.testnet.mantle.xyz/address/0x990d9369C17Bb50083f6e615BB6773bfab637e48#code)
-- [CELO](0x509f25ab47607B5490561CC5053071a79E83D836)
+- [CELO](https://alfajores.celoscan.io/address/0x509f25ab47607B5490561CC5053071a79E83D836)
 
 ## Hackathon bounties
 
@@ -59,11 +59,11 @@ We use EAS to track reputation of agents that are connected to the charity (Unic
 We are using MultiBaas by Curvegrid to interact with our smart contract in an easy way. We also use it to automatically deploy artifacts like interfaces. We had some issue with the plugin for hardhat, but we fixed it now. We made a PR for the fix, to make it available for others as well.
 - [GitHub PR for the plugin fix](https://github.com/curvegrid/hardhat-multibaas-plugin/pull/210)
 
-#### Gnosis - Innovate on Gnosis Chain 
+#### Gnosis
 - [Deployed smart contract](https://gnosisscan.io/address/0x04b3786899D4400bBEf2f000c07CBB916a9a8E24)
 - [Tweet about our project tagging @GnosisChain](https://twitter.com/smartbots_sl/status/1725950705368813731)
 
-#### Arbitrum 
+#### Arbitrum
 - [Deployed smart contract](https://goerli.arbiscan.io/address/0xE57bae05b7568E1b2b03104bD171ab94F54BcbFE)
 
 #### Metamask 
@@ -72,13 +72,13 @@ We are using MultiBaas by Curvegrid to interact with our smart contract in an ea
 #### Scroll
 - [Deployed smart contract](https://sepolia-blockscout.scroll.io/address/0x82C993811B40609c5Dc3380E7Eb8c4BcAc42D46c)
 
-#### Mantle - Best Ux
+#### Mantle
 - [Deployed smart contract](https://explorer.testnet.mantle.xyz/address/0x990d9369C17Bb50083f6e615BB6773bfab637e48)
 
-#### CELO - Best dApps on Celo Blockchain 
+#### CELO
 - [Deployed smart contract](https://alfajores.celoscan.io/address/0x509f25ab47607B5490561CC5053071a79E83D836)
 
-#### Base  - Build a Consumer Product
+#### Base
 - [Deployed smart contract](https://alfajores.celoscan.io/address/0x509f25ab47607B5490561CC5053071a79E83D836)
 
 ## Team
