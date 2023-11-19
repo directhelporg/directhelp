@@ -5,8 +5,8 @@
 <img src="https://github.com/directhelporg/directhelp/blob/58f768d14db772739eafd183be8cd481f29b8054/images/logo.png" alt="logo"/>
 </p>
 <h4 align="center">
-  <a href="https://docs.scaffoldeth.io">Deployed dApp</a> |
-  <a href="https://scaffoldeth.io">Demo video</a>
+  <a href="https://direct-help.eu.meteorapp.com">Deployed dApp</a> |
+  <a href="https://www.youtube.com/watch?v=H-hsv43i-T8">Demo video</a>
 </h4>
 
 🚑 Streamlining distribution for disaster relief.
@@ -30,8 +30,8 @@
 ![diagram](https://github.com/directhelporg/directhelp/blob/bb5e7bd244df801e3c2d7598a752d0d52e8dd522/images/draw_final.png)
 
 ## Links
-- [Deployed dApp]()
-- [Demo video]()
+- [Deployed dApp](https://direct-help.eu.meteorapp.com)
+- [Demo video](https://www.youtube.com/watch?v=H-hsv43i-T8)
 - [Presentation slides](https://docs.google.com/presentation/d/1vG90dBGTiEyBmAL9vfIE4XoaHOR_6UKL-cnz1pXhVoU/edit?usp=sharing)
 
 ## Deployed contracts

@@ -1,13 +1,19 @@
 {
-  "name": "meteor-app-scaffold",
-  "author": {
-    "name": "Denis Perov",
-    "email": "denis.perov@gmail.com"
+  "name": "direct-help",
+  "contributors": [
+    "Denis Perov <denis.perov@gmail.com> (https://github.com/imajus)",
+    "Oleg Borodkin <aargh007@gmail.com> (https://www.linkedin.com/in/de-ad-be-ef/)",
+    "Arjan <aargh007@gmail.com> (https://github.com/arjanjohan)"
+  ],
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/directhelporg/directhelp"
   },
+  "homepage": "https://github.com/directhelporg/directhelp#readme",
   "private": true,
   "scripts": {
     "start": "meteor run --settings=.env/settings.json --exclude-archs=web.browser.legacy,web.cordova --raw-logs",
-    "deploy": "meteor deploy direct-help.eu.meteorapp.com --settings=.env/settings.json --free --mongo --debug"
+    "deploy": "meteor deploy direct-help.eu.meteorapp.com --settings=.env/settings.json --free --mongo"
   },
   "dependencies": {
     "@babel/runtime": "^7.23.2",
