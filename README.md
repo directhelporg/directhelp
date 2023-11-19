@@ -37,12 +37,12 @@
 ## Deployed contracts
 - [Sepolia](https://sepolia.etherscan.io/address/0x2d693964DAA7cFdD27F17501600Af950e0d852F6#code)
 - [Arbitrum](https://goerli.arbiscan.io/address/0xE57bae05b7568E1b2b03104bD171ab94F54BcbFE#code)
-- [Base](https://goerli.basescan.org/address/0xE57bae05b7568E1b2b03104bD171ab94F54BcbFE#code)
-- [Gnosis](https://gnosisscan.io/address/0x04b3786899D4400bBEf2f000c07CBB916a9a8E24)
-- [Linea](https://explorer.linea.build/address/0xE57bae05b7568E1b2b03104bD171ab94F54BcbFE)
-- [Scroll](https://sepolia-blockscout.scroll.io/address/0x82C993811B40609c5Dc3380E7Eb8c4BcAc42D46c#code)
+- [Base](https://goerli.basescan.org/address/0x62Ff1dF6bf5BA9F8DdaC526D99Ba81072FD77E2f)
+- [Gnosis](https://gnosis-chiado.blockscout.com/address/0xb0149484796553Ea5590199C43F168c56d890AB7#code)
+- [Linea](https://testnet.lineascan.build/address/0xdaFE3F88f20a7bdfBa5Fdd783b57f72E1936036d#code)
+- [Scroll](https://sepolia-blockscout.scroll.io/address/0x82C993811B40609c5Dc3380E7Eb8c4BcAc42D46c)
 - [Mantle](https://explorer.testnet.mantle.xyz/address/0x990d9369C17Bb50083f6e615BB6773bfab637e48#code)
-- [CELO](https://alfajores.celoscan.io/address/0x509f25ab47607B5490561CC5053071a79E83D836)
+- [CELO](https://alfajores.celoscan.io/address/0xb8B43084A3e6ccD29f6C549E3028E8B6EE0682FA#code)
 
 ## Hackathon bounties
 
@@ -60,14 +60,14 @@ We are using MultiBaas by Curvegrid to interact with our smart contract in an ea
 - [GitHub PR for the plugin fix](https://github.com/curvegrid/hardhat-multibaas-plugin/pull/210)
 
 #### Gnosis
-- [Deployed smart contract](https://gnosisscan.io/address/0x04b3786899D4400bBEf2f000c07CBB916a9a8E24)
+- [Deployed smart contract](https://gnosis-chiado.blockscout.com/address/0xb0149484796553Ea5590199C43F168c56d890AB7#code)
 - [Tweet about our project tagging @GnosisChain](https://twitter.com/smartbots_sl/status/1725950705368813731)
 
 #### Arbitrum
 - [Deployed smart contract](https://goerli.arbiscan.io/address/0xE57bae05b7568E1b2b03104bD171ab94F54BcbFE)
 
 #### Metamask 
-- [Deployed smart contract](https://goerli.lineascan.build/address/address/0x04b3786899D4400bBEf2f000c07CBB916a9a8E24#code)
+- [Deployed smart contract](https://testnet.lineascan.build/address/0xdaFE3F88f20a7bdfBa5Fdd783b57f72E1936036d#code)
 
 #### Scroll
 - [Deployed smart contract](https://sepolia-blockscout.scroll.io/address/0x82C993811B40609c5Dc3380E7Eb8c4BcAc42D46c)
@@ -76,10 +76,10 @@ We are using MultiBaas by Curvegrid to interact with our smart contract in an ea
 - [Deployed smart contract](https://explorer.testnet.mantle.xyz/address/0x990d9369C17Bb50083f6e615BB6773bfab637e48)
 
 #### CELO
-- [Deployed smart contract](https://alfajores.celoscan.io/address/0x509f25ab47607B5490561CC5053071a79E83D836)
+- [Deployed smart contract](https://alfajores.celoscan.io/address/0xb8B43084A3e6ccD29f6C549E3028E8B6EE0682FA#code)
 
 #### Base
-- [Deployed smart contract](https://alfajores.celoscan.io/address/0x509f25ab47607B5490561CC5053071a79E83D836)
+- [Deployed smart contract](https://goerli.basescan.org/address/0x62Ff1dF6bf5BA9F8DdaC526D99Ba81072FD77E2f)
 
 ## Team
 This project was build at EthGlobal Istanbul 2023 by:
