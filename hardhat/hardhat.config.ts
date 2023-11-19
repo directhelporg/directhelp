@@ -3,6 +3,7 @@ dotenv.config();
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 import "hardhat-multibaas-plugin-v6";
+// import "hardhat-celo";
 
 
 
@@ -109,7 +110,7 @@ const config: HardhatUserConfig = {
       scrollSepolia: process.env.ETHERSCAN_API_KEY,
       polygonMumbai: process.env.POLYGON_API_KEY,
       mantleTestnet: process.env.MANTLE_API_KEY,
-      alfajores: process.env.MANTLE_API_KEY,
+      alfajores: process.env.CELO_API_KEY,
     },
     customChains: [
       {
@@ -156,7 +157,7 @@ const config: HardhatUserConfig = {
         network: "alfajores",
         chainId: 44787,
         urls: {
-          apiURL: "https://alfajores-forno.celo-testnet.org/api",
+          apiURL: "https://api-alfajores.celoscan.io/api",
           browserURL: "https://alfajores.celoscan.io",
         },
       },

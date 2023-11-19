@@ -1,12 +1,12 @@
 {
   "name": "help-hardhat",
   "packageManager": "yarn@4.0.2",
-	"scripts": {
-		"deploy": "hardhat run scripts/deploy.ts",
-		"deploy:base": "yarn deploy --network baseGoerli",
-		"test": "hardhat test tests/Help.ts"
-	},
-	"devDependencies": {
+  "scripts": {
+    "deploy": "hardhat run scripts/deploy.ts",
+    "deploy:base": "yarn deploy --network baseGoerli",
+    "test": "hardhat test tests/Help.ts"
+  },
+  "devDependencies": {
     "@nomicfoundation/hardhat-chai-matchers": "^2.0.0",
     "@nomicfoundation/hardhat-ethers": "^3.0.0",
     "@nomicfoundation/hardhat-network-helpers": "^1.0.0",
@@ -31,6 +31,7 @@
     "@openzeppelin/hardhat-upgrades": "^2.4.1",
     "bigint-conversion": "^2.4.3",
     "dotenv": "^16.3.1",
+    "hardhat-celo": "^0.0.6",
     "hardhat-multibaas-plugin-v6": "^0.2.3"
   }
 }
