@@ -9,22 +9,24 @@
               class='mr-1'>
               DirectHelp<span>.</span></a></h2>
         </div><!-- slim-header-left -->
-        <div class="slim-header-right">
-          <div class="dropdown dropdown-c">
-            <a href="#" class="logged-user" data-toggle="dropdown">
-              <img src="https://robohash.org/0x9F329d6bad710155bc1fA84bdFB0d629Cf4f7FBc?bgset=bg1" alt="">
-              <span>{{shortHash currentAccount}}</span>
-              <i class="fa fa-angle-down"></i>
-            </a>
-            <div class="dropdown-menu dropdown-menu-right">
-              <nav class="nav">
-                {{#each connectedAccounts}}
-                  <a class="nav-link" href="#" data-action="selectAccount">{{shortHash this size=4}}</a>
-                {{/each}}
-              </nav>
-            </div><!-- dropdown-menu -->
-          </div><!-- dropdown -->
-        </div><!-- header-right -->
+        {{#if isConnected}}
+          <div class="slim-header-right">
+            <div class="dropdown dropdown-c">
+              <a href="#" class="logged-user" data-toggle="dropdown">
+                <img src="https://robohash.org/0x9F329d6bad710155bc1fA84bdFB0d629Cf4f7FBc?bgset=bg1" alt="">
+                <span>{{shortHash currentAccount}}</span>
+                <i class="fa fa-angle-down"></i>
+              </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <nav class="nav">
+                    {{#each connectedAccounts}}
+                      <a class="nav-link" href="#" data-action="selectAccount">{{shortHash this size=4}}</a>
+                    {{/each}}
+                  </nav>
+                </div><!-- dropdown-menu -->
+            </div><!-- dropdown -->
+          </div><!-- header-right -->
+        {{/if}}
       </div><!-- container -->
     </div>
     {{#if currentAccount}}

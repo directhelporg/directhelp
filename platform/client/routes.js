@@ -10,11 +10,13 @@ import './ui/pages/agent/submit';
 import './ui/pages/manager/dashboard';
 
 // Preload already connected Web3 accounts
-(async () => {
-  FlowRouter.wait();
+FlowRouter.wait();
+Meteor.startup(async () => {
+  //FIXME: Force init in case if MetaMask hangs forever
+  Meteor.setTimeout(() => FlowRouter.initialize(), 2000);
   await Accounts.init();
   FlowRouter.initialize();
-})();
+});
 
 const manager = FlowRouter.group({
   name: 'manager',

@@ -1,6 +1,6 @@
 import * as MultiBaas from '@curvegrid/multibaas-sdk';
 import { Meteor } from 'meteor/meteor';
-import { Signer } from './ethers';
+import { getSigner } from './ethers';
 
 const { url: baseUrl, key: accessToken } = Meteor.settings.public.MultiBaas;
 
@@ -35,7 +35,7 @@ export async function callContractReadFunction(contract, name, args, extra) {
     contract.label,
     name,
     {
-      from: Signer.address,
+      from: getSigner().address,
       args,
       ...extra,
     },
@@ -44,6 +44,7 @@ export async function callContractReadFunction(contract, name, args, extra) {
 }
 
 export async function callContractWriteFunction(contract, name, args, extra) {
+  const signer = getSigner();
   try {
     const { data: { result: { tx } } } = await Contracts.callContractFunction(
       'ethereum',
@@ -51,14 +52,14 @@ export async function callContractWriteFunction(contract, name, args, extra) {
       contract.label,
       name,
       {
-        from: Signer.address,
+        from: signer.address,
         args,
         ...extra,
       },
     );
     if (Meteor.isServer) {
-      const signed = await Signer.signTransaction({
-        from: Signer.address,
+      const signed = await signer.signTransaction({
+        from: signer.address,
         chainId: await getChainId(),
         to: tx.to,
         data: tx.data,
@@ -72,8 +73,8 @@ export async function callContractWriteFunction(contract, name, args, extra) {
       const { data } = await Chains.submitSignedTransaction('ethereum', { signedTx: signed });
       return data.result;
     } else {
-      const { hash } = await Signer.sendTransaction({
-        from: Signer.address,
+      const { hash } = await signer.sendTransaction({
+        from: signer.address,
         chainId: await getChainId(),
         to: tx.to,
         data: tx.data,

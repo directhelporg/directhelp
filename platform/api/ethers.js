@@ -15,8 +15,13 @@ function getProvider() {
   }
 }
 
-export const Provider = getProvider();
-export const Signer = Meteor.isClient ? Provider?.getSigner() : new ethers.Wallet(Meteor.settings.signer);
+export function getSigner() {
+  if (Meteor.isClient) {
+    return getProvider()?.getSigner();
+  } else {
+    return new ethers.Wallet(Meteor.settings.signer);
+  }
+}
 
 export const Accounts = {
   connected: new ReactiveVar([]),
@@ -25,25 +30,30 @@ export const Accounts = {
     return Boolean(this.connected.get()?.length > 0);
   },
   async init() {
-    const accounts = await Provider?.listAccounts();
-    this.connected.set(accounts);
-    if (accounts?.length > 0) {
-      this.current.set(accounts[0]);
+    const accounts = await getProvider()?.listAccounts();
+    if (accounts) {
+      this.connected.set(accounts);
+      if (accounts.length > 0) {
+        this.current.set(accounts[0]);
+      }
     }
   },
   async connect() {
-    const accounts = await Provider?.send('eth_requestAccounts', []);
-    this.connected.set(accounts);
-    if (accounts?.length > 0) {
-      this.current.set(accounts[0]);
+    const accounts = await getProvider()?.send('eth_requestAccounts', []);
+    if (accounts) {
+      this.connected.set(accounts);
+      if (accounts.length > 0) {
+        this.current.set(accounts[0]);
+      }
     }
   },
 };
 
 Meteor.startup(async () => {
-  if (Provider) {
-    const { chainId } = await Provider.getNetwork();
-    const blockNumber = await Provider.getBlockNumber();
+  const provider = getProvider();
+  if (provider) {
+    const { chainId } = await provider.getNetwork();
+    const blockNumber = await provider.getBlockNumber();
     console.log(`Ethers is connected to #${chainId}, the latest block is #${blockNumber}`);
   } else {
     console.warn('Ethers is not detected');
