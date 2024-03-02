@@ -6,8 +6,8 @@
     "Arjan <aargh007@gmail.com> (https://github.com/arjanjohan)"
   ],
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/directhelporg/directhelp"
+    "type": "git",
+    "url": "https://github.com/directhelporg/directhelp"
   },
   "homepage": "https://github.com/directhelporg/directhelp#readme",
   "private": true,
@@ -19,7 +19,6 @@
     "@babel/runtime": "^7.23.2",
     "@curvegrid/multibaas-sdk": "^1.0.0-beta16",
     "bootstrap": "^4.6.2",
-    "ethers": "^5.7.2",
     "jquery": "^3.7.1",
     "lodash": "^4.17.21",
     "meteor-node-stubs": "^1.2.5",

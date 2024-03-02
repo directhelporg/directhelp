@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
+import { $ } from 'meteor/jquery';
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
-import { Accounts } from '/api/ethers';
+import { Web3Accounts } from 'meteor/majus:web3';
 import './ui/layout';
 import './ui/pages/home';
 import './ui/pages/registration';
@@ -12,10 +13,11 @@ import './ui/pages/manager/dashboard';
 // Preload already connected Web3 accounts
 FlowRouter.wait();
 Meteor.startup(async () => {
-  //FIXME: Force init in case if MetaMask hangs forever
-  Meteor.setTimeout(() => FlowRouter.initialize(), 2000);
-  await Accounts.init();
+  //FIXME: Force page reload in case if MetaMask hangs forever
+  const timeout = Meteor.setTimeout(() => window.location.reload(), 2000);
+  await Web3Accounts.init();
   FlowRouter.initialize();
+  Meteor.clearTimeout(timeout);
 });
 
 const manager = FlowRouter.group({
@@ -26,11 +28,13 @@ const manager = FlowRouter.group({
 const agent = FlowRouter.group({
   name: 'agent',
   prefix: '/agent',
-  triggersEnter: [(context, redirect) => {
-    if (!Accounts.isConnected()) {
-      redirect('/');
-    }
-  }],
+  triggersEnter: [
+    (context, redirect) => {
+      if (!Web3Accounts.isConnected) {
+        redirect('/');
+      }
+    },
+  ],
 });
 
 FlowRouter.route('/', {

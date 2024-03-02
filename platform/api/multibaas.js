@@ -1,6 +1,6 @@
 import * as MultiBaas from '@curvegrid/multibaas-sdk';
 import { Meteor } from 'meteor/meteor';
-import { getSigner } from './ethers';
+import { Web3Factory } from 'meteor/majus:web3';
 
 const { url: baseUrl, key: accessToken } = Meteor.settings.public.MultiBaas;
 
@@ -35,7 +35,7 @@ export async function callContractReadFunction(contract, name, args, extra) {
     contract.label,
     name,
     {
-      from: getSigner().address,
+      from: Web3Factory.signer().address,
       args,
       ...extra,
     },
@@ -44,9 +44,13 @@ export async function callContractReadFunction(contract, name, args, extra) {
 }
 
 export async function callContractWriteFunction(contract, name, args, extra) {
-  const signer = getSigner();
+  const signer = Web3Factory.signer();
   try {
-    const { data: { result: { tx } } } = await Contracts.callContractFunction(
+    const {
+      data: {
+        result: { tx },
+      },
+    } = await Contracts.callContractFunction(
       'ethereum',
       contract.address,
       contract.label,
@@ -70,7 +74,9 @@ export async function callContractWriteFunction(contract, name, args, extra) {
         maxPriorityFeePerGas: Number(tx.gasTipCap),
         type: tx.type,
       });
-      const { data } = await Chains.submitSignedTransaction('ethereum', { signedTx: signed });
+      const { data } = await Chains.submitSignedTransaction('ethereum', {
+        signedTx: signed,
+      });
       return data.result;
     } else {
       const { hash } = await signer.sendTransaction({
@@ -118,7 +124,9 @@ Meteor.startup(async () => {
   try {
     const { data } = await Chains.getChainStatus(chain);
     const { chainID, blockNumber } = data.result;
-    console.log(`MultiBaas is connected to #${chainID}, the latest block is #${blockNumber}`);
+    console.log(
+      `MultiBaas is connected to #${chainID}, the latest block is #${blockNumber}`,
+    );
   } catch (err) {
     throw convertMultiBaasError(err);
   }

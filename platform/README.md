@@ -15,8 +15,12 @@ Create a file `.env/settings.json` and fill it with the necessary data:
       }
     }
   },
-  "rpcUrl": "<json_rpc_url>",
-  "signer": "<ethereum_account_private_key>"
+  "packages": {
+    "majus:web3": {
+      "rpcUrl": "<json_rpc_url>",
+      "key": "<ethereum_account_private_key>"
+    }
+  }
 }
 ```
 

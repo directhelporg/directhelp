@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { TemplateController } from 'meteor/space:template-controller';
 import { FlowRouter } from 'meteor/ostrio:flow-router-extra';
 import { AutoForm } from 'meteor/aldeed:autoform';
-import { Accounts } from '/api/ethers';
+import { Web3Accounts } from 'meteor/majus:web3';
 import { callContractWriteFunction } from '/api/multibaas';
 import './challenge.html';
 
@@ -11,16 +11,17 @@ const { DirectHelp } = Meteor.settings.public.MultiBaas;
 
 TemplateController('ManagerChallenge', {
   helpers: {
-    schema: () => new SimpleSchema({
-      claim: {
-        type: String,
-        value: FlowRouter.getParam('hash'),
-        autoform: {
-          readonly: true,
+    schema: () =>
+      new SimpleSchema({
+        claim: {
+          type: String,
+          value: FlowRouter.getParam('hash'),
+          autoform: {
+            readonly: true,
+          },
         },
-      },
-      description: String,
-    }),
+        description: String,
+      }),
   },
 });
 
@@ -28,10 +29,15 @@ AutoForm.addHooks('challengeRequest', {
   async onSubmit({ description }) {
     this.event.preventDefault();
     const hash = FlowRouter.getParam('hash');
-    callContractWriteFunction(DirectHelp, 'challengeFundRequest', [hash, description], {
-      from: Accounts.current.get(),
-    })
-      .then(res => this.done(null, res))
+    callContractWriteFunction(
+      DirectHelp,
+      'challengeFundRequest',
+      [hash, description],
+      {
+        from: Web3Accounts.current,
+      },
+    )
+      .then((res) => this.done(null, res))
       .catch(this.done);
     return false;
   },
